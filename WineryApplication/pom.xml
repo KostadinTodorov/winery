@@ -39,6 +39,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx</artifactId>
+            <version>8.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -62,7 +67,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.oopproject.wineryapplication/com.oopproject.wineryapplication.HelloApplication
+                                com.oopproject.wineryapplication/com.oopproject.wineryapplication.Launcher
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
