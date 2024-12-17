@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="943.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="943.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopproject.wineryapplication.SceneSwitchingController">
    <AnchorPane prefHeight="97.0" prefWidth="943.0" style="-fx-background-color: blue;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
            <Label alignment="CENTER" graphicTextGap="20.0" layoutX="25.0" layoutY="21.0" prefHeight="60.0" prefWidth="434.0" text="Winery Management System" textFill="WHITE">
@@ -40,7 +40,7 @@
                       <FontAwesomeIcon fill="#2d75e8" glyphName="USER" size="50" />
                   </graphic>
               </Button>
-              <Button fx:id="btnStorageOrganiser" contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="220.0" text="Storage Organiser" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+              <Button fx:id="btnStorageOrganiser" contentDisplay="TOP" mnemonicParsing="false" onAction="#switchToStorageOrganiserMain" prefHeight="100.0" prefWidth="220.0" text="Storage Organiser" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                   <graphic>
                       <FontAwesomeIcon fill="#2d75e8" glyphName="HOME" size="50" />
                   </graphic>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1038.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1038.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopproject.wineryapplication.SceneSwitchingController">
    <children>
       <AnchorPane prefHeight="9.0" prefWidth="600.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -33,7 +33,7 @@
                <children>
                   <VBox layoutX="26.0" layoutY="74.0" spacing="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="bottled wine inventory" textFill="WHITE" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToBottledWineInventory" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="bottled wine inventory" textFill="WHITE" />
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="empty bottles inventory" textFill="WHITE" />
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="grapes inventory" textFill="WHITE" />
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="tasks" textFill="WHITE" />
@@ -52,7 +52,7 @@
             </AnchorPane>
          </left>
          <top>
-            <AnchorPane prefHeight="65.0" prefWidth="1038.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="74.0" prefWidth="1038.0" BorderPane.alignment="CENTER">
                <children>
                   <Label graphicTextGap="20.0" prefHeight="17.0" prefWidth="124.0" text="Quick messages:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <graphic>
@@ -105,7 +105,7 @@
             </AnchorPane>
          </top>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <AnchorPane fx:id="placeHolderAnchPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

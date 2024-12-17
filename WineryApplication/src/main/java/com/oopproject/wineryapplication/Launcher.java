@@ -10,14 +10,14 @@ import java.io.IOException;
 public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-     //   FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("hello-view.fxml"));
-     //   Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-     //   stage.setTitle("Hello!");
-     //   stage.setScene(scene);
-     //   stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("Wellcome.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        stage.setTitle("Winery Application");
+        stage.show();
     }
 
     public static void main(String[] args) {
-     //  launch();
+       launch();
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.4052863436123348" layoutX="14.0" layoutY="14.0" orientation="VERTICAL" prefHeight="510.0" prefWidth="727.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <items>
+          <AnchorPane>
+               <children>
+                  <TableView layoutX="98.0" layoutY="37.0" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                    <columns>
+                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="5.0" prefWidth="-1.0" text="wine ID" />
+                      <TableColumn maxWidth="1.7976931348623157E308" minWidth="5.0" prefWidth="-1.0" text="wine brand" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="5.0" prefWidth="-1.0" text="bottle type (size)" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="5.0" prefWidth="-1.0" text="production date" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="5.0" prefWidth="-1.0" text="price" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="5.0" prefWidth="-1.0" text="bottle quantity" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
