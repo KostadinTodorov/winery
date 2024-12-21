@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopproject.wineryapplication.WelcomeLogController">
    <right>
       <AnchorPane prefHeight="380.0" prefWidth="240.0" BorderPane.alignment="CENTER">
          <children>
@@ -42,7 +42,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </TextField>
-            <Button layoutX="27.0" layoutY="279.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="219.0" text="Login" />
+            <Button layoutX="27.0" layoutY="279.0" mnemonicParsing="false" onAction="#switchToUser" prefHeight="37.0" prefWidth="219.0" text="Login" />
             <Label layoutX="59.0" layoutY="92.0" prefHeight="49.0" prefWidth="155.0" text="Login Account" textFill="#be0a16">
                <font>
                   <Font size="20.0" />

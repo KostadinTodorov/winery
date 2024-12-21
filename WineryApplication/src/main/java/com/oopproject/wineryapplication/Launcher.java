@@ -1,8 +1,8 @@
 package com.oopproject.wineryapplication;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -10,10 +10,10 @@ import java.io.IOException;
 public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("Wellcome.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = new Scene(new Pane());
+        SceneHelper.setScene(scene);
+        SceneHelper.switchTo(Scenes.WELLCOME);
         stage.setScene(scene);
-        stage.setTitle("Winery Application");
         stage.show();
     }
 
