@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "employee", schema = "public")
-public class Employee extends com.access.entities.entity.Entity {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_id_gen")
     @SequenceGenerator(name = "employee_id_gen", sequenceName = "employee_id_seq", allocationSize = 1)
@@ -16,14 +16,14 @@ public class Employee extends com.access.entities.entity.Entity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "person_id", nullable = false)
-    private com.access.entities.Person person;
+    private com.oopproject.wineryapplication.access.entities.Person person;
 
     @Column(name = "password", nullable = false, length = 30)
     private String password;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "occupation_id", nullable = false)
-    private com.access.entities.Occupation occupation;
+    private com.oopproject.wineryapplication.access.entities.Occupation occupation;
 
     @OneToMany(mappedBy = "employee")
     private Set<Behavior> behaviors = new LinkedHashSet<>();
@@ -36,11 +36,11 @@ public class Employee extends com.access.entities.entity.Entity {
         this.id = id;
     }
 
-    public com.access.entities.Person getPerson() {
+    public com.oopproject.wineryapplication.access.entities.Person getPerson() {
         return person;
     }
 
-    public void setPerson(com.access.entities.Person person) {
+    public void setPerson(com.oopproject.wineryapplication.access.entities.Person person) {
         this.person = person;
     }
 
@@ -52,11 +52,11 @@ public class Employee extends com.access.entities.entity.Entity {
         this.password = password;
     }
 
-    public com.access.entities.Occupation getOccupation() {
+    public com.oopproject.wineryapplication.access.entities.Occupation getOccupation() {
         return occupation;
     }
 
-    public void setOccupation(com.access.entities.Occupation occupation) {
+    public void setOccupation(com.oopproject.wineryapplication.access.entities.Occupation occupation) {
         this.occupation = occupation;
     }
 

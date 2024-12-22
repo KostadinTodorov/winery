@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "harvest", schema = "public")
-public class Harvest extends com.access.entities.entity.Entity {
+public class Harvest {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "harvest_id_gen")
     @SequenceGenerator(name = "harvest_id_gen", sequenceName = "harvest_id_seq", allocationSize = 1)
@@ -19,10 +19,10 @@ public class Harvest extends com.access.entities.entity.Entity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sort_id", nullable = false)
-    private com.access.entities.Sort sort;
+    private com.oopproject.wineryapplication.access.entities.Sort sort;
 
     @OneToMany(mappedBy = "harvest")
-    private Set<com.access.entities.Mix> mixes = new LinkedHashSet<>();
+    private Set<com.oopproject.wineryapplication.access.entities.Mix> mixes = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -40,19 +40,19 @@ public class Harvest extends com.access.entities.entity.Entity {
         this.weight = weight;
     }
 
-    public com.access.entities.Sort getSort() {
+    public com.oopproject.wineryapplication.access.entities.Sort getSort() {
         return sort;
     }
 
-    public void setSort(com.access.entities.Sort sort) {
+    public void setSort(com.oopproject.wineryapplication.access.entities.Sort sort) {
         this.sort = sort;
     }
 
-    public Set<com.access.entities.Mix> getMixes() {
+    public Set<com.oopproject.wineryapplication.access.entities.Mix> getMixes() {
         return mixes;
     }
 
-    public void setMixes(Set<com.access.entities.Mix> mixes) {
+    public void setMixes(Set<com.oopproject.wineryapplication.access.entities.Mix> mixes) {
         this.mixes = mixes;
     }
 

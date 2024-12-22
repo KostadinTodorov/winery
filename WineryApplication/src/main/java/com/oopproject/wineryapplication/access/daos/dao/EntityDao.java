@@ -1,6 +1,7 @@
 package com.oopproject.wineryapplication.access.daos.dao;
 
-import com.access.entities.*;
+
+import com.oopproject.wineryapplication.access.entities.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

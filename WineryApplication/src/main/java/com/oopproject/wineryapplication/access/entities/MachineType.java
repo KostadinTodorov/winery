@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "machine_type", schema = "public")
-public class MachineType extends com.access.entities.entity.Entity {
+public class MachineType {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "machine_type_id_gen")
     @SequenceGenerator(name = "machine_type_id_gen", sequenceName = "machine_type_id_seq", allocationSize = 1)
@@ -18,7 +18,7 @@ public class MachineType extends com.access.entities.entity.Entity {
     private String machineType;
 
     @OneToMany(mappedBy = "machineType")
-    private Set<com.access.entities.Machine> machines = new LinkedHashSet<>();
+    private Set<com.oopproject.wineryapplication.access.entities.Machine> machines = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -36,11 +36,11 @@ public class MachineType extends com.access.entities.entity.Entity {
         this.machineType = machineType;
     }
 
-    public Set<com.access.entities.Machine> getMachines() {
+    public Set<com.oopproject.wineryapplication.access.entities.Machine> getMachines() {
         return machines;
     }
 
-    public void setMachines(Set<com.access.entities.Machine> machines) {
+    public void setMachines(Set<com.oopproject.wineryapplication.access.entities.Machine> machines) {
         this.machines = machines;
     }
 

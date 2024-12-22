@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "bottle_type", schema = "public")
-public class BottleType extends com.access.entities.entity.Entity {
+public class BottleType {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bottle_type_id_gen")
     @SequenceGenerator(name = "bottle_type_id_gen", sequenceName = "bottle_type_id_seq", allocationSize = 1)
@@ -21,7 +21,7 @@ public class BottleType extends com.access.entities.entity.Entity {
     private String description;
 
     @OneToMany(mappedBy = "bottleType")
-    private Set<com.access.entities.EmptyBottle> emptyBottles = new LinkedHashSet<>();
+    private Set<com.oopproject.wineryapplication.access.entities.EmptyBottle> emptyBottles = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -47,11 +47,11 @@ public class BottleType extends com.access.entities.entity.Entity {
         this.description = description;
     }
 
-    public Set<com.access.entities.EmptyBottle> getEmptyBottles() {
+    public Set<com.oopproject.wineryapplication.access.entities.EmptyBottle> getEmptyBottles() {
         return emptyBottles;
     }
 
-    public void setEmptyBottles(Set<com.access.entities.EmptyBottle> emptyBottles) {
+    public void setEmptyBottles(Set<com.oopproject.wineryapplication.access.entities.EmptyBottle> emptyBottles) {
         this.emptyBottles = emptyBottles;
     }
 

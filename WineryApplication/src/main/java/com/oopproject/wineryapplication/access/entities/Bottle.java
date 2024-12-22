@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "bottles", schema = "public")
-public class Bottle extends com.access.entities.entity.Entity {
+public class Bottle {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bottles_id_gen")
     @SequenceGenerator(name = "bottles_id_gen", sequenceName = "bottles_id_seq", allocationSize = 1)
@@ -17,7 +17,7 @@ public class Bottle extends com.access.entities.entity.Entity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sweetness_id", nullable = false)
-    private com.access.entities.Sweetness sweetness;
+    private com.oopproject.wineryapplication.access.entities.Sweetness sweetness;
 
     @Column(name = "residual_sugar", nullable = false)
     private Short residualSugar;
@@ -38,11 +38,11 @@ public class Bottle extends com.access.entities.entity.Entity {
         this.batch = batch;
     }
 
-    public com.access.entities.Sweetness getSweetness() {
+    public com.oopproject.wineryapplication.access.entities.Sweetness getSweetness() {
         return sweetness;
     }
 
-    public void setSweetness(com.access.entities.Sweetness sweetness) {
+    public void setSweetness(com.oopproject.wineryapplication.access.entities.Sweetness sweetness) {
         this.sweetness = sweetness;
     }
 

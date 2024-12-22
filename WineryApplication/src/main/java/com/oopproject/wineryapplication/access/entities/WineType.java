@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "wine_type", schema = "public")
-public class WineType extends com.access.entities.entity.Entity {
+public class WineType {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "wine_type_id_gen")
     @SequenceGenerator(name = "wine_type_id_gen", sequenceName = "wine_type_id_seq", allocationSize = 1)

@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "sort", schema = "public")
-public class Sort extends com.access.entities.entity.Entity {
+public class Sort {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sort_id_gen")
     @SequenceGenerator(name = "sort_id_gen", sequenceName = "sort_id_seq", allocationSize = 1)

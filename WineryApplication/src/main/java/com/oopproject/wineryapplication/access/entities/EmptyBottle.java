@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "empty_bottles", schema = "public")
-public class EmptyBottle extends com.access.entities.entity.Entity {
+public class EmptyBottle {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empty_bottles_id_gen")
     @SequenceGenerator(name = "empty_bottles_id_gen", sequenceName = "empty_bottles_id_seq", allocationSize = 1)

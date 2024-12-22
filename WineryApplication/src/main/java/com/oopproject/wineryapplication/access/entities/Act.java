@@ -21,7 +21,7 @@ public class Act {
     private Integer weight;
 
     @OneToMany(mappedBy = "act")
-    private Set<Behavior> behaviors = new LinkedHashSet<>();
+    private Set<com.oopproject.wineryapplication.access.entities.Behavior> behaviors = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -47,11 +47,11 @@ public class Act {
         this.weight = weight;
     }
 
-    public Set<Behavior> getBehaviors() {
+    public Set<com.oopproject.wineryapplication.access.entities.Behavior> getBehaviors() {
         return behaviors;
     }
 
-    public void setBehaviors(Set<Behavior> behaviors) {
+    public void setBehaviors(Set<com.oopproject.wineryapplication.access.entities.Behavior> behaviors) {
         this.behaviors = behaviors;
     }
 

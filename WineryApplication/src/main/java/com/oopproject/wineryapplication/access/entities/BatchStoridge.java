@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "batch_storidge", schema = "public")
-public class BatchStoridge extends com.access.entities.entity.Entity {
+public class BatchStoridge {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "batch_storidge_id_gen")
     @SequenceGenerator(name = "batch_storidge_id_gen", sequenceName = "batch_storidge_id_seq", allocationSize = 1)
@@ -17,7 +17,7 @@ public class BatchStoridge extends com.access.entities.entity.Entity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "container_id", nullable = false)
-    private com.access.entities.Container container;
+    private com.oopproject.wineryapplication.access.entities.Container container;
 
     public Integer getId() {
         return id;
@@ -35,11 +35,11 @@ public class BatchStoridge extends com.access.entities.entity.Entity {
         this.batch = batch;
     }
 
-    public com.access.entities.Container getContainer() {
+    public com.oopproject.wineryapplication.access.entities.Container getContainer() {
         return container;
     }
 
-    public void setContainer(com.access.entities.Container container) {
+    public void setContainer(com.oopproject.wineryapplication.access.entities.Container container) {
         this.container = container;
     }
 

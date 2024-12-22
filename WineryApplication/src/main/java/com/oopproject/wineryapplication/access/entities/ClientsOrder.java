@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "clients_orders", schema = "public")
-public class ClientsOrder extends com.access.entities.entity.Entity {
+public class ClientsOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clients_orders_id_gen")
     @SequenceGenerator(name = "clients_orders_id_gen", sequenceName = "clients_orders_id_seq", allocationSize = 1)
@@ -32,14 +32,14 @@ public class ClientsOrder extends com.access.entities.entity.Entity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "progress_id")
-    private com.access.entities.Progress progress;
+    private com.oopproject.wineryapplication.access.entities.Progress progress;
 
     @Column(name = "end_price", nullable = false, precision = 7, scale = 3)
     private BigDecimal endPrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "wine_type_id", nullable = false)
-    private com.access.entities.WineType wineType;
+    private com.oopproject.wineryapplication.access.entities.WineType wineType;
 
     public Integer getId() {
         return id;
@@ -89,11 +89,11 @@ public class ClientsOrder extends com.access.entities.entity.Entity {
         this.completionDate = completionDate;
     }
 
-    public com.access.entities.Progress getProgress() {
+    public com.oopproject.wineryapplication.access.entities.Progress getProgress() {
         return progress;
     }
 
-    public void setProgress(com.access.entities.Progress progress) {
+    public void setProgress(com.oopproject.wineryapplication.access.entities.Progress progress) {
         this.progress = progress;
     }
 
@@ -105,11 +105,11 @@ public class ClientsOrder extends com.access.entities.entity.Entity {
         this.endPrice = endPrice;
     }
 
-    public com.access.entities.WineType getWineType() {
+    public com.oopproject.wineryapplication.access.entities.WineType getWineType() {
         return wineType;
     }
 
-    public void setWineType(com.access.entities.WineType wineType) {
+    public void setWineType(com.oopproject.wineryapplication.access.entities.WineType wineType) {
         this.wineType = wineType;
     }
 

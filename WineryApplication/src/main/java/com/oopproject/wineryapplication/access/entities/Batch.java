@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "batch", schema = "public")
-public class Batch extends com.access.entities.entity.Entity {
+public class Batch {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "batch_id_gen")
     @SequenceGenerator(name = "batch_id_gen", sequenceName = "batch_id_seq", allocationSize = 1)
@@ -19,16 +19,16 @@ public class Batch extends com.access.entities.entity.Entity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "wine_type_id", nullable = false)
-    private com.access.entities.WineType wineType;
+    private com.oopproject.wineryapplication.access.entities.WineType wineType;
 
     @OneToMany(mappedBy = "batch")
-    private Set<com.access.entities.BatchStoridge> batchStoridges = new LinkedHashSet<>();
+    private Set<com.oopproject.wineryapplication.access.entities.BatchStoridge> batchStoridges = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "batch")
-    private Set<com.access.entities.Bottle> bottles = new LinkedHashSet<>();
+    private Set<com.oopproject.wineryapplication.access.entities.Bottle> bottles = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "batch")
-    private Set<com.access.entities.Mix> mixes = new LinkedHashSet<>();
+    private Set<com.oopproject.wineryapplication.access.entities.Mix> mixes = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -46,35 +46,35 @@ public class Batch extends com.access.entities.entity.Entity {
         this.volume = volume;
     }
 
-    public com.access.entities.WineType getWineType() {
+    public com.oopproject.wineryapplication.access.entities.WineType getWineType() {
         return wineType;
     }
 
-    public void setWineType(com.access.entities.WineType wineType) {
+    public void setWineType(com.oopproject.wineryapplication.access.entities.WineType wineType) {
         this.wineType = wineType;
     }
 
-    public Set<com.access.entities.BatchStoridge> getBatchStoridges() {
+    public Set<com.oopproject.wineryapplication.access.entities.BatchStoridge> getBatchStoridges() {
         return batchStoridges;
     }
 
-    public void setBatchStoridges(Set<com.access.entities.BatchStoridge> batchStoridges) {
+    public void setBatchStoridges(Set<com.oopproject.wineryapplication.access.entities.BatchStoridge> batchStoridges) {
         this.batchStoridges = batchStoridges;
     }
 
-    public Set<com.access.entities.Bottle> getBottles() {
+    public Set<com.oopproject.wineryapplication.access.entities.Bottle> getBottles() {
         return bottles;
     }
 
-    public void setBottles(Set<com.access.entities.Bottle> bottles) {
+    public void setBottles(Set<com.oopproject.wineryapplication.access.entities.Bottle> bottles) {
         this.bottles = bottles;
     }
 
-    public Set<com.access.entities.Mix> getMixes() {
+    public Set<com.oopproject.wineryapplication.access.entities.Mix> getMixes() {
         return mixes;
     }
 
-    public void setMixes(Set<com.access.entities.Mix> mixes) {
+    public void setMixes(Set<com.oopproject.wineryapplication.access.entities.Mix> mixes) {
         this.mixes = mixes;
     }
 

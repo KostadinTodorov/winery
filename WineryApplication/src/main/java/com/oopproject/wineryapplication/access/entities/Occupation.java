@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "occupation", schema = "public")
-public class Occupation extends com.access.entities.entity.Entity {
+public class Occupation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "occupation_id_gen")
     @SequenceGenerator(name = "occupation_id_gen", sequenceName = "occupation_id_seq", allocationSize = 1)

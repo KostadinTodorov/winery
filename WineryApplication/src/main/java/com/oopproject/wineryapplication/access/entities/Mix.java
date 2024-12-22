@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "mix", schema = "public")
-public class Mix extends com.access.entities.entity.Entity {
+public class Mix {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;

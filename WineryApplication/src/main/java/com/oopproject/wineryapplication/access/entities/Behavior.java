@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "behavior", schema = "public")
-public class Behavior extends com.access.entities.entity.Entity {
+public class Behavior {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "behavior_id_gen")
     @SequenceGenerator(name = "behavior_id_gen", sequenceName = "behavior_id_seq", allocationSize = 1)
@@ -13,7 +13,7 @@ public class Behavior extends com.access.entities.entity.Entity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "employee_id", nullable = false)
-    private com.access.entities.Employee employee;
+    private com.oopproject.wineryapplication.access.entities.Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "act_id", nullable = false)
@@ -27,11 +27,11 @@ public class Behavior extends com.access.entities.entity.Entity {
         this.id = id;
     }
 
-    public com.access.entities.Employee getEmployee() {
+    public com.oopproject.wineryapplication.access.entities.Employee getEmployee() {
         return employee;
     }
 
-    public void setEmployee(com.access.entities.Employee employee) {
+    public void setEmployee(com.oopproject.wineryapplication.access.entities.Employee employee) {
         this.employee = employee;
     }
 
