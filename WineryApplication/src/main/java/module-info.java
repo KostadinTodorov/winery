@@ -10,4 +10,12 @@ module com.oopproject.wineryapplication {
     exports com.oopproject.wineryapplication;
     exports com.oopproject.wineryapplication.Controller;
     opens com.oopproject.wineryapplication.Controller to javafx.fxml;
+    exports com.oopproject.wineryapplication.access;
+    opens com.oopproject.wineryapplication.access to org.hibernate.orm.core;
+    exports com.oopproject.wineryapplication.access.daos.dao;
+    opens com.oopproject.wineryapplication.access.daos.dao to org.hibernate.orm.core;
+    exports com.oopproject.wineryapplication.access.daos;
+    opens com.oopproject.wineryapplication.access.daos to org.hibernate.orm.core;
+    exports com.oopproject.wineryapplication.access.entities;
+    opens com.oopproject.wineryapplication.access.entities to org.hibernate.orm.core;
 }

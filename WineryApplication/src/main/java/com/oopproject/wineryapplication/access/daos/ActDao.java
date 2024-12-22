@@ -1,6 +1,6 @@
 package com.oopproject.wineryapplication.access.daos;
-import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 import com.oopproject.wineryapplication.access.entities.Act;
+import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
