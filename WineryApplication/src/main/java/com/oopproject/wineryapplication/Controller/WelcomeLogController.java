@@ -18,6 +18,7 @@ public class WelcomeLogController {
        // stage.show();
 
         // TODO: add a passing point
+
         SceneHelper.switchTo(Scenes.USER);
     }
 
