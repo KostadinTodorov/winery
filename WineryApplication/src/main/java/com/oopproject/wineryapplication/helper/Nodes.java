@@ -1,4 +1,4 @@
-package com.oopproject.wineryapplication;
+package com.oopproject.wineryapplication.helper;
 
 public enum Nodes {
     BOTTLEDWINEINVENTORY("BottledWineInventory.fxml");

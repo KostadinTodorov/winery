@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopproject.wineryapplication.Controller.UserMainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopproject.wineryapplication.controller.UserMainController">
    <children>
       <AnchorPane prefHeight="9.0" prefWidth="600.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -30,15 +30,7 @@
          <left>
             <AnchorPane prefHeight="779.0" prefWidth="156.0" style="-fx-background-color: #004B49;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="26.0" layoutY="74.0" spacing="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                     <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToBottledWineInventory" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="bottled wine inventory" textFill="WHITE" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="empty bottles inventory" textFill="WHITE" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="grapes inventory" textFill="WHITE" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="tasks" textFill="WHITE" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #004B49; -fx-border-color: #008a85;" text="reports" textFill="WHITE" />
-                     </children>
-                  </VBox>
+                  <VBox fx:id="buttonHolder" layoutX="26.0" layoutY="74.0" spacing="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
                   <Button alignment="TOP_LEFT" graphicTextGap="5.0" layoutX="31.0" layoutY="740.0" mnemonicParsing="false" style="-fx-background-color: #004B49;" text="Sign Out" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <graphic>
                         <FontAwesomeIcon fill="#0c9010" glyphName="SIGN_OUT" size="2em" wrappingWidth="39.0" />

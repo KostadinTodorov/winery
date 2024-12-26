@@ -1,4 +1,4 @@
-package com.oopproject.wineryapplication;
+package com.oopproject.wineryapplication.helper;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

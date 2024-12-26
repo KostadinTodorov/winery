@@ -1,7 +1,7 @@
-package com.oopproject.wineryapplication.Controller;
+package com.oopproject.wineryapplication.controller;
 
-import com.oopproject.wineryapplication.SceneHelper;
-import com.oopproject.wineryapplication.Scenes;
+import com.oopproject.wineryapplication.helper.SceneHelper;
+import com.oopproject.wineryapplication.helper.Scenes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
