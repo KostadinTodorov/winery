@@ -1,53 +1,52 @@
 package com.oopproject.wineryapplication.access.daos;
 
-import com.oopproject.wineryapplication.access.daos.dao.Dao;
+import com.oopproject.wineryapplication.access.entities.FaultCode;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
-import com.oopproject.wineryapplication.access.entities.Answer;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class AnswerDao extends EntityDao<Answer> {
-    public AnswerDao() {
+public class FaultCodeDao extends EntityDao<FaultCode> {
+
+    public FaultCodeDao() {
         super();
     }
 
     @Override
-    public Answer get(int id) {
+    public FaultCode get(int id) {
         try (Session session = createSession()) {
-            return session.get(Answer.class, id);
+            return session.get(FaultCode.class, id);
         }
     }
 
     @Override
-    public List<Answer> getAll() {
+    public List<FaultCode> getAll() {
         try (Session session = createSession()) {
-            return session.createQuery("from Answer", Answer.class).list();
+            return session.createQuery("from FaultCode", FaultCode.class).list();
         }
     }
 
     @Override
-    public boolean add(Answer answer) {
-        if (answer.getId() == null) {
-            return insert(answer) != null;
-        }
-        else if (get(answer.getId()) == null) {
-            return insert(answer) != null;
+    public boolean add(FaultCode faultCode) {
+        if (faultCode.getId() == null) {
+            return insert(faultCode) != null;
+        } else if (get(faultCode.getId()) == null) {
+            return insert(faultCode) != null;
         }
         return false;
     }
 
     @Override
-    public Answer insert(Answer answer) {
-        Answer newAnswer = null;
-        try(Session session = createSession()) {
+    public FaultCode insert(FaultCode faultCode) {
+        FaultCode newFaultCode = null;
+        try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
-            newAnswer = session.merge(answer);
+            newFaultCode = session.merge(faultCode);
             try {
                 transaction.commit();
-                return newAnswer;
+                return newFaultCode;
             } catch (RollbackException e) {
                 transaction.rollback();
                 return null;
@@ -59,10 +58,10 @@ public class AnswerDao extends EntityDao<Answer> {
     }
 
     @Override
-    public boolean update(int id, Answer answer) {
+    public boolean update(int id, FaultCode faultCode) {
         if (get(id) != null) {
-            answer.setId(id);
-            return insert(answer) != null;
+            faultCode.setId(id);
+            return insert(faultCode) != null;
         }
         return false;
     }
@@ -72,9 +71,9 @@ public class AnswerDao extends EntityDao<Answer> {
         try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                Answer answer = session.get(Answer.class, id);
-                if (answer != null) {
-                    session.remove(answer);
+                FaultCode faultCode = session.get(FaultCode.class, id);
+                if (faultCode != null) {
+                    session.remove(faultCode);
                     transaction.commit();
                     return true;
                 } else {

@@ -8,8 +8,8 @@ module com.oopproject.wineryapplication {
 
     opens com.oopproject.wineryapplication to javafx.fxml;
     exports com.oopproject.wineryapplication;
-    exports com.oopproject.wineryapplication.Controller;
-    opens com.oopproject.wineryapplication.Controller to javafx.fxml;
+    exports com.oopproject.wineryapplication.controller;
+    opens com.oopproject.wineryapplication.controller to javafx.fxml;
     exports com.oopproject.wineryapplication.access;
     opens com.oopproject.wineryapplication.access to org.hibernate.orm.core;
     exports com.oopproject.wineryapplication.access.daos.dao;

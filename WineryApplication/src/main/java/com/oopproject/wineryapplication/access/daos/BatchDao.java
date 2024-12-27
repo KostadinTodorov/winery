@@ -2,52 +2,52 @@ package com.oopproject.wineryapplication.access.daos;
 
 import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
-import com.oopproject.wineryapplication.access.entities.Answer;
+import com.oopproject.wineryapplication.access.entities.Batch;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class AnswerDao extends EntityDao<Answer> {
-    public AnswerDao() {
+public class BatchDao extends EntityDao<Batch> {
+    public BatchDao() {
         super();
     }
 
     @Override
-    public Answer get(int id) {
+    public Batch get(int id) {
         try (Session session = createSession()) {
-            return session.get(Answer.class, id);
+            return session.get(Batch.class, id);
         }
     }
 
     @Override
-    public List<Answer> getAll() {
+    public List<Batch> getAll() {
         try (Session session = createSession()) {
-            return session.createQuery("from Answer", Answer.class).list();
+            return session.createQuery("from Batch", Batch.class).list();
         }
     }
 
     @Override
-    public boolean add(Answer answer) {
-        if (answer.getId() == null) {
-            return insert(answer) != null;
+    public boolean add(Batch batch) {
+        if (batch.getId() == null) {
+            return insert(batch) != null;
         }
-        else if (get(answer.getId()) == null) {
-            return insert(answer) != null;
+        else if (get(batch.getId()) == null) {
+            return insert(batch) != null;
         }
         return false;
     }
 
     @Override
-    public Answer insert(Answer answer) {
-        Answer newAnswer = null;
+    public Batch insert(Batch batch) {
+        Batch newBatch = null;
         try(Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
-            newAnswer = session.merge(answer);
+            newBatch = session.merge(batch);
             try {
                 transaction.commit();
-                return newAnswer;
+                return newBatch;
             } catch (RollbackException e) {
                 transaction.rollback();
                 return null;
@@ -59,10 +59,10 @@ public class AnswerDao extends EntityDao<Answer> {
     }
 
     @Override
-    public boolean update(int id, Answer answer) {
+    public boolean update(int id, Batch batch) {
         if (get(id) != null) {
-            answer.setId(id);
-            return insert(answer) != null;
+            batch.setId(id);
+            return insert(batch) != null;
         }
         return false;
     }
@@ -72,9 +72,9 @@ public class AnswerDao extends EntityDao<Answer> {
         try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                Answer answer = session.get(Answer.class, id);
-                if (answer != null) {
-                    session.remove(answer);
+                Batch batch = session.get(Batch.class, id);
+                if (batch != null) {
+                    session.remove(batch);
                     transaction.commit();
                     return true;
                 } else {

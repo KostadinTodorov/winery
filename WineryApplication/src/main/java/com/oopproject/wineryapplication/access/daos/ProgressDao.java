@@ -1,53 +1,52 @@
 package com.oopproject.wineryapplication.access.daos;
 
-import com.oopproject.wineryapplication.access.daos.dao.Dao;
+import com.oopproject.wineryapplication.access.entities.Progress;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
-import com.oopproject.wineryapplication.access.entities.Answer;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class AnswerDao extends EntityDao<Answer> {
-    public AnswerDao() {
+public class ProgressDao extends EntityDao<Progress> {
+
+    public ProgressDao() {
         super();
     }
 
     @Override
-    public Answer get(int id) {
+    public Progress get(int id) {
         try (Session session = createSession()) {
-            return session.get(Answer.class, id);
+            return session.get(Progress.class, id);
         }
     }
 
     @Override
-    public List<Answer> getAll() {
+    public List<Progress> getAll() {
         try (Session session = createSession()) {
-            return session.createQuery("from Answer", Answer.class).list();
+            return session.createQuery("from Progress", Progress.class).list();
         }
     }
 
     @Override
-    public boolean add(Answer answer) {
-        if (answer.getId() == null) {
-            return insert(answer) != null;
-        }
-        else if (get(answer.getId()) == null) {
-            return insert(answer) != null;
+    public boolean add(Progress progress) {
+        if (progress.getId() == null) {
+            return insert(progress) != null;
+        } else if (get(progress.getId()) == null) {
+            return insert(progress) != null;
         }
         return false;
     }
 
     @Override
-    public Answer insert(Answer answer) {
-        Answer newAnswer = null;
-        try(Session session = createSession()) {
+    public Progress insert(Progress progress) {
+        Progress newProgress = null;
+        try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
-            newAnswer = session.merge(answer);
+            newProgress = session.merge(progress);
             try {
                 transaction.commit();
-                return newAnswer;
+                return newProgress;
             } catch (RollbackException e) {
                 transaction.rollback();
                 return null;
@@ -59,10 +58,10 @@ public class AnswerDao extends EntityDao<Answer> {
     }
 
     @Override
-    public boolean update(int id, Answer answer) {
+    public boolean update(int id, Progress progress) {
         if (get(id) != null) {
-            answer.setId(id);
-            return insert(answer) != null;
+            progress.setId(id);
+            return insert(progress) != null;
         }
         return false;
     }
@@ -72,9 +71,9 @@ public class AnswerDao extends EntityDao<Answer> {
         try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                Answer answer = session.get(Answer.class, id);
-                if (answer != null) {
-                    session.remove(answer);
+                Progress progress = session.get(Progress.class, id);
+                if (progress != null) {
+                    session.remove(progress);
                     transaction.commit();
                     return true;
                 } else {

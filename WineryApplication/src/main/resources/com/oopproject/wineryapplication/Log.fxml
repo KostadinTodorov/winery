@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopproject.wineryapplication.Controller.WelcomeLogController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopproject.wineryapplication.controller.LogController">
    <right>
-      <AnchorPane prefHeight="380.0" prefWidth="240.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="380.0" prefWidth="240.0" BorderPane.alignment="CENTER" fx:id="placeHolderAnchPane">
          <children>
             <ImageView fitHeight="139.0" fitWidth="134.0" layoutX="53.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                
@@ -35,14 +35,19 @@
    <left>
       <AnchorPane prefHeight="380.0" prefWidth="265.0" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField layoutX="38.0" layoutY="208.0" prefHeight="25.0" prefWidth="197.0" promptText="Password" />
+            <PasswordField layoutX="38.0" layoutY="208.0" prefHeight="25.0" prefWidth="197.0" promptText="Password" fx:id="password"/>
             <ImageView fitHeight="69.0" fitWidth="79.0" layoutX="93.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField layoutX="38.0" layoutY="164.0" prefHeight="25.0" prefWidth="198.0" promptText="Username">
+            <TextField layoutX="38.0" layoutY="164.0" prefHeight="25.0" prefWidth="198.0" promptText="Username" fx:id="employeeName">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </TextField>
-            <Button layoutX="27.0" layoutY="279.0" mnemonicParsing="false" onAction="#switchToUser" prefHeight="37.0" prefWidth="219.0" text="Login" />
+            <TextField layoutX="300.0" layoutY="164.0" prefHeight="25.0" prefWidth="198.0" promptText="email" fx:id="employeeEmail">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </TextField>
+            <Button layoutX="27.0" layoutY="279.0" mnemonicParsing="false" onAction="#switchToBottledWineInventory" prefHeight="37.0" prefWidth="219.0" text="Login" />
             <Label layoutX="59.0" layoutY="92.0" prefHeight="49.0" prefWidth="155.0" text="Login Account" textFill="#be0a16">
                <font>
                   <Font size="20.0" />

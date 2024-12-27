@@ -1,53 +1,52 @@
 package com.oopproject.wineryapplication.access.daos;
 
-import com.oopproject.wineryapplication.access.daos.dao.Dao;
+import com.oopproject.wineryapplication.access.entities.Mix;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
-import com.oopproject.wineryapplication.access.entities.Answer;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class AnswerDao extends EntityDao<Answer> {
-    public AnswerDao() {
+public class MixDao extends EntityDao<Mix> {
+
+    public MixDao() {
         super();
     }
 
     @Override
-    public Answer get(int id) {
+    public Mix get(int id) {
         try (Session session = createSession()) {
-            return session.get(Answer.class, id);
+            return session.get(Mix.class, id);
         }
     }
 
     @Override
-    public List<Answer> getAll() {
+    public List<Mix> getAll() {
         try (Session session = createSession()) {
-            return session.createQuery("from Answer", Answer.class).list();
+            return session.createQuery("from Mix", Mix.class).list();
         }
     }
 
     @Override
-    public boolean add(Answer answer) {
-        if (answer.getId() == null) {
-            return insert(answer) != null;
-        }
-        else if (get(answer.getId()) == null) {
-            return insert(answer) != null;
+    public boolean add(Mix mix) {
+        if (mix.getId() == null) {
+            return insert(mix) != null;
+        } else if (get(mix.getId()) == null) {
+            return insert(mix) != null;
         }
         return false;
     }
 
     @Override
-    public Answer insert(Answer answer) {
-        Answer newAnswer = null;
-        try(Session session = createSession()) {
+    public Mix insert(Mix mix) {
+        Mix newMix = null;
+        try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
-            newAnswer = session.merge(answer);
+            newMix = session.merge(mix);
             try {
                 transaction.commit();
-                return newAnswer;
+                return newMix;
             } catch (RollbackException e) {
                 transaction.rollback();
                 return null;
@@ -59,10 +58,10 @@ public class AnswerDao extends EntityDao<Answer> {
     }
 
     @Override
-    public boolean update(int id, Answer answer) {
+    public boolean update(int id, Mix mix) {
         if (get(id) != null) {
-            answer.setId(id);
-            return insert(answer) != null;
+            mix.setId(id);
+            return insert(mix) != null;
         }
         return false;
     }
@@ -72,9 +71,9 @@ public class AnswerDao extends EntityDao<Answer> {
         try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                Answer answer = session.get(Answer.class, id);
-                if (answer != null) {
-                    session.remove(answer);
+                Mix mix = session.get(Mix.class, id);
+                if (mix != null) {
+                    session.remove(mix);
                     transaction.commit();
                     return true;
                 } else {

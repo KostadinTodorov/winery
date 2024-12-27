@@ -1,53 +1,52 @@
 package com.oopproject.wineryapplication.access.daos;
 
-import com.oopproject.wineryapplication.access.daos.dao.Dao;
+import com.oopproject.wineryapplication.access.entities.EmptyBottle;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
-import com.oopproject.wineryapplication.access.entities.Answer;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class AnswerDao extends EntityDao<Answer> {
-    public AnswerDao() {
+public class EmptyBottleDao extends EntityDao<EmptyBottle> {
+
+    public EmptyBottleDao() {
         super();
     }
 
     @Override
-    public Answer get(int id) {
+    public EmptyBottle get(int id) {
         try (Session session = createSession()) {
-            return session.get(Answer.class, id);
+            return session.get(EmptyBottle.class, id);
         }
     }
 
     @Override
-    public List<Answer> getAll() {
+    public List<EmptyBottle> getAll() {
         try (Session session = createSession()) {
-            return session.createQuery("from Answer", Answer.class).list();
+            return session.createQuery("from EmptyBottle", EmptyBottle.class).list();
         }
     }
 
     @Override
-    public boolean add(Answer answer) {
-        if (answer.getId() == null) {
-            return insert(answer) != null;
-        }
-        else if (get(answer.getId()) == null) {
-            return insert(answer) != null;
+    public boolean add(EmptyBottle emptyBottle) {
+        if (emptyBottle.getId() == null) {
+            return insert(emptyBottle) != null;
+        } else if (get(emptyBottle.getId()) == null) {
+            return insert(emptyBottle) != null;
         }
         return false;
     }
 
     @Override
-    public Answer insert(Answer answer) {
-        Answer newAnswer = null;
-        try(Session session = createSession()) {
+    public EmptyBottle insert(EmptyBottle emptyBottle) {
+        EmptyBottle newEmptyBottle = null;
+        try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
-            newAnswer = session.merge(answer);
+            newEmptyBottle = session.merge(emptyBottle);
             try {
                 transaction.commit();
-                return newAnswer;
+                return newEmptyBottle;
             } catch (RollbackException e) {
                 transaction.rollback();
                 return null;
@@ -59,10 +58,10 @@ public class AnswerDao extends EntityDao<Answer> {
     }
 
     @Override
-    public boolean update(int id, Answer answer) {
+    public boolean update(int id, EmptyBottle emptyBottle) {
         if (get(id) != null) {
-            answer.setId(id);
-            return insert(answer) != null;
+            emptyBottle.setId(id);
+            return insert(emptyBottle) != null;
         }
         return false;
     }
@@ -72,9 +71,9 @@ public class AnswerDao extends EntityDao<Answer> {
         try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                Answer answer = session.get(Answer.class, id);
-                if (answer != null) {
-                    session.remove(answer);
+                EmptyBottle emptyBottle = session.get(EmptyBottle.class, id);
+                if (emptyBottle != null) {
+                    session.remove(emptyBottle);
                     transaction.commit();
                     return true;
                 } else {
