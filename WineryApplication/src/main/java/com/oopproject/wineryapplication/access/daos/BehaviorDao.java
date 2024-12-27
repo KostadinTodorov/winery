@@ -1,53 +1,52 @@
 package com.oopproject.wineryapplication.access.daos;
 
-import com.oopproject.wineryapplication.access.daos.dao.Dao;
+import com.oopproject.wineryapplication.access.entities.Behavior;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
-import com.oopproject.wineryapplication.access.entities.Answer;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class AnswerDao extends EntityDao<Answer> {
-    public AnswerDao() {
+public class BehaviorDao extends EntityDao<Behavior> {
+
+    public BehaviorDao() {
         super();
     }
 
     @Override
-    public Answer get(int id) {
+    public Behavior get(int id) {
         try (Session session = createSession()) {
-            return session.get(Answer.class, id);
+            return session.get(Behavior.class, id);
         }
     }
 
     @Override
-    public List<Answer> getAll() {
+    public List<Behavior> getAll() {
         try (Session session = createSession()) {
-            return session.createQuery("from Answer", Answer.class).list();
+            return session.createQuery("from Behavior", Behavior.class).list();
         }
     }
 
     @Override
-    public boolean add(Answer answer) {
-        if (answer.getId() == null) {
-            return insert(answer) != null;
-        }
-        else if (get(answer.getId()) == null) {
-            return insert(answer) != null;
+    public boolean add(Behavior behavior) {
+        if (behavior.getId() == null) {
+            return insert(behavior) != null;
+        } else if (get(behavior.getId()) == null) {
+            return insert(behavior) != null;
         }
         return false;
     }
 
     @Override
-    public Answer insert(Answer answer) {
-        Answer newAnswer = null;
-        try(Session session = createSession()) {
+    public Behavior insert(Behavior behavior) {
+        Behavior newBehavior = null;
+        try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
-            newAnswer = session.merge(answer);
+            newBehavior = session.merge(behavior);
             try {
                 transaction.commit();
-                return newAnswer;
+                return newBehavior;
             } catch (RollbackException e) {
                 transaction.rollback();
                 return null;
@@ -59,10 +58,10 @@ public class AnswerDao extends EntityDao<Answer> {
     }
 
     @Override
-    public boolean update(int id, Answer answer) {
+    public boolean update(int id, Behavior behavior) {
         if (get(id) != null) {
-            answer.setId(id);
-            return insert(answer) != null;
+            behavior.setId(id);
+            return insert(behavior) != null;
         }
         return false;
     }
@@ -72,9 +71,9 @@ public class AnswerDao extends EntityDao<Answer> {
         try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                Answer answer = session.get(Answer.class, id);
-                if (answer != null) {
-                    session.remove(answer);
+                Behavior behavior = session.get(Behavior.class, id);
+                if (behavior != null) {
+                    session.remove(behavior);
                     transaction.commit();
                     return true;
                 } else {
