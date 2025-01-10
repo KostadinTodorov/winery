@@ -3,6 +3,8 @@ package com.oopproject.wineryapplication.controller;
 import com.oopproject.wineryapplication.Nodes;
 import com.oopproject.wineryapplication.SceneHelper;
 import com.oopproject.wineryapplication.Scenes;
+import com.oopproject.wineryapplication.access.entities.Act;
+import com.oopproject.wineryapplication.access.entities.Batch;
 import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.data.User;
 import javafx.event.ActionEvent;
@@ -47,6 +49,6 @@ public class LogController {
             System.out.println("Exception: " + e);
             System.out.println("Cause: " + e.getCause());
         }
-        SceneHelper.addNode(placeHolderAnchPane, Nodes.BOTTLEDWINEINVENTORY);
+        SceneHelper.<AddBaseController>switchTo(Scenes.ADDBASE, new AddBaseController(new Employee()));
     }
 }

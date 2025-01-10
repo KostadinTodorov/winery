@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "mix", schema = "public")
-public class Mix {
+public class Mix implements com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;

@@ -36,6 +36,25 @@ public class SceneHelper
     }
 
 
+
+    public static <T> void switchTo (Scenes selectedScene, T controller) {
+        if (SceneHelper.scene == null)
+        {
+            System.out.println("No scene is being declared!");
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(SceneHelper.class.getResource(selectedScene.getFileName()));
+            loader.setController(controller);
+            SceneHelper.scene.setRoot(loader.load());
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
     public static void addNode(Pane paneNode, Nodes node)
     {
         if (SceneHelper.scene == null)
@@ -56,4 +75,5 @@ public class SceneHelper
             throw new RuntimeException(e);
         }
     }
+
 }

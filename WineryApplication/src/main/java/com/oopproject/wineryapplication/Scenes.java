@@ -3,7 +3,8 @@ package com.oopproject.wineryapplication;
 public enum Scenes {
     WELLCOME("Wellcome.fxml"),
     LOG("Log.fxml"),
-    USER("User.fxml");
+    USER("User.fxml"),
+    ADDBASE("AddBase.fxml");
 
     private String fileName;
 

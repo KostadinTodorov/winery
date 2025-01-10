@@ -46,7 +46,6 @@ public abstract class EntityDao<T> implements Dao<T> {
                 .addAnnotatedClass(Company.class)
                 .addAnnotatedClass(Container.class)
                 .addAnnotatedClass(Employee.class)
-                .addAnnotatedClass(EmptyBottle.class)
                 .addAnnotatedClass(FaultCode.class)
                 .addAnnotatedClass(Harvest.class)
                 .addAnnotatedClass(MachineType.class)
