@@ -29,22 +29,22 @@ public class AnswerDao extends EntityDao<Answer> {
     }
 
     @Override
-    public boolean add(Answer Answer) {
-        if (Answer.getId() == null) {
-            return insert(Answer) != null;
+    public boolean add(Answer answer) {
+        if (answer.getId() == null) {
+            return insert(answer) != null;
         }
-        else if (get(Answer.getId()) == null) {
-            return insert(Answer) != null;
+        else if (get(answer.getId()) == null) {
+            return insert(answer) != null;
         }
         return false;
     }
 
     @Override
-    public Answer insert(Answer Answer) {
+    public Answer insert(Answer answer) {
         Answer newAnswer = null;
         try(Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
-            newAnswer = session.merge(Answer);
+            newAnswer = session.merge(answer);
             try {
                 transaction.commit();
                 return newAnswer;
@@ -59,10 +59,10 @@ public class AnswerDao extends EntityDao<Answer> {
     }
 
     @Override
-    public boolean update(int id, Answer Answer) {
+    public boolean update(int id, Answer answer) {
         if (get(id) != null) {
-            Answer.setId(id);
-            return insert(Answer) != null;
+            answer.setId(id);
+            return insert(answer) != null;
         }
         return false;
     }
@@ -72,9 +72,9 @@ public class AnswerDao extends EntityDao<Answer> {
         try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                Answer Answer = session.get(Answer.class, id);
-                if (Answer != null) {
-                    session.remove(Answer);
+                Answer answer = session.get(Answer.class, id);
+                if (answer != null) {
+                    session.remove(answer);
                     transaction.commit();
                     return true;
                 } else {

@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "answers", schema = "public")
-public class Answer {
+public class Answer implements com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "answers_id_gen")
     @SequenceGenerator(name = "answers_id_gen", sequenceName = "answers_id_seq", allocationSize = 1)

@@ -13,6 +13,9 @@ public class ActDao extends EntityDao<Act> {
         super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Act get(int id) {
         try (Session session = createSession()) {
@@ -20,6 +23,9 @@ public class ActDao extends EntityDao<Act> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Act> getAll() {
         try (Session session = createSession()) {
@@ -27,6 +33,9 @@ public class ActDao extends EntityDao<Act> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean add(Act act) {
         if (act.getId() == null) {
@@ -38,6 +47,9 @@ public class ActDao extends EntityDao<Act> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Act insert(Act act) {
         Act newAct = null;
@@ -57,6 +69,9 @@ public class ActDao extends EntityDao<Act> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(int id, Act act) {
         if (get(id) != null) {
@@ -66,6 +81,9 @@ public class ActDao extends EntityDao<Act> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(int id) {
         try (Session session = createSession()) {

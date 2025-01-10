@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "clients_orders", schema = "public")
-public class ClientsOrder {
+public class ClientsOrder implements com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clients_orders_id_gen")
     @SequenceGenerator(name = "clients_orders_id_gen", sequenceName = "clients_orders_id_seq", allocationSize = 1)

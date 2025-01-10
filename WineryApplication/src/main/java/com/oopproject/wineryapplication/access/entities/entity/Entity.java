@@ -1,5 +1,7 @@
 package com.oopproject.wineryapplication.access.entities.entity;
 
-public abstract class Entity {
-    protected Integer id;
+public interface Entity {
+    public Integer getId();
+
+    public void setId(Integer id);
 }
