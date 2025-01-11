@@ -1,15 +1,9 @@
-package com.oopproject.wineryapplication.controller;
+package com.oopproject.wineryapplication;
 
-import com.oopproject.wineryapplication.Nodes;
-import com.oopproject.wineryapplication.SceneHelper;
-import com.oopproject.wineryapplication.Scenes;
-import com.oopproject.wineryapplication.access.entities.Act;
-import com.oopproject.wineryapplication.access.entities.Batch;
 import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.data.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;

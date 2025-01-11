@@ -1,4 +1,4 @@
-package com.oopproject.wineryapplication.controller;
+package com.oopproject.wineryapplication;
 
 import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
