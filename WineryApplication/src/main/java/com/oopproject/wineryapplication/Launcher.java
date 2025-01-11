@@ -1,7 +1,5 @@
 package com.oopproject.wineryapplication;
 
-import com.oopproject.wineryapplication.helper.SceneHelper;
-import com.oopproject.wineryapplication.helper.Scenes;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;

@@ -1,4 +1,4 @@
-package com.oopproject.wineryapplication.helper;
+package com.oopproject.wineryapplication;
 
 public enum Scenes {
     WELLCOME("Wellcome.fxml"),

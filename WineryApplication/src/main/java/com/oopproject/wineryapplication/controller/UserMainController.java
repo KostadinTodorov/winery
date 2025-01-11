@@ -1,8 +1,8 @@
 package com.oopproject.wineryapplication.controller;
 
 import com.oopproject.wineryapplication.Role;
-import com.oopproject.wineryapplication.helper.Nodes;
-import com.oopproject.wineryapplication.helper.SceneHelper;
+import com.oopproject.wineryapplication.Nodes;
+import com.oopproject.wineryapplication.SceneHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
