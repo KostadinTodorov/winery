@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class AddBaseController {
-
     @FXML
     public AnchorPane AddBase;
     @FXML
@@ -48,11 +47,15 @@ public class AddBaseController {
             String fieldName = field.getName();
             Class<?> fieldType = field.getType();
             javafx.scene.control.Label label = new javafx.scene.control.Label(fieldName);
-            if (classImplementsInterface(fieldType,Entity.class)) {
+            if (Entity.class.isAssignableFrom(fieldType)) {
                 Class<Entity> entityField = (Class<Entity>) fieldType;
                 ComboBox<Entity> entityComboBox = new ComboBox<>();
                 List<Entity> entities = new TemplateDao<Entity>(entityField).getAll();
+//                List<EntityDisplayWrapper> displayWrappers = entities.stream()
+//                        .map(EntityDisplayWrapper::new)
+//                        .toList();
                 ObservableList<Entity> observableEntities = FXCollections.observableArrayList(entities);
+
                 entityComboBox.setItems(observableEntities);
                 fieldNodedMap.put(field, entityComboBox);
                 EntityProps.getChildren().add(label);

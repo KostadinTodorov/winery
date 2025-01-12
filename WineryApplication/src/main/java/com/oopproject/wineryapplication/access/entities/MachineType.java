@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "machine_type", schema = "public")
-public class MachineType implements com.oopproject.wineryapplication.access.entities.entity.Entity {
+public class MachineType extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "machine_type_id_gen")
     @SequenceGenerator(name = "machine_type_id_gen", sequenceName = "machine_type_id_seq", allocationSize = 1)

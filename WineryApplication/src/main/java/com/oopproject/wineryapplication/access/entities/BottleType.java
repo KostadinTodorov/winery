@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "bottle_type", schema = "public")
-public class BottleType implements com.oopproject.wineryapplication.access.entities.entity.Entity {
+public class BottleType extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bottle_type_id_gen")
     @SequenceGenerator(name = "bottle_type_id_gen", sequenceName = "bottle_type_id_seq", allocationSize = 1)

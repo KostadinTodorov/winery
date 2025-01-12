@@ -1,7 +1,12 @@
 package com.oopproject.wineryapplication.access.entities.entity;
 
-public interface Entity {
-    public Integer getId();
+public abstract class Entity {
+    public abstract Integer getId();
 
-    public void setId(Integer id);
+    public abstract void setId(Integer id);
+
+    @Override
+    public String toString() {
+        return getId().toString();
+    }
 }

@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "fault_codes", schema = "public")
-public class FaultCode implements com.oopproject.wineryapplication.access.entities.entity.Entity {
+public class FaultCode extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fault_codes_id_gen")
     @SequenceGenerator(name = "fault_codes_id_gen", sequenceName = "fault_codes_id_seq", allocationSize = 1)

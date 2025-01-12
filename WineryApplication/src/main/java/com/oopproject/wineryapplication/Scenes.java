@@ -4,7 +4,8 @@ public enum Scenes {
     WELLCOME("Wellcome.fxml"),
     LOG("Log.fxml"),
     USER("User.fxml"),
-    ADDBASE("AddBase.fxml");
+    ADDBASE("AddBase.fxml"),
+    DISPLAYBASE("DisplayBase.fxml");
 
     private String fileName;
 

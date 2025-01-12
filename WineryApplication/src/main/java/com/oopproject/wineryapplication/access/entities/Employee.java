@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "employee", schema = "public")
-public class Employee implements com.oopproject.wineryapplication.access.entities.entity.Entity {
+public class Employee extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_id_gen")
     @SequenceGenerator(name = "employee_id_gen", sequenceName = "employee_id_seq", allocationSize = 1)
@@ -67,5 +67,4 @@ public class Employee implements com.oopproject.wineryapplication.access.entitie
     public void setBehaviors(Set<Behavior> behaviors) {
         this.behaviors = behaviors;
     }
-
 }

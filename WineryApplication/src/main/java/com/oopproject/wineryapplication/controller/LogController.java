@@ -7,6 +7,7 @@ import com.oopproject.wineryapplication.access.entities.*;
 import com.oopproject.wineryapplication.data.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,9 +17,14 @@ import java.io.IOException;
 
 public class LogController {
 
+    @FXML
     public PasswordField password;
+    @FXML
     public TextField employeeName;
+    @FXML
     public TextField employeeEmail;
+    @FXML
+    public AnchorPane base;
 
     @FXML
     private AnchorPane placeHolderAnchPane;
@@ -44,9 +50,15 @@ public class LogController {
             emp = User.GetInstance(Integer.parseInt(employeeName.getText()),password.getText());
             System.out.println(emp.getPerson().getPersonName());
         } catch (Exception e) {
-            System.out.println("Exception: " + e);
-            System.out.println("Cause: " + e.getCause());
+            employeeName.setText("");
+            password.setText("");
+            employeeEmail.setText("");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Wrong credentials!");
+            alert.setContentText("Make sure you have entered the correct credentials!");
+            alert.showAndWait();
         }
-        SceneHelper.<AddBaseController>switchTo(Scenes.ADDBASE, new AddBaseController(new Employee()));
+        SceneHelper.<AddBaseController>addNode(base,Nodes.ADDBASE, new AddBaseController(new Employee()));
+//        SceneHelper.<DisplayBaseController>switchTo(Scenes.DISPLAYBASE, new DisplayBaseController(Person.class));
     }
 }

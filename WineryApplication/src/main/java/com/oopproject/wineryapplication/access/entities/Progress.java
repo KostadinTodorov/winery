@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "progress", schema = "public")
-public class Progress implements com.oopproject.wineryapplication.access.entities.entity.Entity {
+public class Progress extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "progress_id_gen")
     @SequenceGenerator(name = "progress_id_gen", sequenceName = "progress_id_seq", allocationSize = 1)
