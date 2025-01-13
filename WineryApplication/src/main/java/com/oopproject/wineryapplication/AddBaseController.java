@@ -1,26 +1,22 @@
 package com.oopproject.wineryapplication;
 
 import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
+import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import com.oopproject.wineryapplication.access.entities.entity.EntityFieldMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 
 public class AddBaseController {
-
     @FXML
     public AnchorPane AddBase;
     @FXML
@@ -43,7 +39,7 @@ public class AddBaseController {
     @FXML
     public void initialize() {
         Button saveButton = new Button("Save");
-        saveButton.setOnAction(event -> setEntity());
+        saveButton.setOnAction(event -> saveButton());
         EntityProps.getChildren().add(saveButton);
         Field[] fields = entityFieldMap.getFields();
         int i = 0;
@@ -51,23 +47,32 @@ public class AddBaseController {
             String fieldName = field.getName();
             Class<?> fieldType = field.getType();
             javafx.scene.control.Label label = new javafx.scene.control.Label(fieldName);
-            if (classImplementsInterface(fieldType,Entity.class)) {
+            if (Entity.class.isAssignableFrom(fieldType)) {
                 Class<Entity> entityField = (Class<Entity>) fieldType;
                 ComboBox<Entity> entityComboBox = new ComboBox<>();
-
-                // Assuming you have a method to retrieve a list of entities
                 List<Entity> entities = new TemplateDao<Entity>(entityField).getAll();
-
-                // Create an ObservableList from the list of entities
+//                List<EntityDisplayWrapper> displayWrappers = entities.stream()
+//                        .map(EntityDisplayWrapper::new)
+//                        .toList();
                 ObservableList<Entity> observableEntities = FXCollections.observableArrayList(entities);
 
-                // Set the items of the ComboBox
                 entityComboBox.setItems(observableEntities);
-
                 fieldNodedMap.put(field, entityComboBox);
                 EntityProps.getChildren().add(label);
                 EntityProps.getChildren().add(entityComboBox);
-            } else if (!(fieldName.equals("id") && fieldType.equals(Set.class))) {
+            } else if (fieldType.equals(Boolean.class)) {
+                CheckBox checkBox = new CheckBox();
+                checkBox.setId(fieldName);
+                EntityProps.getChildren().add(label);
+                fieldNodedMap.put(field, checkBox);
+                EntityProps.getChildren().add(checkBox);
+            } else if (fieldType.equals(LocalDate.class)) {
+                DatePicker datePicker = new DatePicker();
+                datePicker.setId(fieldName);
+                EntityProps.getChildren().add(label);
+                fieldNodedMap.put(field, datePicker);
+                EntityProps.getChildren().add(datePicker);
+            } else if (!(fieldName.equals("id") || fieldType.equals(Set.class))) {
                 TextField textField = new TextField();
 
                 textField.setPromptText(fieldType.getTypeName());
@@ -80,31 +85,6 @@ public class AddBaseController {
         }
     }
 
-//    public ComboBoxWithEntityMap() {
-//        entityMap = new HashMap<>();
-//        // Example: Add some entities to the map
-//        entityMap.put("entity1", new Employee());
-//        entityMap.put("entity2", new Employee());
-//        entityMap.put("entity3", new Employee());
-//
-//        // Create the ComboBox
-//        comboBox = new ComboBox<>();
-//        comboBox.setItems(FXCollections.observableArrayList(entityMap.keySet()));
-//
-//        // Handle selection changes
-//        comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-//            if (newValue != null) {
-//                Entity selectedEntity = entityMap.get(newValue);
-//                // Process the selected entity
-//                if (selectedEntity instanceof Entity) {
-//                    Entity entity = (Entity) selectedEntity;
-//                    System.out.println("Selected Entity: " + entity.getName());
-//                    // Perform actions with the selected entity
-//                }
-//            }
-//        });
-//    }
-
     private boolean isFilled() {
 //        for (Map.Entry<Field, Node> entry : fieldNodedMap.entrySet()) {
 //            if (entry.getValue() entry.getValue().getText().isEmpty()) {
@@ -114,9 +94,27 @@ public class AddBaseController {
         return true;
     }
 
-    private void doshit(){
-        boolean a = setEntity();
-        Entity mrdog = entity;
+    private void saveButton(){
+        if (setEntity()) {
+            if (saveEntity()){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                clearNodes();
+                alert.setTitle("Information saved to the database");
+                alert.setContentText("You have successfully saved to database!");
+                alert.showAndWait();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information wasn't saved to the database");
+                alert.setContentText("Something went wrong!");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Fields not filled correctly");
+            alert.setContentText("Make sure you are using the correct format for each field and that you have filled the required fields!");
+            alert.showAndWait();
+        }
     }
 
     private boolean setEntity() {
@@ -130,27 +128,53 @@ public class AddBaseController {
 
                     try {
                         Class<?> fieldType = field.getType();
-
-                        if (fieldType == String.class) {
-                            TextField textField = (TextField) entry.getValue();
-                            field.set(entity, textField.getText());
-                        } else if (fieldType == Integer.class) {
-                            TextField textField = (TextField) entry.getValue();
-                            field.set(entity, Integer.parseInt(textField.getText()));
-                        } else if (fieldType == Double.class) {
-                            TextField textField = (TextField) entry.getValue();
-                            field.set(entity, Double.parseDouble(textField.getText()));
-                        } else if (fieldType == Boolean.class) {
-                            TextField textField = (TextField) entry.getValue();
-                            field.set(entity, Boolean.parseBoolean(textField.getText()));
-                        } else if (Entity.class.isAssignableFrom(fieldType)) {
+                        if (Entity.class.isAssignableFrom(fieldType)) {
                             ComboBox<Entity> entityComboBox = (ComboBox<Entity>) entry.getValue();
                             field.set(entity, entityComboBox.getValue());
+                        } else {
+                            TextField textField;
+                            switch (fieldType.getSimpleName()) {
+                                case "String":
+                                    textField = (TextField) entry.getValue();
+                                    field.set(entity, textField.getText());
+                                    break;
+                                case "Short":
+                                    textField = (TextField) entry.getValue();
+                                    field.set(entity, Short.parseShort(textField.getText()));
+                                    break;
+                                case "Integer":
+                                    textField = (TextField) entry.getValue();
+                                    field.set(entity, Integer.parseInt(textField.getText()));
+                                    break;
+                                case "Long":
+                                    textField = (TextField) entry.getValue();
+                                    field.set(entity, Long.parseLong(textField.getText()));
+                                    break;
+                                case "Float":
+                                    textField = (TextField) entry.getValue();
+                                    field.set(entity, Float.parseFloat(textField.getText()));
+                                    break;
+                                case "Double":
+                                    textField = (TextField) entry.getValue();
+                                    field.set(entity, Double.parseDouble(textField.getText()));
+                                    break;
+                                case "Boolean":
+                                    CheckBox checkBox = (CheckBox) entry.getValue();
+                                    field.set(entity, checkBox.isSelected());
+                                    break;
+                                case "LocalDate":
+                                    DatePicker datePicker = new DatePicker();
+                                    field.set(entity, datePicker.getValue());
+                                    break;
+                                default:
+                                    // Handle unexpected Number subclasses
+                                    System.err.println("Unexpected Number subclass: " + fieldType.getName());
+                                    break;
+                            }
                         }
-                    } catch (IllegalAccessException e) {
+                    } catch (Exception e) {
                         return false;
                     }
-
                 }
                 return true;
             }
@@ -158,8 +182,16 @@ public class AddBaseController {
         }
         return false;
     }
-    public void saveEntity() {
-
+    public boolean saveEntity() {
+        try{
+            var t = new TemplateDao<>(Entity.class);
+            if (!t.add(entity)) {
+                return false;
+            }
+        } catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     public boolean classImplementsInterface(Class<?> clazz, Class<?> interfaceClass) {
@@ -180,5 +212,19 @@ public class AddBaseController {
         }
 
         return false;
+    }
+
+    private void clearNodes() {
+        for (var node : fieldNodedMap.values()) {
+            if (node instanceof TextField) {
+                ((TextField) node).setText("");
+            } else if (node instanceof ComboBox) {
+                ((ComboBox<?>) node).getSelectionModel().clearSelection();
+            } else if (node instanceof DatePicker) {
+                ((DatePicker) node).setValue(null);
+            } else if(node instanceof CheckBox) {
+                ((CheckBox) node).setSelected(false);
+            }
+        }
     }
 }

@@ -3,6 +3,6 @@
   <component name="JpaBuddyIdeaProjectConfig" migrateIndexesAndConstraints="true" reUseTableSchema="true">
     <option name="migrateIndexesAndConstraints" value="true" />
     <option name="reLastEntityCreationPackage" value="src/main/java/com/oopproject/wineryapplication/access/entities" />
-    <option name="reverseEngineeringLastDbConnectionId" value="3437eee5-0d3a-4b49-8e99-f86a66ddf9dc" />
+    <option name="reverseEngineeringLastDbConnectionId" value="cc656abd-3848-4420-96c6-99aa8024af3b" />
   </component>
 </project>

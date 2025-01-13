@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "behavior", schema = "public")
-public class Behavior implements com.oopproject.wineryapplication.access.entities.entity.Entity {
+public class Behavior extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "behavior_id_gen")
     @SequenceGenerator(name = "behavior_id_gen", sequenceName = "behavior_id_seq", allocationSize = 1)

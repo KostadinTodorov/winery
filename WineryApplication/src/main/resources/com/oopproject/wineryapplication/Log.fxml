@@ -14,16 +14,8 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopproject.wineryapplication.LogController">
    <right>
-      <AnchorPane prefHeight="380.0" prefWidth="240.0" BorderPane.alignment="CENTER" fx:id="placeHolderAnchPane">
+      <AnchorPane fx:id="placeHolderAnchPane" prefHeight="380.0" prefWidth="240.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="139.0" fitWidth="134.0" layoutX="53.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-               
-               <effect>
-                  <Bloom threshold="0.6" />
-               </effect>
-               <image>
-                  <Image url="@../../../Pictures/download.jpg" />
-               </image></ImageView>
             <Label layoutX="25.0" layoutY="162.0" prefHeight="44.0" prefWidth="189.0" text="Winery Corporation" textFill="#a60d38">
                <font>
                   <Font name="Arial" size="20.0" />
@@ -32,17 +24,17 @@
          </children>
       </AnchorPane>
    </right>
-   <left>
-      <AnchorPane prefHeight="380.0" prefWidth="265.0" BorderPane.alignment="CENTER">
+   <top>
+      <AnchorPane fx:id="base" prefHeight="380.0" prefWidth="265.0" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField layoutX="38.0" layoutY="208.0" prefHeight="25.0" prefWidth="197.0" promptText="Password" fx:id="password"/>
+            <PasswordField fx:id="password" layoutX="38.0" layoutY="208.0" prefHeight="25.0" prefWidth="197.0" promptText="Password" />
             <ImageView fitHeight="69.0" fitWidth="79.0" layoutX="93.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField layoutX="38.0" layoutY="164.0" prefHeight="25.0" prefWidth="198.0" promptText="Username" fx:id="employeeName">
+            <TextField fx:id="employeeName" layoutX="38.0" layoutY="164.0" prefHeight="25.0" prefWidth="198.0" promptText="Username">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </TextField>
-            <TextField layoutX="300.0" layoutY="164.0" prefHeight="25.0" prefWidth="198.0" promptText="email" fx:id="employeeEmail">
+            <TextField fx:id="employeeEmail" layoutX="300.0" layoutY="164.0" prefHeight="25.0" prefWidth="198.0" promptText="email">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
@@ -53,7 +45,15 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <ImageView fitHeight="139.0" fitWidth="134.0" layoutX="346.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+               
+               <effect>
+                  <Bloom threshold="0.6" />
+               </effect>
+               <image>
+                  <Image url="@../../../Pictures/download.jpg" />
+               </image></ImageView>
          </children>
       </AnchorPane>
-   </left>
+   </top>
 </BorderPane>

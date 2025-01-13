@@ -76,4 +76,26 @@ public class SceneHelper
         }
     }
 
+    public static <T> void addNode(Pane paneNode, Nodes node, T controller)
+    {
+        if (SceneHelper.scene == null)
+        {
+            System.out.println("No scene is being declared!");
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(SceneHelper.class.getResource(node.getFileName()));
+            loader.setController(controller);
+            AnchorPane newNode = loader.load();
+            AnchorPane.setLeftAnchor(newNode, 0.0);
+            AnchorPane.setBottomAnchor(newNode, 0.0);
+            AnchorPane.setRightAnchor(newNode, 0.0);
+            AnchorPane.setTopAnchor(newNode, 0.0);
+            paneNode.getChildren().setAll(newNode);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
