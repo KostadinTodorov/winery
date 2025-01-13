@@ -47,10 +47,13 @@ public class User
         if (instance == null){
             if (chosenEmployee != null)
             {
-                instance = chosenEmployee;
+                if (chosenEmployee.getPassword().equals(password)) {
+                    instance = chosenEmployee;
+                }
             }
             else {
                 //TODO: add relevant exceptions
+                //TODO: add alert
                 throw new RuntimeException();
             }
         }

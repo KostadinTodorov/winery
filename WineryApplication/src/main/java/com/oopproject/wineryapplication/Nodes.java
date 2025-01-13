@@ -1,7 +1,8 @@
 package com.oopproject.wineryapplication;
 
 public enum Nodes {
-    BOTTLEDWINEINVENTORY("BottledWineInventory.fxml");
+    BOTTLEDWINEINVENTORY("BottledWineInventory.fxml"),
+    ADDBASE("AddBase.fxml");
 
     private String fileName;
 

@@ -1,28 +1,32 @@
 package com.oopproject.wineryapplication;
 
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class UserButtonsHelper {
+public class ButtonsHelper {
 
 
 
-    public static void setUserWithBitmap(VBox vboxHolder, UserButtonsMapping actionBitmap) {
-        Integer actionInstance = actionBitmap.getUserMapping();
-        String[] predefinedActions = {"Action1", "Action2", "Action3", "Action4"};
+    public static void setButtonsFor(ButtonsMappingRegisters actionBitmap, VBox vboxHolder) {
+        Integer actionInstance = actionBitmap.getButtonsMapping();
+        String[] predefinedActions = {"manage workers", "manage wine inventory", "manage orders", "manage machines"};
         Runnable[] predefinedHandlers = {
                 () -> {
                     try {
-                        switchToLogin();
+                        displayWorkers( (BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent() );
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 },
                 () -> {
                     try {
-                        switchToLogin();
+                        displayWineInventory( (BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent() );
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -48,9 +52,21 @@ public class UserButtonsHelper {
                 Button button = new Button(predefinedActions[i]);
                 int finalI = i;
                 button.setOnAction(e -> predefinedHandlers[finalI].run());
+                button.setMaxWidth(Double.MAX_VALUE);
+                button.setMaxHeight(Double.MAX_VALUE);
                 vboxHolder.getChildren().add(button);
             }
         }
+    }
+
+    protected static void displayWorkers(BorderPane parentHolder) throws IOException {
+        System.out.println("Displaying workers...");
+        SceneHelper.addNode((Pane)parentHolder.lookup("#placeHolderAnchorPane"), Nodes.BOTTLEDWINEINVENTORY);
+    }
+
+    protected static void displayWineInventory(BorderPane parentHolder) throws IOException {
+        System.out.println("Displaying wine...");
+        SceneHelper.addNode((Pane)parentHolder.lookup("#placeHolderAnchorPane"), Nodes.BOTTLEDWINEINVENTORY);
     }
 
     protected static void switchToLogin() throws IOException {
