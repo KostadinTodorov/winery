@@ -18,4 +18,6 @@ module com.oopproject.wineryapplication {
     opens com.oopproject.wineryapplication.access.entities to javafx.fxml, org.hibernate.orm.core;
     exports com.oopproject.wineryapplication.access.entities.entity;
     opens com.oopproject.wineryapplication.access.entities.entity to javafx.fxml, org.hibernate.orm.core;
+    exports com.oopproject.wineryapplication.controller;
+    opens com.oopproject.wineryapplication.controller to javafx.fxml;
 }
