@@ -18,7 +18,7 @@ public class UserMainController {
     public void initialize()
     {
         // TODO: Just an example
-        ButtonsHelper.setButtonsForRole(ButtonsMappingRegisters.CEO, placeHolderVBox);
+        ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.CEO, placeHolderVBox);
 
         // TODO: add If statement, which checks the User and decides which buttons to be loaded
         //ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.CEO, placeHolderVBox);

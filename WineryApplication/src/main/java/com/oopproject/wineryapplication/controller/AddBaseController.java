@@ -1,7 +1,6 @@
-package com.oopproject.wineryapplication;
+package com.oopproject.wineryapplication.controller;
 
 import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
-import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import com.oopproject.wineryapplication.access.entities.entity.EntityFieldMap;
 import javafx.collections.FXCollections;
