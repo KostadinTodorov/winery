@@ -1,9 +1,13 @@
 package com.oopproject.wineryapplication.helpers;
 
+import com.oopproject.wineryapplication.access.entities.ClientsOrder;
 import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.access.entities.Harvest;
 import com.oopproject.wineryapplication.access.entities.WineType;
+import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import com.oopproject.wineryapplication.controller.AddBaseController;
+import com.oopproject.wineryapplication.controller.DisplayBaseController;
+import jakarta.persistence.criteria.Order;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -18,25 +22,32 @@ public class ButtonsHelper {
 
     public static void setButtonsFor(ButtonsMappingRegisters actionBitmap, VBox vboxHolder) {
         Integer actionInstance = actionBitmap.getButtonsMapping();
-        String[] predefinedActions = {"manage workers", "manage wine", "manage harvest", "manage orders"};
+        String[] predefinedActions = {"Workers", "Wine", "Harvest", "Orders"};
         Runnable[] predefinedHandlers = {
                 () -> {
                     try {
-                        Workers( (BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent() );
+                        displayEntity( (BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent(), new Employee() );
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 },
                 () -> {
                     try {
-                        Wine( (BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent() );
+                        displayEntity( (BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent(), new WineType() );
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 },
                 () -> {
                     try {
-                        Hrvst( (BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent() );
+                        displayEntity( (BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent(), new Harvest() );
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                () -> {
+                    try {
+                        displayEntity( (BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent(), new ClientsOrder() );
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -55,18 +66,8 @@ public class ButtonsHelper {
         }
     }
 
-    protected static void Workers(BorderPane parentHolder) throws IOException {
-        System.out.println("Displaying workers...");
-        SceneHelper.<AddBaseController>addNode((Pane)parentHolder.lookup("#placeHolderAnchorPane"),Nodes.ADDBASE, new AddBaseController(new Employee()));
-    }
-
-    protected static void Wine(BorderPane parentHolder) throws IOException {
-        System.out.println("Displaying wine...");
-        SceneHelper.<AddBaseController>addNode((Pane)parentHolder.lookup("#placeHolderAnchorPane"),Nodes.ADDBASE, new AddBaseController(new WineType()));
-    }
-
-    protected static void Hrvst(BorderPane parentHolder) throws IOException {
-        System.out.println("Displaying harvest...");
-        SceneHelper.<AddBaseController>addNode((Pane)parentHolder.lookup("#placeHolderAnchorPane"),Nodes.ADDBASE, new AddBaseController(new Harvest()));
+    protected static void displayEntity(BorderPane parentHolder, Entity entity) throws IOException {
+        System.out.println("Displaying Entity = ");
+        SceneHelper.<DisplayBaseController>addNode((Pane)parentHolder.lookup("#placeHolderAnchorPane"),Nodes.DISPLAYBASE, new DisplayBaseController(entity.getClass()));
     }
 }

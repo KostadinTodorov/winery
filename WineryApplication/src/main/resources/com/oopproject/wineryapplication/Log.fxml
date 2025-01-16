@@ -13,17 +13,6 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oopproject.wineryapplication.controller.LogController">
-   <right>
-      <AnchorPane fx:id="placeHolderAnchPane" prefHeight="380.0" prefWidth="240.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="25.0" layoutY="162.0" prefHeight="44.0" prefWidth="189.0" text="Winery Corporation" textFill="#a60d38">
-               <font>
-                  <Font name="Arial" size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </right>
    <top>
       <AnchorPane fx:id="base" prefHeight="380.0" prefWidth="265.0" BorderPane.alignment="CENTER">
          <children>
@@ -34,12 +23,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </TextField>
-            <TextField fx:id="employeeEmail" layoutX="300.0" layoutY="164.0" prefHeight="25.0" prefWidth="198.0" promptText="email">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </TextField>
-            <Button layoutX="27.0" layoutY="279.0" mnemonicParsing="false" onAction="#switchToBottledWineInventory" prefHeight="37.0" prefWidth="219.0" text="Login" />
+            <Button layoutX="27.0" layoutY="279.0" mnemonicParsing="false" onAction="#switchToUser" prefHeight="37.0" prefWidth="219.0" text="Login" />
             <Label layoutX="59.0" layoutY="92.0" prefHeight="49.0" prefWidth="155.0" text="Login Account" textFill="#be0a16">
                <font>
                   <Font size="20.0" />
@@ -53,6 +37,11 @@
                <image>
                   <Image url="@../../../Pictures/download.jpg" />
                </image></ImageView>
+            <Label layoutX="319.0" layoutY="276.0" prefHeight="44.0" prefWidth="189.0" text="Winery Corporation" textFill="#a60d38">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </top>

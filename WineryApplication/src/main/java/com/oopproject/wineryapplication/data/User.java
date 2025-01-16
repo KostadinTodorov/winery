@@ -1,11 +1,11 @@
 package com.oopproject.wineryapplication.data;
 
 import com.oopproject.wineryapplication.access.daos.EmployeeDao;
-import com.oopproject.wineryapplication.access.daos.PersonDao;
 import com.oopproject.wineryapplication.access.entities.Employee;
-import com.oopproject.wineryapplication.access.entities.Person;
+import com.oopproject.wineryapplication.helpers.SceneHelper;
+import com.oopproject.wineryapplication.helpers.Scenes;
+import javafx.scene.control.Alert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User
@@ -19,49 +19,38 @@ public class User
 
     }
 
-
     // Public static method to provide access to the instance
-    public static Employee GetInstance(String employeeName, String email, String password)
+    public static Employee GetInstance(String employeeName, String password)
     {
         List<Employee> chosenEmployees = new EmployeeDao().getAll().stream().filter(
                 e -> e.getPerson().getPersonName().equals(employeeName)
-                        && e.getPerson().getEmail().equals(email)
+                        && e.getPassword().equals(password)
         ).toList();
-        Employee chosenEmployee = null;
+
         if (instance == null){
-            if (chosenEmployees.size() == 1 && chosenEmployees.getFirst().getPassword().equals(password))
-            {
+            if (chosenEmployees.size() == 1 /*&& chosenEmployees.getFirst().getPassword().equals(password)*/){
+
                 instance = chosenEmployees.getFirst();
             }
             else {
-                //TODO: add relevant exceptions
-                throw new RuntimeException();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Two users with the same Name and Password!");
+                alert.setContentText("Please manage them!");
+                alert.showAndWait();
+
+
+                SceneHelper.switchTo(Scenes.WELLCOME);
             }
         }
+        else {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("The user singleton has already been instanced!");
+            alert.showAndWait();
+        }
+
+
         return instance;
     }
 
-    public static Employee GetInstance(int id, String password)
-    {
-        Employee chosenEmployee = new EmployeeDao().get(id);
-        if (instance == null){
-            if (chosenEmployee != null)
-            {
-                if (chosenEmployee.getPassword().equals(password)) {
-                    instance = chosenEmployee;
-                }
-            }
-            else {
-                //TODO: add relevant exceptions
-                //TODO: add alert
-                throw new RuntimeException();
-            }
-        }
-        return instance;
-    }
-
-    public static Employee GetInstance()
-    {
-        return instance;
-    }
 }
