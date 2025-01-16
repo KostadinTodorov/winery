@@ -1,8 +1,7 @@
 package com.oopproject.wineryapplication.controller;
 
-import com.oopproject.wineryapplication.ButtonsHelper;
-import com.oopproject.wineryapplication.ButtonsMappingRegisters;
-import com.oopproject.wineryapplication.access.entities.entity.Entity;
+import com.oopproject.wineryapplication.helpers.ButtonsHelper;
+import com.oopproject.wineryapplication.helpers.ButtonsMappingRegisters;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;

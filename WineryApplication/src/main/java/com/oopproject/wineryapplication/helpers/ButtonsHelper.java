@@ -1,4 +1,4 @@
-package com.oopproject.wineryapplication;
+package com.oopproject.wineryapplication.helpers;
 
 import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.access.entities.Harvest;

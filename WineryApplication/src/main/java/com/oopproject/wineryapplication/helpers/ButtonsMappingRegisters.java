@@ -1,4 +1,4 @@
-package com.oopproject.wineryapplication;
+package com.oopproject.wineryapplication.helpers;
 
 public enum ButtonsMappingRegisters {
 

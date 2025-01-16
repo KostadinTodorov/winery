@@ -1,8 +1,7 @@
 package com.oopproject.wineryapplication.controller;
 
-import com.oopproject.wineryapplication.Nodes;
-import com.oopproject.wineryapplication.SceneHelper;
-import com.oopproject.wineryapplication.Scenes;
+import com.oopproject.wineryapplication.helpers.SceneHelper;
+import com.oopproject.wineryapplication.helpers.Scenes;
 import com.oopproject.wineryapplication.access.entities.*;
 import com.oopproject.wineryapplication.data.User;
 import javafx.event.ActionEvent;
