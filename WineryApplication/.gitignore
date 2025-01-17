@@ -5,7 +5,6 @@ target/
 
 ### IntelliJ IDEA ###
 .idea/
-
 *.iws
 *.iml
 *.ipr
@@ -34,3 +33,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+src/main/resources/hibernate.cfg.xml
+

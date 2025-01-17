@@ -2,12 +2,13 @@ package com.oopproject.wineryapplication.access.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "act", schema = "public")
-public class Act {
+public class Act extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "act_id_gen")
     @SequenceGenerator(name = "act_id_gen", sequenceName = "act_id_seq", allocationSize = 1)

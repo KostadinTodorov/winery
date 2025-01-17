@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "batch", schema = "public")
-public class Batch {
+public class Batch extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "batch_id_gen")
     @SequenceGenerator(name = "batch_id_gen", sequenceName = "batch_id_seq", allocationSize = 1)
