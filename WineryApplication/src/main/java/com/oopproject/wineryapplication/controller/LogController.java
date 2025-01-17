@@ -33,15 +33,8 @@ public class LogController {
 
 
             SceneHelper.switchTo(Scenes.USER);
-        } catch (Exception e) {
-
-            employeeName.setText("");
-            password.setText("");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Wrong credentials!");
-            alert.setContentText("Make sure you have entered the correct credentials!");
-            alert.showAndWait();
-
+        } catch (NullPointerException e) {
+            throw new NullPointerException(e.getMessage());
         }
 
     }

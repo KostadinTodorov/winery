@@ -6,6 +6,7 @@ import com.oopproject.wineryapplication.helpers.SceneHelper;
 import com.oopproject.wineryapplication.helpers.Scenes;
 import javafx.scene.control.Alert;
 
+import java.io.IOException;
 import java.util.List;
 
 public class User
@@ -23,8 +24,8 @@ public class User
     public static Employee GetInstance(String employeeName, String password)
     {
         List<Employee> chosenEmployees = new EmployeeDao().getAll().stream().filter(
-                e -> e.getPerson().getPersonName().equals(employeeName)
-                        && e.getPassword().equals(password)
+                e -> (    e.getPerson().getPersonName().equals(employeeName)
+                                && e.getPassword().equals(password))
         ).toList();
 
         if (instance == null){
@@ -32,14 +33,22 @@ public class User
 
                 instance = chosenEmployees.getFirst();
             }
-            else {
+            else if (chosenEmployees.size() > 1 ){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Two users with the same Name and Password!");
                 alert.setContentText("Please manage them!");
                 alert.showAndWait();
 
+                SceneHelper.switchTo(Scenes.LOG);
+            }
+            else {
 
-                SceneHelper.switchTo(Scenes.WELLCOME);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Wrong credentials!");
+                alert.setContentText("Make sure you have entered the correct credentials!");
+                alert.showAndWait();
+
+                SceneHelper.switchTo(Scenes.LOG);
             }
         }
         else {
@@ -47,6 +56,7 @@ public class User
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("The user singleton has already been instanced!");
             alert.showAndWait();
+
         }
 
 
