@@ -2,6 +2,7 @@ package com.oopproject.wineryapplication.helpers;
 
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import com.oopproject.wineryapplication.controller.DisplayBaseController;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -25,9 +26,9 @@ public class ButtonsHelper {
             return label;
         }
 
-        public void execute(BorderPane parentHolder) throws IOException {
+        public void execute(Scene scene) throws IOException {
             Entity entity = entityProvider.provide();
-            ButtonsHelper.displayEntity((AnchorPane) parentHolder.lookup("#placeHolderAnchorPane"), entity);
+            ButtonsHelper.displayEntity((AnchorPane) scene.lookup("#placeHolderAnchorPane"), entity);
         }
     }
 
@@ -42,7 +43,7 @@ public class ButtonsHelper {
                 Button button = new Button(action.getLabel());
                 button.setOnAction(e -> {
                     try {
-                        action.execute((BorderPane) ((AnchorPane)vboxHolder.getParent()).getParent());
+                        action.execute(vboxHolder.getScene());
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
