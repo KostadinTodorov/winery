@@ -6,23 +6,19 @@ import com.oopproject.wineryapplication.helpers.SceneHelper;
 import com.oopproject.wineryapplication.helpers.Scenes;
 import javafx.scene.control.Alert;
 
-import java.io.IOException;
 import java.util.List;
 
 public class User
 {
-    // Static variable to hold the single instance of the class
     private static Employee instance;
+    private static String employeeOccupationBasedOnWellcome;
 
-    // Private constructor to prevent direct instantiation
-    private User()
-    {
+    private User() {
 
     }
 
-    // Public static method to provide access to the instance
-    public static Employee GetInstance(String employeeName, String password)
-    {
+    public static Employee CheckEmployee(String employeeName, String password) {
+
         List<Employee> chosenEmployees = new EmployeeDao().getAll().stream().filter(
                 e -> (    e.getPerson().getPersonName().equals(employeeName)
                                 && e.getPassword().equals(password))
@@ -31,7 +27,17 @@ public class User
         if (instance == null){
             if (chosenEmployees.size() == 1 /*&& chosenEmployees.getFirst().getPassword().equals(password)*/){
 
-                instance = chosenEmployees.getFirst();
+                if(chosenEmployees.getFirst().getOccupation().getOccupation().equals(employeeOccupationBasedOnWellcome)){
+                    instance = chosenEmployees.getFirst();
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Wrong sector!");
+                    alert.setContentText(String.format("Hello, %s!\nYou exist as %s user,\nbut you try to log in the %s segment.", employeeName, chosenEmployees.getFirst().getOccupation().getOccupation(), employeeOccupationBasedOnWellcome));
+                    alert.showAndWait();
+
+                    clearSingleton();
+                    SceneHelper.switchTo(Scenes.WELLCOME);
+                }
             }
             else if (chosenEmployees.size() > 1 ){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -39,7 +45,8 @@ public class User
                 alert.setContentText("Please manage them!");
                 alert.showAndWait();
 
-                SceneHelper.switchTo(Scenes.LOG);
+                clearSingleton();
+                SceneHelper.switchTo(Scenes.WELLCOME);
             }
             else {
 
@@ -62,5 +69,24 @@ public class User
 
         return instance;
     }
+
+    public static void setEmployeeOccupationBasedOnWelcome(String employeeOccupationBasedOnWellcome) {
+        User.employeeOccupationBasedOnWellcome = employeeOccupationBasedOnWellcome;
+    }
+
+    public static String getEmployeeOccupationBasedOnWellcome() {
+        return employeeOccupationBasedOnWellcome;
+    }
+
+    private static void clearSingleton() {
+        instance = null;
+        employeeOccupationBasedOnWellcome = "";
+    }
+
+    public static void userLogout(){
+        clearSingleton();
+        SceneHelper.switchTo(Scenes.WELLCOME);
+    }
+
 
 }

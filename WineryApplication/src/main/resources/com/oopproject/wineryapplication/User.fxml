@@ -40,7 +40,7 @@
                         </AnchorPane>
                     </content>
                   </ScrollPane>
-                  <Button alignment="TOP_LEFT" graphicTextGap="5.0" layoutX="31.0" layoutY="740.0" mnemonicParsing="false" style="-fx-background-color: #004B49;" text="Sign Out" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                  <Button fx:id="btnLogOut" alignment="TOP_LEFT" graphicTextGap="5.0" layoutX="31.0" layoutY="740.0" mnemonicParsing="false" style="-fx-background-color: #004B49;" text="Log Out" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <graphic>
                         <FontAwesomeIcon fill="#0c9010" glyphName="SIGN_OUT" size="2em" wrappingWidth="39.0" />
                      </graphic>

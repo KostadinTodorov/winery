@@ -6,7 +6,6 @@ import com.oopproject.wineryapplication.access.entities.*;
 import com.oopproject.wineryapplication.data.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -28,12 +27,16 @@ public class LogController {
         Employee emp;
         try {
 
-            emp = User.GetInstance(employeeName.getText(),password.getText());
-            System.out.println(emp.getPerson().getPersonName());
+            emp = User.CheckEmployee(employeeName.getText(),password.getText());
+            //System.out.println(emp.getPerson().getPersonName());
+            if (emp != null) {
+                System.out.println(String.format("Hello, %s!\nYou enter as %s user.", emp.getPerson().getPersonName(), emp.getOccupation().getOccupation()));
 
+                SceneHelper.switchTo(Scenes.USER);
+            }
 
-            SceneHelper.switchTo(Scenes.USER);
         } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
             throw new NullPointerException(e.getMessage());
         }
 
