@@ -35,8 +35,7 @@ public class User
                     alert.setContentText(String.format("Hello, %s!\nYou exist as %s user,\nbut you try to log in the %s segment.", employeeName, chosenEmployees.getFirst().getOccupation().getOccupation(), employeeOccupationBasedOnWellcome));
                     alert.showAndWait();
 
-                    clearSingleton();
-                    SceneHelper.switchTo(Scenes.WELLCOME);
+                    userLogout();
                 }
             }
             else if (chosenEmployees.size() > 1 ){
@@ -45,8 +44,7 @@ public class User
                 alert.setContentText("Please manage them!");
                 alert.showAndWait();
 
-                clearSingleton();
-                SceneHelper.switchTo(Scenes.WELLCOME);
+                userLogout();
             }
             else {
 
@@ -72,10 +70,21 @@ public class User
 
     public static void setEmployeeOccupationBasedOnWelcome(String employeeOccupationBasedOnWellcome) {
         User.employeeOccupationBasedOnWellcome = employeeOccupationBasedOnWellcome;
+
+        System.out.println(String.format("Occupation %s was set!", User.employeeOccupationBasedOnWellcome));
     }
 
     public static String getEmployeeOccupationBasedOnWellcome() {
         return employeeOccupationBasedOnWellcome;
+    }
+
+    public static Employee getEmployee() {
+        if (instance == null){
+            throw new NullPointerException();
+        }
+        else {
+            return instance;
+        }
     }
 
     private static void clearSingleton() {

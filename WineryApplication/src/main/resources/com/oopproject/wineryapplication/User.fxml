@@ -14,7 +14,7 @@
    <children>
       <AnchorPane prefHeight="9.0" prefWidth="600.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="26.0" textFill="WHITE">
+            <Label fx:id="lblUserGreeting" alignment="TOP_LEFT" graphicTextGap="10.0" prefHeight="26.0" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="HOME" size="2em" />
                </graphic>
