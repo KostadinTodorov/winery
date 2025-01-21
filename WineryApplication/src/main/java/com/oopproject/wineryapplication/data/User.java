@@ -17,6 +17,7 @@ public class User
 
     }
 
+    // Lazy instantiation of a singleton (There are other types of singletons). This is the most common one.
     public static Employee CheckEmployee(String employeeName, String password) {
 
         List<Employee> chosenEmployees = new EmployeeDao().getAll().stream().filter(
@@ -59,9 +60,11 @@ public class User
         else {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("The user singleton has already been instanced!");
+            alert.setTitle("The User singleton has already been instanced!");
+            alert.setContentText("Could be due to incorrectly executed login steps.");
             alert.showAndWait();
 
+            throw new RuntimeException();
         }
 
 
