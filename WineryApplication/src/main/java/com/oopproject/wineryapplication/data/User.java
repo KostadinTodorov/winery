@@ -10,47 +10,95 @@ import java.util.List;
 
 public class User
 {
-    // Static variable to hold the single instance of the class
     private static Employee instance;
+    private static String employeeOccupationBasedOnWellcome;
 
-    // Private constructor to prevent direct instantiation
-    private User()
-    {
+    private User() {
 
     }
 
-    // Public static method to provide access to the instance
-    public static Employee GetInstance(String employeeName, String password)
-    {
+    // Lazy instantiation of a singleton (There are other types of singletons). This is the most common one.
+    public static Employee CheckEmployee(String employeeName, String password) {
+
         List<Employee> chosenEmployees = new EmployeeDao().getAll().stream().filter(
-                e -> e.getPerson().getPersonName().equals(employeeName)
-                        && e.getPassword().equals(password)
+                e -> (    e.getPerson().getPersonName().equals(employeeName)
+                                && e.getPassword().equals(password))
         ).toList();
 
         if (instance == null){
             if (chosenEmployees.size() == 1 /*&& chosenEmployees.getFirst().getPassword().equals(password)*/){
 
-                instance = chosenEmployees.getFirst();
+                if(chosenEmployees.getFirst().getOccupation().getOccupation().equals(employeeOccupationBasedOnWellcome)){
+                    instance = chosenEmployees.getFirst();
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Wrong sector!");
+                    alert.setContentText(String.format("Hello, %s!\nYou exist as %s user,\nbut you try to log in the %s segment.", employeeName, chosenEmployees.getFirst().getOccupation().getOccupation(), employeeOccupationBasedOnWellcome));
+                    alert.showAndWait();
+
+                    userLogout();
+                }
             }
-            else {
+            else if (chosenEmployees.size() > 1 ){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Two users with the same Name and Password!");
                 alert.setContentText("Please manage them!");
                 alert.showAndWait();
 
+                userLogout();
+            }
+            else {
 
-                SceneHelper.switchTo(Scenes.WELLCOME);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Wrong credentials!");
+                alert.setContentText("Make sure you have entered the correct credentials!");
+                alert.showAndWait();
+
+                SceneHelper.switchTo(Scenes.LOG);
             }
         }
         else {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("The user singleton has already been instanced!");
+            alert.setTitle("The User singleton has already been instanced!");
+            alert.setContentText("Could be due to incorrectly executed login steps.");
             alert.showAndWait();
+
+            throw new RuntimeException();
         }
 
 
         return instance;
     }
+
+    public static void setEmployeeOccupationBasedOnWelcome(String employeeOccupationBasedOnWellcome) {
+        User.employeeOccupationBasedOnWellcome = employeeOccupationBasedOnWellcome;
+
+        System.out.println(String.format("Occupation %s was set!", User.employeeOccupationBasedOnWellcome));
+    }
+
+    public static String getEmployeeOccupationBasedOnWellcome() {
+        return employeeOccupationBasedOnWellcome;
+    }
+
+    public static Employee getEmployee() {
+        if (instance == null){
+            throw new NullPointerException();
+        }
+        else {
+            return instance;
+        }
+    }
+
+    private static void clearSingleton() {
+        instance = null;
+        employeeOccupationBasedOnWellcome = "";
+    }
+
+    public static void userLogout(){
+        clearSingleton();
+        SceneHelper.switchTo(Scenes.WELLCOME);
+    }
+
 
 }

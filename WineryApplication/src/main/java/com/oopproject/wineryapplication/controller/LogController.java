@@ -6,10 +6,10 @@ import com.oopproject.wineryapplication.access.entities.*;
 import com.oopproject.wineryapplication.data.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
@@ -20,7 +20,16 @@ public class LogController {
     @FXML
     public TextField employeeName;
     @FXML
-    public AnchorPane base;
+    public Label lblEnterCredentials;
+    @FXML
+    public Button btnGoBack;
+
+
+    @FXML
+    public void initialize() {
+        btnGoBack.setOnAction((ActionEvent event) -> {User.userLogout();});
+        lblEnterCredentials.setText(String.format("Enter %s credentials:", User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
+    }
 
     @FXML
     protected void switchToUser(ActionEvent event) throws IOException {
@@ -28,22 +37,17 @@ public class LogController {
         Employee emp;
         try {
 
-            emp = User.GetInstance(employeeName.getText(),password.getText());
-            System.out.println(emp.getPerson().getPersonName());
+            emp = User.CheckEmployee(employeeName.getText(),password.getText());
+            if (emp != null) {
+                System.out.println(String.format("Hello, %s!\nYou enter as %s user.", emp.getPerson().getPersonName(), emp.getOccupation().getOccupation()));
 
+                SceneHelper.switchTo(Scenes.USER);
+            }
 
-            SceneHelper.switchTo(Scenes.USER);
-        } catch (Exception e) {
-
-            employeeName.setText("");
-            password.setText("");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Wrong credentials!");
-            alert.setContentText("Make sure you have entered the correct credentials!");
-            alert.showAndWait();
-
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+            throw new NullPointerException(e.getMessage());
         }
 
     }
-
 }

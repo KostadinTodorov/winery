@@ -2,10 +2,10 @@ package com.oopproject.wineryapplication.helpers;
 
 public enum ButtonsMappingRegisters {
 
-    ADMINISTRATOR(0b1000),
     STORAGEORGANISER(0b0010),
-    CEO(0b1111),
+    CEO(0b11111111111111111111110),
     ACCOUNTANT(0b1111),
+    DEVISIONLEAD(0b0001),
     CRUD(0b0111);
 
     private Integer buttonsMapping;
