@@ -8,6 +8,7 @@ target/
 *.iws
 *.iml
 *.ipr
+wineryapp.log
 
 ### Eclipse ###
 .apt_generated

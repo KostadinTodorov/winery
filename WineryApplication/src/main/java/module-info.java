@@ -4,6 +4,7 @@ module com.oopproject.wineryapplication {
     requires java.desktop;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
+    requires org.apache.logging.log4j;
 
 
     opens com.oopproject.wineryapplication to javafx.fxml;
