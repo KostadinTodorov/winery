@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.CompanyDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -44,4 +47,8 @@ public class Company extends com.oopproject.wineryapplication.access.entities.en
         this.clients = clients;
     }
 
+    @Override
+    public Dao<Company> getDao() {
+        return new CompanyDao();
+    }
 }

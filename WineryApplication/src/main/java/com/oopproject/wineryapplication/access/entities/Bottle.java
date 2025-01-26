@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.BottleDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 @Entity
@@ -77,4 +80,8 @@ public class Bottle extends com.oopproject.wineryapplication.access.entities.ent
         this.bottleType = bottleType;
     }
 
+    @Override
+    public Dao<Bottle> getDao() {
+        return new BottleDao();
+    }
 }

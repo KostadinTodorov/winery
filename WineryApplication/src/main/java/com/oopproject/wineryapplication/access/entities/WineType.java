@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.WineTypeDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -55,4 +58,13 @@ public class WineType extends com.oopproject.wineryapplication.access.entities.e
         this.clientsOrders = clientsOrders;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"["+name+"]";
+    }
+
+    @Override
+    public Dao<WineType> getDao() {
+        return new WineTypeDao();
+    }
 }

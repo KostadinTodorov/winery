@@ -4,6 +4,7 @@ module com.oopproject.wineryapplication {
     requires java.desktop;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
+    requires org.postgresql.jdbc;
 
 
     opens com.oopproject.wineryapplication to javafx.fxml;
@@ -20,4 +21,9 @@ module com.oopproject.wineryapplication {
     opens com.oopproject.wineryapplication.access.entities to javafx.fxml, org.hibernate.orm.core;
     exports com.oopproject.wineryapplication.access.entities.entity;
     opens com.oopproject.wineryapplication.access.entities.entity to javafx.fxml, org.hibernate.orm.core;
+    exports com.oopproject.wineryapplication.access.entities.entity.contracts;
+    opens com.oopproject.wineryapplication.access.entities.entity.contracts to javafx.fxml, org.hibernate.orm.core;
+    exports com.oopproject.wineryapplication.access.entities.helper;
+    opens com.oopproject.wineryapplication.access.entities.helper to javafx.fxml, org.hibernate.orm.core;
+
 }

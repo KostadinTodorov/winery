@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.SortDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -44,4 +47,13 @@ public class Sort extends com.oopproject.wineryapplication.access.entities.entit
         this.harvests = harvests;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"["+name+"]";
+    }
+
+    @Override
+    public Dao<Sort> getDao() {
+        return new SortDao();
+    }
 }

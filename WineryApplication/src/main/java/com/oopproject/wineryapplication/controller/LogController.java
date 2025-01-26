@@ -59,6 +59,6 @@ public class LogController {
             alert.showAndWait();
         }
 //        SceneHelper.<AddBaseController>addNode(base,Nodes.ADDBASE, new AddBaseController(new Employee()));
-        SceneHelper.<DisplayBaseController>switchTo(Scenes.DISPLAYBASE, new DisplayBaseController(Person.class));
+        SceneHelper.switchTo(Scenes.DISPLAYBASE, new DisplayBaseController(Person.class));
     }
 }
