@@ -1,13 +1,14 @@
 package com.oopproject.wineryapplication.access.daos;
 
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
+import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class TemplateDao<T> extends EntityDao<T> {
+public class TemplateDao<T extends Entity> extends EntityDao<T> {
 
     private final Class<T> type;
 
