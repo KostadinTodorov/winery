@@ -1,7 +1,7 @@
 package com.oopproject.wineryapplication.controller;
 
-import com.oopproject.wineryapplication.Nodes;
-import com.oopproject.wineryapplication.SceneHelper;
+import com.oopproject.wineryapplication.helpers.Nodes;
+import com.oopproject.wineryapplication.helpers.SceneHelper;
 import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 
