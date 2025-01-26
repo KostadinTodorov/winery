@@ -1,10 +1,13 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.BehaviorDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "behavior", schema = "public")
-public class Behavior {
+public class Behavior extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "behavior_id_gen")
     @SequenceGenerator(name = "behavior_id_gen", sequenceName = "behavior_id_seq", allocationSize = 1)
@@ -43,4 +46,8 @@ public class Behavior {
         this.act = act;
     }
 
+    @Override
+    public Dao<Behavior> getDao() {
+        return new BehaviorDao();
+    }
 }

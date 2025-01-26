@@ -1,5 +1,9 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.BottleDao;
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -7,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "bottle_type", schema = "public")
-public class BottleType {
+public class BottleType extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bottle_type_id_gen")
     @SequenceGenerator(name = "bottle_type_id_gen", sequenceName = "bottle_type_id_seq", allocationSize = 1)
@@ -20,8 +24,11 @@ public class BottleType {
     @Column(name = "description", length = 200)
     private String description;
 
+    @Column(name = "stock", nullable = false)
+    private Integer stock;
+
     @OneToMany(mappedBy = "bottleType")
-    private Set<com.oopproject.wineryapplication.access.entities.EmptyBottle> emptyBottles = new LinkedHashSet<>();
+    private Set<com.oopproject.wineryapplication.access.entities.Bottle> bottles = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -47,12 +54,29 @@ public class BottleType {
         this.description = description;
     }
 
-    public Set<com.oopproject.wineryapplication.access.entities.EmptyBottle> getEmptyBottles() {
-        return emptyBottles;
+    public Integer getStock() {
+        return stock;
     }
 
-    public void setEmptyBottles(Set<com.oopproject.wineryapplication.access.entities.EmptyBottle> emptyBottles) {
-        this.emptyBottles = emptyBottles;
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
+    public Set<com.oopproject.wineryapplication.access.entities.Bottle> getBottles() {
+        return bottles;
+    }
+
+    public void setBottles(Set<com.oopproject.wineryapplication.access.entities.Bottle> bottles) {
+        this.bottles = bottles;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"["+name+"]";
+    }
+
+    @Override
+    public Dao<BottleType> getDao() {
+        return new BottleTypeDao();
+    }
 }

@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.ClientDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -7,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "client", schema = "public")
-public class Client {
+public class Client extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_id_gen")
     @SequenceGenerator(name = "client_id_gen", sequenceName = "client_id_seq", allocationSize = 1)
@@ -57,4 +60,13 @@ public class Client {
         this.clientsOrders = clientsOrders;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"["+person.getPersonName()+"]";
+    }
+
+    @Override
+    public Dao<Client> getDao() {
+        return new ClientDao();
+    }
 }

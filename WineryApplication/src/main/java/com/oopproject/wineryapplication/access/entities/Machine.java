@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.MachineDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -7,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "machines", schema = "public")
-public class Machine {
+public class Machine extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "machines_id_gen")
     @SequenceGenerator(name = "machines_id_gen", sequenceName = "machines_id_seq", allocationSize = 1)
@@ -102,4 +105,8 @@ public class Machine {
         this.answer = answer;
     }
 
+    @Override
+    public Dao<Machine> getDao() {
+        return new MachineDao();
+    }
 }

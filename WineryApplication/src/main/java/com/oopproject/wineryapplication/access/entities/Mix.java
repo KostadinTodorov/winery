@@ -1,10 +1,13 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.MixDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "mix", schema = "public")
-public class Mix {
+public class Mix extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
@@ -41,4 +44,8 @@ public class Mix {
         this.batch = batch;
     }
 
+    @Override
+    public Dao<Mix> getDao() {
+        return new MixDao();
+    }
 }

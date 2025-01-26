@@ -1,10 +1,13 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.BatchStoridgeDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "batch_storidge", schema = "public")
-public class BatchStoridge {
+public class BatchStoridge extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "batch_storidge_id_gen")
     @SequenceGenerator(name = "batch_storidge_id_gen", sequenceName = "batch_storidge_id_seq", allocationSize = 1)
@@ -43,4 +46,8 @@ public class BatchStoridge {
         this.container = container;
     }
 
+    @Override
+    public Dao<BatchStoridge> getDao() {
+        return new BatchStoridgeDao();
+    }
 }

@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.ClientsOrderDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -7,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "clients_orders", schema = "public")
-public class ClientsOrder {
+public class ClientsOrder extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clients_orders_id_gen")
     @SequenceGenerator(name = "clients_orders_id_gen", sequenceName = "clients_orders_id_seq", allocationSize = 1)
@@ -113,4 +116,8 @@ public class ClientsOrder {
         this.wineType = wineType;
     }
 
+    @Override
+    public Dao<ClientsOrder> getDao() {
+        return new ClientsOrderDao();
+    }
 }

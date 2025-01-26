@@ -1,13 +1,18 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
+import javafx.scene.Node;
 
+import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
 @Table(name = "act", schema = "public")
-public class Act {
+public class Act extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "act_id_gen")
     @SequenceGenerator(name = "act_id_gen", sequenceName = "act_id_seq", allocationSize = 1)
@@ -23,12 +28,19 @@ public class Act {
     @OneToMany(mappedBy = "act")
     private Set<com.oopproject.wineryapplication.access.entities.Behavior> behaviors = new LinkedHashSet<>();
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public Dao<Act> getDao() {
+        return new ActDao();
     }
 
     public String getName() {
@@ -53,6 +65,11 @@ public class Act {
 
     public void setBehaviors(Set<com.oopproject.wineryapplication.access.entities.Behavior> behaviors) {
         this.behaviors = behaviors;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"["+name+"]";
     }
 
 }

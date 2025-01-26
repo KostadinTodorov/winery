@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.SortDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -7,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "sort", schema = "public")
-public class Sort {
+public class Sort extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sort_id_gen")
     @SequenceGenerator(name = "sort_id_gen", sequenceName = "sort_id_seq", allocationSize = 1)
@@ -44,4 +47,13 @@ public class Sort {
         this.harvests = harvests;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"["+name+"]";
+    }
+
+    @Override
+    public Dao<Sort> getDao() {
+        return new SortDao();
+    }
 }

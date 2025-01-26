@@ -1,0 +1,20 @@
+package com.oopproject.wineryapplication.helpers;
+
+public enum ButtonsMappingRegisters {
+
+    STORAGEORGANISER(0b0010),
+    CEO(0b11111111111111111111110),
+    ACCOUNTANT(0b1111),
+    DEVISIONLEAD(0b0001),
+    CRUD(0b0111);
+
+    private Integer buttonsMapping;
+
+    ButtonsMappingRegisters(Integer buttonsMapping) {
+        this.buttonsMapping = buttonsMapping;
+    }
+
+    public Integer getButtonsMapping() {
+        return buttonsMapping;
+    }
+}

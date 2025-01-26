@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.BatchDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -7,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "batch", schema = "public")
-public class Batch {
+public class Batch extends com.oopproject.wineryapplication.access.entities.entity.Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "batch_id_gen")
     @SequenceGenerator(name = "batch_id_gen", sequenceName = "batch_id_seq", allocationSize = 1)
@@ -78,4 +81,8 @@ public class Batch {
         this.mixes = mixes;
     }
 
+    @Override
+    public Dao<Batch> getDao() {
+        return new BatchDao();
+    }
 }
