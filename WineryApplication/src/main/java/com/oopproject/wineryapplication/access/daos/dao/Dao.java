@@ -1,5 +1,6 @@
 package com.oopproject.wineryapplication.access.daos.dao;
 
+import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @param <T> the type of the entity this DAO will handle
  */
-public interface Dao<T> {
+public interface Dao<T extends Entity> {
 
     /**
      * Retrieves an entity by its ID.

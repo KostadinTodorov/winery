@@ -1,9 +1,13 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
+import javafx.scene.Node;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -24,12 +28,19 @@ public class Act extends com.oopproject.wineryapplication.access.entities.entity
     @OneToMany(mappedBy = "act")
     private Set<com.oopproject.wineryapplication.access.entities.Behavior> behaviors = new LinkedHashSet<>();
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public Dao<Act> getDao() {
+        return new ActDao();
     }
 
     public String getName() {
@@ -54,6 +65,11 @@ public class Act extends com.oopproject.wineryapplication.access.entities.entity
 
     public void setBehaviors(Set<com.oopproject.wineryapplication.access.entities.Behavior> behaviors) {
         this.behaviors = behaviors;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"["+name+"]";
     }
 
 }

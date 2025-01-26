@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.FaultCodeDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -44,4 +47,8 @@ public class FaultCode extends com.oopproject.wineryapplication.access.entities.
         this.machines = machines;
     }
 
+    @Override
+    public Dao<FaultCode> getDao() {
+        return new FaultCodeDao();
+    }
 }

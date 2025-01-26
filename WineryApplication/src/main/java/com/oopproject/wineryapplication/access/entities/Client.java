@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.ClientDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -57,4 +60,13 @@ public class Client extends com.oopproject.wineryapplication.access.entities.ent
         this.clientsOrders = clientsOrders;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"["+person.getPersonName()+"]";
+    }
+
+    @Override
+    public Dao<Client> getDao() {
+        return new ClientDao();
+    }
 }

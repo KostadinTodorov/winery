@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.BatchStoridgeDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 @Entity
@@ -43,4 +46,8 @@ public class BatchStoridge extends com.oopproject.wineryapplication.access.entit
         this.container = container;
     }
 
+    @Override
+    public Dao<BatchStoridge> getDao() {
+        return new BatchStoridgeDao();
+    }
 }

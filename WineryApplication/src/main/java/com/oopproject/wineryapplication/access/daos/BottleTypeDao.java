@@ -1,59 +1,52 @@
-package com.oopproject.wineryapplication.access.daos.dao;
+package com.oopproject.wineryapplication.access.daos;
 
-import com.oopproject.wineryapplication.access.entities.Act;
-import com.oopproject.wineryapplication.access.entities.entity.Entity;
+import com.oopproject.wineryapplication.access.entities.BottleType;
+import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class TemplateDao<T extends Entity> extends EntityDao<T> {
+public class BottleTypeDao extends EntityDao<BottleType> {
 
-    private final Class<T> type;
-
-    public TemplateDao(Class<T> type) {
+    public BottleTypeDao() {
         super();
-        this.type = type;
     }
 
     @Override
-    public T get(int id) {
+    public BottleType get(int id) {
         try (Session session = createSession()) {
-            return session.get(type, id);
+            return session.get(BottleType.class, id);
         }
     }
 
     @Override
-    public List<T> getAll() {
+    public List<BottleType> getAll() {
         try (Session session = createSession()) {
-            return session.createQuery("from " + type.getName(), type).list();
+            return session.createQuery("from BottleType", BottleType.class).list();
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean add(T entity) {
-        if (entity.getId() == null) {
-            return insert(entity) != null;
-        }
-        else if (get(entity.getId()) == null) {
-            return insert(entity) != null;
+    public boolean add(BottleType bottleType) {
+        if (bottleType.getId() == null) {
+            return insert(bottleType) != null;
+        } else if (get(bottleType.getId()) == null) {
+            return insert(bottleType) != null;
         }
         return false;
     }
 
     @Override
-    public T insert(T entity) {
-        T newEntity = null;
+    public BottleType insert(BottleType bottleType) {
+        BottleType newBottleType = null;
         try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
-            newEntity = session.merge(entity);
+            newBottleType = session.merge(bottleType);
             try {
                 transaction.commit();
-                return newEntity;
+                return newBottleType;
             } catch (RollbackException e) {
                 transaction.rollback();
                 return null;
@@ -65,10 +58,10 @@ public class TemplateDao<T extends Entity> extends EntityDao<T> {
     }
 
     @Override
-    public boolean update(int id, T entity) {
+    public boolean update(int id, BottleType bottleType) {
         if (get(id) != null) {
-            entity.setId(id);
-            return insert(entity) != null;
+            bottleType.setId(id);
+            return insert(bottleType) != null;
         }
         return false;
     }
@@ -78,9 +71,9 @@ public class TemplateDao<T extends Entity> extends EntityDao<T> {
         try (Session session = createSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                T entity = session.get(type, id);
-                if (entity != null) {
-                    session.remove(entity);
+                BottleType bottleType = session.get(BottleType.class, id);
+                if (bottleType != null) {
+                    session.remove(bottleType);
                     transaction.commit();
                     return true;
                 } else {

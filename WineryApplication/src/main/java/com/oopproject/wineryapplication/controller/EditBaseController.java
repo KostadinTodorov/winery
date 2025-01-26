@@ -1,12 +1,10 @@
 package com.oopproject.wineryapplication.controller;
 
-import com.oopproject.wineryapplication.access.entities.Employee;
+import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
 import com.oopproject.wineryapplication.access.entities.creator.EntityFactory;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
-import com.oopproject.wineryapplication.access.entities.helper.EntityFieldMap;
+import com.oopproject.wineryapplication.access.entities.helper.EntityIdTypeNodeMapper;
 import com.oopproject.wineryapplication.access.entities.helper.EntityTypeNodeMapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -14,12 +12,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.lang.reflect.Field;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-public class AddBaseController {
+public class EditBaseController {
     @FXML
-    public AnchorPane AddBase;
+    public AnchorPane EditBase;
     @FXML
     public VBox entityProps;
     private Map<Field, Node> fieldNodeMap = new HashMap<>();
@@ -28,7 +27,10 @@ public class AddBaseController {
     private ComboBox<String> comboBox;
     private Map<String, Entity> entityMap;
 
-    public AddBaseController(Entity entity) {
+    public EditBaseController(Entity entity) {
+        if (entity.getId() == null) {
+            throw new IllegalArgumentException("Id cannot be null");
+        }
         this.entity = entity;
     }
 
@@ -93,13 +95,14 @@ public class AddBaseController {
     }
     public boolean saveEntity() {
         try{
-            if (entity.getDao().add(entity)) {
-                return true;
-            }
+//            if (entity.getDao().update(entity.getId(),entity)) {
+//                return true;
+//            }
+            TemplateDao<Entity> dao = new TemplateDao<>((Class<Entity>) entity.getClass());
+            return dao.update(entity.getId(), entity);
         } catch (Exception e){
             return false;
         }
-        return true;
     }
 
     public boolean classImplementsInterface(Class<?> clazz, Class<?> interfaceClass) {

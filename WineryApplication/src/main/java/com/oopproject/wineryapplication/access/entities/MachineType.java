@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.MachineTypeDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -42,6 +45,16 @@ public class MachineType extends com.oopproject.wineryapplication.access.entitie
 
     public void setMachines(Set<com.oopproject.wineryapplication.access.entities.Machine> machines) {
         this.machines = machines;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"["+machineType+"]";
+    }
+
+    @Override
+    public Dao<MachineType> getDao() {
+        return new MachineTypeDao();
     }
 
 }

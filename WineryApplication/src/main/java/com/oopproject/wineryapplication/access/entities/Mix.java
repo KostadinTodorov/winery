@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.MixDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 @Entity
@@ -41,4 +44,8 @@ public class Mix extends com.oopproject.wineryapplication.access.entities.entity
         this.batch = batch;
     }
 
+    @Override
+    public Dao<Mix> getDao() {
+        return new MixDao();
+    }
 }

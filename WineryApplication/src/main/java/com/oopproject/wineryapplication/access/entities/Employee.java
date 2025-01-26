@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.EmployeeDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -66,5 +69,15 @@ public class Employee extends com.oopproject.wineryapplication.access.entities.e
 
     public void setBehaviors(Set<Behavior> behaviors) {
         this.behaviors = behaviors;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"["+person.getPersonName()+"]";
+    }
+
+    @Override
+    public Dao<Employee> getDao() {
+        return new EmployeeDao();
     }
 }

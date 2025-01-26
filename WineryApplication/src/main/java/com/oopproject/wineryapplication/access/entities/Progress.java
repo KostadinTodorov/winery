@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.ProgressDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -44,4 +47,13 @@ public class Progress extends com.oopproject.wineryapplication.access.entities.e
         this.clientsOrders = clientsOrders;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"["+status+"]";
+    }
+
+    @Override
+    public Dao<Progress> getDao() {
+        return new ProgressDao();
+    }
 }

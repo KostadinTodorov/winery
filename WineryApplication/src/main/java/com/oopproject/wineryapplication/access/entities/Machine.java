@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.MachineDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -102,4 +105,8 @@ public class Machine extends com.oopproject.wineryapplication.access.entities.en
         this.answer = answer;
     }
 
+    @Override
+    public Dao<Machine> getDao() {
+        return new MachineDao();
+    }
 }

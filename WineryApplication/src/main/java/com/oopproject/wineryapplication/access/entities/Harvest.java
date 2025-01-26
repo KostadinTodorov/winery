@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.HarvestDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -56,4 +59,13 @@ public class Harvest extends com.oopproject.wineryapplication.access.entities.en
         this.mixes = mixes;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"["+sort.getName()+"]";
+    }
+
+    @Override
+    public Dao<Harvest> getDao() {
+        return new HarvestDao();
+    }
 }

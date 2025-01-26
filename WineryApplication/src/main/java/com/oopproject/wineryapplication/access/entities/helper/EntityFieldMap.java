@@ -1,4 +1,6 @@
-package com.oopproject.wineryapplication.access.entities.entity;
+package com.oopproject.wineryapplication.access.entities.helper;
+
+import com.oopproject.wineryapplication.access.entities.entity.Entity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -9,9 +11,9 @@ public class EntityFieldMap{
 
     private Field[] fields;
     private Map<String, Type> map;
-    Class<?> clazz;
+    Class<? extends Entity> clazz;
 
-    public EntityFieldMap(Class<?> clazz) {
+    public EntityFieldMap(Class<? extends Entity> clazz) {
         this.clazz = clazz;
         fields = this.clazz.getDeclaredFields();
     }

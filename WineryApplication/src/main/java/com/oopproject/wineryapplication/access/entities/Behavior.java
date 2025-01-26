@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.BehaviorDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 @Entity
@@ -43,4 +46,8 @@ public class Behavior extends com.oopproject.wineryapplication.access.entities.e
         this.act = act;
     }
 
+    @Override
+    public Dao<Behavior> getDao() {
+        return new BehaviorDao();
+    }
 }
