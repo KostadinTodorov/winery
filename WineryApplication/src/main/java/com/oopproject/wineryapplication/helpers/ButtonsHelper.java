@@ -2,6 +2,8 @@ package com.oopproject.wineryapplication.helpers;
 
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import com.oopproject.wineryapplication.controller.DisplayBaseController;
+import com.oopproject.wineryapplication.controller.EditBaseController;
+import com.oopproject.wineryapplication.data.User;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +35,9 @@ public class ButtonsHelper {
     }
 
     public static void setButtonsFor(ButtonsMappingRegisters actionBitmap, VBox vboxHolder, Map<Integer, ButtonAction> actionMap) {
+
+        LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.DEBUG, "Generate User buttons");
+
         Integer actionInstance = actionBitmap.getButtonsMapping();
 
         for (Map.Entry<Integer, ButtonAction> entry : actionMap.entrySet()) {
@@ -56,7 +61,8 @@ public class ButtonsHelper {
     }
 
     protected static void displayEntity(AnchorPane parentHolder, Entity entity) throws IOException {
-        System.out.println("Displaying Entity = ");
+        LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.DEBUG, String.format("Opening a display controller for Entity <[ %s ]>", entity.toString() ));
+
         SceneHelper.<DisplayBaseController>addNode(parentHolder,Nodes.DISPLAYBASE, new DisplayBaseController(entity.getClass()));
     }
 }

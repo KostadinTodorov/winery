@@ -5,6 +5,8 @@ import com.oopproject.wineryapplication.access.entities.creator.EntityFactory;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import com.oopproject.wineryapplication.access.entities.helper.EntityFieldMap;
 import com.oopproject.wineryapplication.access.entities.helper.EntityTypeNodeMapper;
+import com.oopproject.wineryapplication.helpers.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.LoggerLevels;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,6 +36,8 @@ public class AddBaseController {
 
     @FXML
     public void initialize() {
+        LoggerHelper.logData(AddBaseController.class, LoggerLevels.DEBUG, "Initialize Add Base Controller");
+
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> saveButton());
         entityProps.getChildren().add(saveButton);

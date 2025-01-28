@@ -5,6 +5,8 @@ import com.oopproject.wineryapplication.access.entities.creator.EntityFactory;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import com.oopproject.wineryapplication.access.entities.helper.EntityIdTypeNodeMapper;
 import com.oopproject.wineryapplication.access.entities.helper.EntityTypeNodeMapper;
+import com.oopproject.wineryapplication.helpers.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.LoggerLevels;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -36,6 +38,8 @@ public class EditBaseController {
 
     @FXML
     public void initialize() {
+        LoggerHelper.logData(EditBaseController.class, LoggerLevels.DEBUG, "Initialize Edit Base Controller");
+
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> saveButton());
         entityProps.getChildren().add(saveButton);
@@ -50,6 +54,8 @@ public class EditBaseController {
                 entityProps.getChildren().addAll(fieldLabel, entry.getValue());
             }
         }
+
+        LoggerHelper.logData(EditBaseController.class, LoggerLevels.DEBUG, "Generate buttons and fields for Edit Base Controller");
     }
 
     private boolean isFilled() {

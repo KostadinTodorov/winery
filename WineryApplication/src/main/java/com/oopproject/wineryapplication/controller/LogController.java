@@ -1,5 +1,7 @@
 package com.oopproject.wineryapplication.controller;
 
+import com.oopproject.wineryapplication.helpers.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.LoggerLevels;
 import com.oopproject.wineryapplication.helpers.SceneHelper;
 import com.oopproject.wineryapplication.helpers.Scenes;
 import com.oopproject.wineryapplication.access.entities.*;
@@ -27,19 +29,21 @@ public class LogController {
 
     @FXML
     public void initialize() {
+        LoggerHelper.logData(LogController.class, LoggerLevels.DEBUG, "Initialize Log Controller");
+
         btnGoBack.setOnAction((ActionEvent event) -> {User.userLogout();});
         lblEnterCredentials.setText(String.format("Enter %s credentials:", User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
     }
 
     @FXML
-    protected void switchToUser(ActionEvent event) throws IOException {
+    protected void switchToUser() throws IOException {
 
         Employee emp;
         try {
 
             emp = User.CheckEmployee(employeeName.getText(),password.getText());
             if (emp != null) {
-                System.out.println(String.format("Hello, %s!\nYou enter as %s user.", emp.getPerson().getPersonName(), emp.getOccupation().getOccupation()));
+                LoggerHelper.logData(LogController.class, LoggerLevels.DEBUG, String.format("%s enters as %s user.", emp.getPerson().getPersonName(), emp.getOccupation().getOccupation()));
 
                 SceneHelper.switchTo(Scenes.USER);
             }
