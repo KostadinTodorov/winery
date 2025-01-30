@@ -9,6 +9,7 @@ target/
 *.iml
 *.ipr
 wineryapp.log
+hibernate.cfg.xml
 
 ### Eclipse ###
 .apt_generated
