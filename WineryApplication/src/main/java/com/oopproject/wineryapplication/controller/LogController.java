@@ -29,7 +29,7 @@ public class LogController {
 
     @FXML
     public void initialize() {
-        LoggerHelper.logData(LogController.class, LoggerLevels.DEBUG, "Initialize Log Controller");
+        LoggerHelper.logData(LogController.class, LoggerLevels.INFO, "Initialize Log Controller");
 
         btnGoBack.setOnAction((ActionEvent event) -> {User.userLogout();});
         lblEnterCredentials.setText(String.format("Enter %s credentials:", User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
@@ -43,7 +43,7 @@ public class LogController {
 
             emp = User.CheckEmployee(employeeName.getText(),password.getText());
             if (emp != null) {
-                LoggerHelper.logData(LogController.class, LoggerLevels.DEBUG, String.format("%s enters as %s user.", emp.getPerson().getPersonName(), emp.getOccupation().getOccupation()));
+                LoggerHelper.logData(LogController.class, LoggerLevels.INFO, String.format("%s enters as %s user.", emp.getPerson().getPersonName(), emp.getOccupation().getOccupation()));
 
                 SceneHelper.switchTo(Scenes.USER);
             }

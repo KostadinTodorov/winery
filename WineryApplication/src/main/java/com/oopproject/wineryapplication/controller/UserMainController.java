@@ -5,6 +5,7 @@ import com.oopproject.wineryapplication.helpers.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class UserMainController {
@@ -15,45 +16,49 @@ public class UserMainController {
     private Button btnLogOut;
     @FXML
     private Label lblUserGreeting;
+    @FXML
+    private Label lblUserPrompt;
+    @FXML
+    private AnchorPane placeHolderAnchorPane;
 
     @FXML
     public void initialize()
     {
-        LoggerHelper.logData(UserMainController.class, LoggerLevels.DEBUG, "Initializing User Controller");
+        LoggerHelper.logData(UserMainController.class, LoggerLevels.INFO, "Initializing User Controller");
+
+        ButtonsMapHolderForEachCategory categoriesMap = new ButtonsMapHolderForEachCategory();
+        lblUserPrompt.setText ("Please choose a category and then select one of its attributes!");
         btnLogOut.setOnAction(e -> {User.userLogout();});
 
-        if(User.getEmployeeOccupationBasedOnWellcome().equals("ceo")){
+        switch (User.getEmployeeOccupationBasedOnWellcome()) {
+            case "ceo" -> {
 
-            //System.out.println("CEO entered");
-            LoggerHelper.logData(UserMainController.class, LoggerLevels.DEBUG, String.format("%s ( %s ) begun work", User.getEmployee().getPerson().getPersonName(), User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
+                LoggerHelper.logData(UserMainController.class, LoggerLevels.INFO, String.format("%s ( %s ) begun work", User.getEmployee().getPerson().getPersonName(), User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
 
-            lblUserGreeting.setText(String.format("# %s : Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
-            ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.CEO, placeHolderVBox, ButtonsMapHolder.actionMap);
+                lblUserGreeting.setText(String.format("# %s : Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
+                ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.CEO, placeHolderVBox, categoriesMap.getActionMap());
+            }
+            case "storage organiser" -> {
 
-        } else if (User.getEmployeeOccupationBasedOnWellcome().equals("storage organiser")) {
+                LoggerHelper.logData(UserMainController.class, LoggerLevels.INFO, String.format("%s ( %s ) begun work", User.getEmployee().getPerson().getPersonName(), User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
 
-            //System.out.println("Storage organiser entered");
-            LoggerHelper.logData(UserMainController.class, LoggerLevels.DEBUG, String.format("%s ( %s ) begun work", User.getEmployee().getPerson().getPersonName(), User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
+                lblUserGreeting.setText(String.format("# %s Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
+                ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.STORAGEORGANISER, placeHolderVBox, categoriesMap.getActionMap());
+            }
+            case "accountant" -> {
 
-            lblUserGreeting.setText(String.format("# %s Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
-            ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.STORAGEORGANISER, placeHolderVBox, ButtonsMapHolder.actionMap);
+                LoggerHelper.logData(UserMainController.class, LoggerLevels.INFO, String.format("%s ( %s ) begun work", User.getEmployee().getPerson().getPersonName(), User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
 
-        } else if (User.getEmployeeOccupationBasedOnWellcome().equals("accountant")) {
+                lblUserGreeting.setText(String.format("# %s Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
+                ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.ACCOUNTANT, placeHolderVBox, categoriesMap.getActionMap());
+            }
+            case "devision lead" -> {
 
-            //System.out.println("Accountant entered");
-            LoggerHelper.logData(UserMainController.class, LoggerLevels.DEBUG, String.format("%s ( %s ) begun work", User.getEmployee().getPerson().getPersonName(), User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
+                LoggerHelper.logData(UserMainController.class, LoggerLevels.INFO, String.format("%s ( %s ) begun work", User.getEmployee().getPerson().getPersonName(), User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
 
-            lblUserGreeting.setText(String.format("# %s Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
-            ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.ACCOUNTANT, placeHolderVBox, ButtonsMapHolder.actionMap);
-
-        } else if (User.getEmployeeOccupationBasedOnWellcome().equals("devision lead")) {
-
-            //System.out.println("Devision Lead entered");
-            LoggerHelper.logData(UserMainController.class, LoggerLevels.DEBUG, String.format("%s ( %s ) begun work", User.getEmployee().getPerson().getPersonName(), User.getEmployeeOccupationBasedOnWellcome().toUpperCase()));
-
-            lblUserGreeting.setText(String.format("# %s Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(),User.getEmployee().getPerson().getPersonName()));
-            ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.DEVISIONLEAD, placeHolderVBox, ButtonsMapHolder.actionMap);
-
+                lblUserGreeting.setText(String.format("# %s Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
+                ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.DEVISIONLEAD, placeHolderVBox, categoriesMap.getActionMap());
+            }
         }
     }
 

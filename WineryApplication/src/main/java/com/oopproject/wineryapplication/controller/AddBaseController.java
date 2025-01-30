@@ -36,7 +36,7 @@ public class AddBaseController {
 
     @FXML
     public void initialize() {
-        LoggerHelper.logData(AddBaseController.class, LoggerLevels.DEBUG, "Initialize Add Base Controller");
+        LoggerHelper.logData(AddBaseController.class, LoggerLevels.INFO, "Initialize Add Base Controller");
 
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> saveButton());

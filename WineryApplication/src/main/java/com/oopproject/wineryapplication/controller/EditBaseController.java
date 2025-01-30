@@ -38,7 +38,7 @@ public class EditBaseController {
 
     @FXML
     public void initialize() {
-        LoggerHelper.logData(EditBaseController.class, LoggerLevels.DEBUG, "Initialize Edit Base Controller");
+        LoggerHelper.logData(EditBaseController.class, LoggerLevels.INFO, "Initialize Edit Base Controller");
 
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> saveButton());
@@ -55,7 +55,7 @@ public class EditBaseController {
             }
         }
 
-        LoggerHelper.logData(EditBaseController.class, LoggerLevels.DEBUG, "Generate buttons and fields for Edit Base Controller");
+        LoggerHelper.logData(EditBaseController.class, LoggerLevels.INFO, "Generate buttons and fields for Edit Base Controller");
     }
 
     private boolean isFilled() {

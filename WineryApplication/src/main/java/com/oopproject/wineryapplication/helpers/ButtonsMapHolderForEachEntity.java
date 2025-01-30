@@ -1,18 +1,15 @@
 package com.oopproject.wineryapplication.helpers;
 
+import java.util.Map;
 import com.oopproject.wineryapplication.access.entities.*;
 
-import java.util.Comparator;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.LinkedHashMap;
+public class ButtonsMapHolderForEachEntity extends ButtonsMapBase {
 
-public class ButtonsMapHolder {
+    @Override
+    protected Map<Integer, ButtonsHelper.ButtonAction> initializeMap() {
+        LoggerHelper.logData(ButtonsMapHolderForEachEntity.class, LoggerLevels.INFO, "Creation of the entity buttons");
 
-    public static Map<Integer, ButtonsHelper.ButtonAction> actionMap;
-
-    static {
-        Map<Integer, ButtonsHelper.ButtonAction> unsortedMap = Map.ofEntries(
+        return Map.ofEntries(
                 Map.entry(0, new ButtonsHelper.ButtonAction("Act", Act::new)),
                 Map.entry(1, new ButtonsHelper.ButtonAction("Answer", Answer::new)),
                 Map.entry(2, new ButtonsHelper.ButtonAction("Batch", Batch::new)),
@@ -37,15 +34,5 @@ public class ButtonsMapHolder {
                 Map.entry(21, new ButtonsHelper.ButtonAction("Sweetness", Sweetness::new)),
                 Map.entry(22, new ButtonsHelper.ButtonAction("Wine Type", WineType::new))
         );
-
-        // Sort entries by button name
-        actionMap = unsortedMap.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.comparing(ButtonsHelper.ButtonAction::getLabel)))
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (e1, e2) -> e1,
-                        LinkedHashMap::new // Preserve sorted order
-                ));
     }
 }

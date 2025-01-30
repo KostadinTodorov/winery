@@ -56,7 +56,7 @@ public class DisplayBaseController<T extends Entity> {
 
     @FXML
     public void initialize() {
-        LoggerHelper.logData(DisplayBaseController.class, LoggerLevels.DEBUG, "Initialize Display Base Controller");
+        LoggerHelper.logData(DisplayBaseController.class, LoggerLevels.INFO, "Initialize Display Base Controller");
 
         add.setOnAction(e -> {addEntity();});
         List<TableColumn<Entity, ?>> columns = new ArrayList<>();
@@ -183,12 +183,12 @@ public class DisplayBaseController<T extends Entity> {
     private void addEntity() {
         T entity = EntityCreator.createInstance(entityClass);
 
-        LoggerHelper.logData(DisplayBaseController.class, LoggerLevels.DEBUG, "Call Add Base Controller");
+        LoggerHelper.logData(DisplayBaseController.class, LoggerLevels.INFO, "Call Add Base Controller");
         SceneHelper.<AddBaseController>addNode(DisplayBase, Nodes.ADDBASE, new AddBaseController(entity));
     }
 
     private void editEntity(Entity entity) {
-        LoggerHelper.logData(DisplayBaseController.class, LoggerLevels.DEBUG, "Call Edit Base Controller");
+        LoggerHelper.logData(DisplayBaseController.class, LoggerLevels.INFO, "Call Edit Base Controller");
         SceneHelper.<EditBaseController>addNode(DisplayBase, Nodes.EDITBASE, new EditBaseController(entity));
     }
 }

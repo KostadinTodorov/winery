@@ -23,7 +23,7 @@ public class Launcher extends Application {
     }
 
     public static void main(String[] args) {
-       LoggerHelper.logData(Launcher.class, LoggerLevels.DEBUG, "Launch the Winery Application");
+       LoggerHelper.logData(Launcher.class, LoggerLevels.INFO, "Launch the Winery Application");
        launch();
     }
 }
