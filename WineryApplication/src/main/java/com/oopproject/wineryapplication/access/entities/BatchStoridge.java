@@ -22,6 +22,9 @@ public class BatchStoridge extends com.oopproject.wineryapplication.access.entit
     @JoinColumn(name = "container_id", nullable = false)
     private com.oopproject.wineryapplication.access.entities.Container container;
 
+    @Column(name = "volume_stored", nullable = false)
+    private Integer volumeStored;
+
     public Integer getId() {
         return id;
     }
@@ -44,6 +47,14 @@ public class BatchStoridge extends com.oopproject.wineryapplication.access.entit
 
     public void setContainer(com.oopproject.wineryapplication.access.entities.Container container) {
         this.container = container;
+    }
+
+    public Integer getVolumeStored() {
+        return volumeStored;
+    }
+
+    public void setVolumeStored(Integer volume_stored) {
+        this.volumeStored = volume_stored;
     }
 
     @Override
