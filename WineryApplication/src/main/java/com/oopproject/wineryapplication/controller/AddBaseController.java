@@ -1,14 +1,10 @@
 package com.oopproject.wineryapplication.controller;
 
-import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.access.entities.creator.EntityFactory;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
-import com.oopproject.wineryapplication.access.entities.helper.EntityFieldMap;
 import com.oopproject.wineryapplication.access.entities.helper.EntityTypeNodeMapper;
-import com.oopproject.wineryapplication.helpers.LoggerHelper;
-import com.oopproject.wineryapplication.helpers.LoggerLevels;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -16,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.lang.reflect.Field;
-import java.time.LocalDate;
 import java.util.*;
 
 public class AddBaseController {

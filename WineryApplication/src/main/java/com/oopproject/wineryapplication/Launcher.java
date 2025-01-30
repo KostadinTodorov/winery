@@ -1,9 +1,9 @@
 package com.oopproject.wineryapplication;
 
-import com.oopproject.wineryapplication.helpers.LoggerHelper;
-import com.oopproject.wineryapplication.helpers.LoggerLevels;
-import com.oopproject.wineryapplication.helpers.SceneHelper;
-import com.oopproject.wineryapplication.helpers.Scenes;
+import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
+import com.oopproject.wineryapplication.helpers.scenes.SceneHelper;
+import com.oopproject.wineryapplication.helpers.scenes.Scenes;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;

@@ -1,7 +1,11 @@
-package com.oopproject.wineryapplication.helpers;
+package com.oopproject.wineryapplication.helpers.buttons;
 
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import com.oopproject.wineryapplication.controller.DisplayBaseController;
+import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
+import com.oopproject.wineryapplication.helpers.scenes.Nodes;
+import com.oopproject.wineryapplication.helpers.scenes.SceneHelper;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -112,7 +116,7 @@ public class ButtonsHelper {
     protected static void displayBase(AnchorPane parentHolder, Entity entity) throws IOException {
         LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.INFO, String.format("Opening a display controller for Entity <[ %s ]>", entity.getClass().getSimpleName() ));
 
-        SceneHelper.<DisplayBaseController>addNode(parentHolder,Nodes.DISPLAYBASE, new DisplayBaseController(entity.getClass()));
+        SceneHelper.<DisplayBaseController>addNode(parentHolder, Nodes.DISPLAYBASE, new DisplayBaseController(entity.getClass()));
     }
 
     protected static void displayCategoryButtons(HBox placeHolderHBox, String category) throws IOException {

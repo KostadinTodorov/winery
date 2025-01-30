@@ -1,4 +1,4 @@
-package com.oopproject.wineryapplication.helpers;
+package com.oopproject.wineryapplication.helpers.scenes;
 
 public enum Nodes {
     ADDBASE("/com/oopproject/wineryapplication/AddBase.fxml"),

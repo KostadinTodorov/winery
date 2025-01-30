@@ -1,7 +1,9 @@
-package com.oopproject.wineryapplication.helpers;
+package com.oopproject.wineryapplication.helpers.buttons;
 
 import java.util.Map;
 import com.oopproject.wineryapplication.access.entities.*;
+import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
 
 public class ButtonsMapHolderForEachEntity extends ButtonsMapBase {
 

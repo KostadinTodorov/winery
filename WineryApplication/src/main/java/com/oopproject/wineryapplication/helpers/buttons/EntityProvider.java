@@ -1,4 +1,4 @@
-package com.oopproject.wineryapplication.helpers;
+package com.oopproject.wineryapplication.helpers.buttons;
 
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 

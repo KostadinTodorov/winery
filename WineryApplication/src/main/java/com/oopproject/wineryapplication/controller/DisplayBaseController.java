@@ -1,9 +1,9 @@
 package com.oopproject.wineryapplication.controller;
 
-import com.oopproject.wineryapplication.helpers.LoggerHelper;
-import com.oopproject.wineryapplication.helpers.LoggerLevels;
-import com.oopproject.wineryapplication.helpers.Nodes;
-import com.oopproject.wineryapplication.helpers.SceneHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
+import com.oopproject.wineryapplication.helpers.scenes.Nodes;
+import com.oopproject.wineryapplication.helpers.scenes.SceneHelper;
 import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 

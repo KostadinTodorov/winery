@@ -1,7 +1,11 @@
 package com.oopproject.wineryapplication.controller;
 
 import com.oopproject.wineryapplication.data.User;
-import com.oopproject.wineryapplication.helpers.*;
+import com.oopproject.wineryapplication.helpers.buttons.ButtonsHelper;
+import com.oopproject.wineryapplication.helpers.buttons.ButtonsMapHolderForEachCategory;
+import com.oopproject.wineryapplication.helpers.buttons.ButtonsMappingRegisters;
+import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

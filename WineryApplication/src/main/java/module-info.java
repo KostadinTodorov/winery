@@ -22,10 +22,14 @@ module com.oopproject.wineryapplication {
     opens com.oopproject.wineryapplication.access.entities.entity to javafx.fxml, org.hibernate.orm.core;
     exports com.oopproject.wineryapplication.controller;
     opens com.oopproject.wineryapplication.controller to javafx.fxml;
-    exports com.oopproject.wineryapplication.helpers;
-    opens com.oopproject.wineryapplication.helpers to javafx.fxml;
     exports com.oopproject.wineryapplication.access.entities.entity.contracts;
     opens com.oopproject.wineryapplication.access.entities.entity.contracts to javafx.fxml, org.hibernate.orm.core;
     exports com.oopproject.wineryapplication.access.entities.helper;
     opens com.oopproject.wineryapplication.access.entities.helper to javafx.fxml, org.hibernate.orm.core;
+    exports com.oopproject.wineryapplication.helpers.buttons;
+    opens com.oopproject.wineryapplication.helpers.buttons to javafx.fxml;
+    exports com.oopproject.wineryapplication.helpers.scenes;
+    opens com.oopproject.wineryapplication.helpers.scenes to javafx.fxml;
+    exports com.oopproject.wineryapplication.helpers.logger;
+    opens com.oopproject.wineryapplication.helpers.logger to javafx.fxml;
 }
