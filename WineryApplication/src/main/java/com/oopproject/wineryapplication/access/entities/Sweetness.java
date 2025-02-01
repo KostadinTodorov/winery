@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.SweetnessDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -55,4 +58,13 @@ public class Sweetness extends com.oopproject.wineryapplication.access.entities.
         this.bottles = bottles;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"["+leCategory+"("+category+")"+"]";
+    }
+
+    @Override
+    public Dao<Sweetness> getDao() {
+        return new SweetnessDao();
+    }
 }

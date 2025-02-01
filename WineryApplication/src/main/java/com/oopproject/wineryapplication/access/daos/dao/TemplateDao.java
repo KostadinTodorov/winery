@@ -1,12 +1,14 @@
 package com.oopproject.wineryapplication.access.daos.dao;
 
+import com.oopproject.wineryapplication.access.entities.Act;
+import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class TemplateDao<T> extends EntityDao<T> {
+public class TemplateDao<T extends Entity> extends EntityDao<T> {
 
     private final Class<T> type;
 
@@ -29,11 +31,15 @@ public class TemplateDao<T> extends EntityDao<T> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean add(T entity) {
-        if (getId(entity) == null) {
+        if (entity.getId() == null) {
             return insert(entity) != null;
-        } else if (get(getId(entity)) == null) {
+        }
+        else if (get(entity.getId()) == null) {
             return insert(entity) != null;
         }
         return false;
@@ -61,7 +67,7 @@ public class TemplateDao<T> extends EntityDao<T> {
     @Override
     public boolean update(int id, T entity) {
         if (get(id) != null) {
-            setId(entity, id);
+            entity.setId(id);
             return insert(entity) != null;
         }
         return false;
@@ -87,23 +93,6 @@ public class TemplateDao<T> extends EntityDao<T> {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
-        }
-    }
-
-    // Helper methods to handle entity ID
-    private Integer getId(T entity) {
-        try {
-            return (Integer) entity.getClass().getMethod("getId").invoke(entity);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to get ID from entity", e);
-        }
-    }
-
-    private void setId(T entity, int id) {
-        try {
-            entity.getClass().getMethod("setId", Integer.class).invoke(entity, id);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to set ID on entity", e);
         }
     }
 }

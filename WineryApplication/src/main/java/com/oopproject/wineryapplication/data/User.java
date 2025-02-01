@@ -2,8 +2,8 @@ package com.oopproject.wineryapplication.data;
 
 import com.oopproject.wineryapplication.access.daos.EmployeeDao;
 import com.oopproject.wineryapplication.access.entities.Employee;
-import com.oopproject.wineryapplication.helpers.SceneHelper;
-import com.oopproject.wineryapplication.helpers.Scenes;
+import com.oopproject.wineryapplication.helpers.scenes.SceneHelper;
+import com.oopproject.wineryapplication.helpers.scenes.Scenes;
 import javafx.scene.control.Alert;
 
 import java.util.List;
@@ -75,6 +75,7 @@ public class User
         User.employeeOccupationBasedOnWellcome = employeeOccupationBasedOnWellcome;
 
         System.out.println(String.format("Occupation %s was set!", User.employeeOccupationBasedOnWellcome));
+
     }
 
     public static String getEmployeeOccupationBasedOnWellcome() {

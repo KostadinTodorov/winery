@@ -1,8 +1,10 @@
 package com.oopproject.wineryapplication.controller;
 
 import com.oopproject.wineryapplication.data.User;
-import com.oopproject.wineryapplication.helpers.SceneHelper;
-import com.oopproject.wineryapplication.helpers.Scenes;
+import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
+import com.oopproject.wineryapplication.helpers.scenes.SceneHelper;
+import com.oopproject.wineryapplication.helpers.scenes.Scenes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,28 +23,37 @@ public class WelcomeController {
     Button btnDevisionLead;
 
     @FXML
+    public void initialize() {
+        LoggerHelper.logData(WelcomeController.class, LoggerLevels.INFO, "Initialize Welcome Controller");
+    }
+
+    @FXML
     protected void switchToLogin(ActionEvent event) throws IOException {
 
         Object source = event.getSource();
 
         if(btnCEO == source){
 
-            System.out.println("CEO pressed");
+            //System.out.println("CEO pressed");
+            LoggerHelper.logData(WelcomeController.class, LoggerLevels.INFO, "CEO pressed");
             User.setEmployeeOccupationBasedOnWelcome("ceo");
 
         } else if (btnStorageOrganiser == source) {
 
-            System.out.println("Storage organiser pressed");
+            //System.out.println("Storage organiser pressed");
+            LoggerHelper.logData(WelcomeController.class, LoggerLevels.INFO, "Storage organiser pressed");
             User.setEmployeeOccupationBasedOnWelcome("storage organiser");
 
         } else if (btnAccountant == source) {
 
-            System.out.println("Accountant pressed");
+            //System.out.println("Accountant pressed");
+            LoggerHelper.logData(WelcomeController.class, LoggerLevels.INFO, "Accountant pressed");
             User.setEmployeeOccupationBasedOnWelcome("accountant");
 
         } else if (btnDevisionLead == source) {
 
-            System.out.println("Devision Lead pressed");
+            //System.out.println("Devision Lead pressed");
+            LoggerHelper.logData(WelcomeController.class, LoggerLevels.INFO, "Devision Lead pressed");
             User.setEmployeeOccupationBasedOnWelcome("devision lead");
 
         }

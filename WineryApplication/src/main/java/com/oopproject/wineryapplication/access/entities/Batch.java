@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.BatchDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -78,4 +81,8 @@ public class Batch extends com.oopproject.wineryapplication.access.entities.enti
         this.mixes = mixes;
     }
 
+    @Override
+    public Dao<Batch> getDao() {
+        return new BatchDao();
+    }
 }

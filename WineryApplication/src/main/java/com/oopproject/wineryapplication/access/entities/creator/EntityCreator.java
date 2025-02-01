@@ -1,4 +1,4 @@
-package com.oopproject.wineryapplication.data;
+package com.oopproject.wineryapplication.access.entities.creator;
 
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 

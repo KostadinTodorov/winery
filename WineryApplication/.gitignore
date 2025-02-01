@@ -8,6 +8,8 @@ target/
 *.iws
 *.iml
 *.ipr
+wineryapp.log
+hibernate.cfg.xml
 
 ### Eclipse ###
 .apt_generated
@@ -35,4 +37,5 @@ build/
 .DS_Store
 
 src/main/resources/hibernate.cfg.xml
+src/main/java/module-info.java
 

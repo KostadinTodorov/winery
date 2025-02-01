@@ -1,0 +1,18 @@
+<Configuration>
+    <Appenders>
+        <Console name = "Console" target = "SYSTEM_OUT" >
+            <PatternLayout pattern = "%d %p %c{1.} [%t] %m%n" />
+        </Console>
+        <File name = "LogFile" filename = "wineryapp.log" >
+            <PatternLayout pattern = "%d %p %c{1.} [%t] %m%n" />
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level = "info" >
+            <AppenderRef ref = "Console" />
+        </Root>
+        <Logger name = "com.oopproject.wineryapplication" level = "info" >
+            <AppenderRef ref = "LogFile" />
+        </Logger>
+    </Loggers>
+</Configuration>

@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.ClientsOrderDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -113,4 +116,8 @@ public class ClientsOrder extends com.oopproject.wineryapplication.access.entiti
         this.wineType = wineType;
     }
 
+    @Override
+    public Dao<ClientsOrder> getDao() {
+        return new ClientsOrderDao();
+    }
 }

@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.ActDao;
+import com.oopproject.wineryapplication.access.daos.BatchStoridgeDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +21,9 @@ public class BatchStoridge extends com.oopproject.wineryapplication.access.entit
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "container_id", nullable = false)
     private com.oopproject.wineryapplication.access.entities.Container container;
+
+    @Column(name = "volume_stored", nullable = false)
+    private Integer volumeStored;
 
     public Integer getId() {
         return id;
@@ -43,4 +49,16 @@ public class BatchStoridge extends com.oopproject.wineryapplication.access.entit
         this.container = container;
     }
 
+    public Integer getVolumeStored() {
+        return volumeStored;
+    }
+
+    public void setVolumeStored(Integer volume_stored) {
+        this.volumeStored = volume_stored;
+    }
+
+    @Override
+    public Dao<BatchStoridge> getDao() {
+        return new BatchStoridgeDao();
+    }
 }

@@ -1,11 +1,14 @@
 package com.oopproject.wineryapplication.controller;
 
-import com.oopproject.wineryapplication.helpers.Nodes;
-import com.oopproject.wineryapplication.helpers.SceneHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
+import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
+import com.oopproject.wineryapplication.helpers.scenes.Nodes;
+import com.oopproject.wineryapplication.helpers.scenes.SceneHelper;
 import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 
-import com.oopproject.wineryapplication.data.EntityCreator;
+
+import com.oopproject.wineryapplication.access.entities.creator.EntityCreator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -53,6 +56,8 @@ public class DisplayBaseController<T extends Entity> {
 
     @FXML
     public void initialize() {
+        LoggerHelper.logData(DisplayBaseController.class, LoggerLevels.INFO, "Initialize Display Base Controller");
+
         add.setOnAction(e -> {addEntity();});
         List<TableColumn<Entity, ?>> columns = new ArrayList<>();
         Field[] fields = entityClass.getDeclaredFields();
@@ -81,14 +86,14 @@ public class DisplayBaseController<T extends Entity> {
 
 
         }
-        TableColumn<Entity, Void> buttonColumn = new TableColumn<>("Action"); // No data type needed
+        TableColumn<Entity, Void> deleteButtonColumn = new TableColumn<>("Delete"); // No data type needed
 
-        buttonColumn.setCellFactory(new Callback<TableColumn<Entity, Void>, TableCell<Entity, Void>>() {
+        deleteButtonColumn.setCellFactory(new Callback<TableColumn<Entity, Void>, TableCell<Entity, Void>>() {
             @Override
             public TableCell<Entity, Void> call(final TableColumn<Entity, Void> param) {
                 final TableCell<Entity, Void> cell = new TableCell<Entity, Void>() {
 
-                    private final Button btn = new Button("Do Something");
+                    private final Button btn = new Button("Delete");
 
                     {
                         btn.setOnAction(event -> {
@@ -129,7 +134,46 @@ public class DisplayBaseController<T extends Entity> {
                 return cell;
             }
         });
-        columns.add(buttonColumn);
+        columns.add(deleteButtonColumn);
+
+        TableColumn<Entity, Void> editButtonColumn = new TableColumn<>("Edit"); // No data type needed
+
+        editButtonColumn.setCellFactory(new Callback<TableColumn<Entity, Void>, TableCell<Entity, Void>>() {
+            @Override
+            public TableCell<Entity, Void> call(final TableColumn<Entity, Void> param) {
+                final TableCell<Entity, Void> cell = new TableCell<Entity, Void>() {
+
+                    private final Button btn = new Button("Edit");
+
+                    {
+//                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//                        alert.setTitle("Are you sure?");
+//                        alert.setHeaderText("Confirm deletion");
+//                        alert.setContentText("This cannot be reverted!");
+//                        Optional<ButtonType> result = alert.showAndWait();
+//                        if (result.isPresent() && result.get() == ButtonType.OK) {
+                            btn.setOnAction(event -> {
+                                Entity entity = (Entity) this.getTableView().getItems().get(getIndex());
+                                editEntity(entity);
+                            });
+//                        }
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        columns.add(editButtonColumn);
+
         entityTableView.getColumns().addAll(columns);
 
         ObservableList<Entity> entities = FXCollections.observableArrayList(entityList);
@@ -138,6 +182,13 @@ public class DisplayBaseController<T extends Entity> {
 
     private void addEntity() {
         T entity = EntityCreator.createInstance(entityClass);
+
+        LoggerHelper.logData(DisplayBaseController.class, LoggerLevels.INFO, "Call Add Base Controller");
         SceneHelper.<AddBaseController>addNode(DisplayBase, Nodes.ADDBASE, new AddBaseController(entity));
+    }
+
+    private void editEntity(Entity entity) {
+        LoggerHelper.logData(DisplayBaseController.class, LoggerLevels.INFO, "Call Edit Base Controller");
+        SceneHelper.<EditBaseController>addNode(DisplayBase, Nodes.EDITBASE, new EditBaseController(entity));
     }
 }

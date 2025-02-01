@@ -2,6 +2,7 @@ package com.oopproject.wineryapplication.access.daos.dao;
 
 
 import com.oopproject.wineryapplication.access.entities.*;
+import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,7 +18,7 @@ import org.hibernate.cfg.Configuration;
  *
  * @param <T> the type of entity managed by this DAO
  */
-public abstract class EntityDao<T> implements Dao<T> {
+public abstract class EntityDao<T extends Entity> implements Dao<T> {
     /**
      * The Hibernate {@code SessionFactory} used to manage database sessions.
      */

@@ -1,5 +1,8 @@
 package com.oopproject.wineryapplication.access.entities;
 
+import com.oopproject.wineryapplication.access.daos.BottleTypeDao;
+import com.oopproject.wineryapplication.access.daos.OccupationDao;
+import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -44,4 +47,13 @@ public class Occupation extends com.oopproject.wineryapplication.access.entities
         this.employees = employees;
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+"["+occupation+"]";
+    }
+
+    @Override
+    public Dao<Occupation> getDao() {
+        return new OccupationDao();
+    }
 }
