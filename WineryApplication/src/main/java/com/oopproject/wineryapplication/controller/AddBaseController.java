@@ -1,12 +1,9 @@
 package com.oopproject.wineryapplication.controller;
 
-import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.access.entities.creator.EntityFactory;
+import com.oopproject.wineryapplication.access.entities.creator.GenericEntityFactory;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
-import com.oopproject.wineryapplication.access.entities.helper.EntityFieldMap;
-import com.oopproject.wineryapplication.access.entities.helper.EntityTypeNodeMapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.oopproject.wineryapplication.access.entities.mappers.EntityTypeNodeMapper;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -14,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.lang.reflect.Field;
-import java.time.LocalDate;
 import java.util.*;
 
 public class AddBaseController {
@@ -23,13 +19,13 @@ public class AddBaseController {
     @FXML
     public VBox entityProps;
     private Map<Field, Node> fieldNodeMap = new HashMap<>();
-    private final Entity entity;
-
+    private final Entity emptyEntity;
+    private Entity entity;
     private ComboBox<String> comboBox;
     private Map<String, Entity> entityMap;
 
-    public AddBaseController(Entity entity) {
-        this.entity = entity;
+    public AddBaseController(Entity emptyEntity) {
+        this.emptyEntity = emptyEntity;
     }
 
     @FXML
@@ -37,7 +33,7 @@ public class AddBaseController {
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> saveButton());
         entityProps.getChildren().add(saveButton);
-        fieldNodeMap = entity.toNode(new EntityTypeNodeMapper(entity.getClass()));
+        fieldNodeMap = emptyEntity.toFieldNodesMap(new EntityTypeNodeMapper(emptyEntity.getClass()));
         generateNodes(fieldNodeMap);
     }
 
@@ -83,44 +79,42 @@ public class AddBaseController {
     }
 
     private boolean setEntity() {
-        EntityFactory entityFactory = new EntityFactory();
+        EntityFactory genericEntityFactory = new GenericEntityFactory(emptyEntity,fieldNodeMap);
         try {
-            entityFactory.createEntity(entity,fieldNodeMap);
+            entity = genericEntityFactory.createEntity();
             return true;
         } catch (Exception e) {
             return false;
         }
     }
-    public boolean saveEntity() {
+
+    private boolean saveEntity() {
         try{
-            if (entity.getDao().add(entity)) {
-                return true;
-            }
+            return entity != null? emptyEntity.getDao().add(entity) : false;
         } catch (Exception e){
             return false;
         }
-        return true;
     }
 
-    public boolean classImplementsInterface(Class<?> clazz, Class<?> interfaceClass) {
-        // Check if the class directly implements the interface
-        for (Class<?> implementedInterface : clazz.getInterfaces()) {
-            if (implementedInterface.equals(interfaceClass)) {
-                return true;
-            }
-        }
-
-        // Check if any of the superclasses implement the interface
-        Class<?> superclass = clazz.getSuperclass();
-        while (superclass != null) {
-            if (classImplementsInterface(superclass, interfaceClass)) {
-                return true;
-            }
-            superclass = superclass.getSuperclass();
-        }
-
-        return false;
-    }
+//    public boolean classImplementsInterface(Class<?> clazz, Class<?> interfaceClass) {
+//        // Check if the class directly implements the interface
+//        for (Class<?> implementedInterface : clazz.getInterfaces()) {
+//            if (implementedInterface.equals(interfaceClass)) {
+//                return true;
+//            }
+//        }
+//
+//        // Check if any of the superclasses implement the interface
+//        Class<?> superclass = clazz.getSuperclass();
+//        while (superclass != null) {
+//            if (classImplementsInterface(superclass, interfaceClass)) {
+//                return true;
+//            }
+//            superclass = superclass.getSuperclass();
+//        }
+//
+//        return false;
+//    }
 
     private void clearNodes() {
         for (var node : fieldNodeMap.values()) {

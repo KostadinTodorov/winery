@@ -7,7 +7,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EntityFieldMap{
+ class EntityFieldMap{
 
     private Field[] fields;
     private Map<String, Type> map;

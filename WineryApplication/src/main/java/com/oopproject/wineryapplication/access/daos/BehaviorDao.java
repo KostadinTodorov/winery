@@ -1,5 +1,6 @@
 package com.oopproject.wineryapplication.access.daos;
 
+import com.oopproject.wineryapplication.access.entities.BatchStoridge;
 import com.oopproject.wineryapplication.access.entities.Behavior;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 import jakarta.persistence.RollbackException;
@@ -8,12 +9,33 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * A DAO class for performing CRUD operations on the {@link Behavior} entity using Hibernate.
+ * <p>
+ * This class extends {@link EntityDao} and provides implementations for:
+ * <ul>
+ *   <li>Retrieving single or multiple {@link Behavior} entities.</li>
+ *   <li>Adding a new {@link Behavior} entity.</li>
+ *   <li>Updating an existing {@link Behavior} entity.</li>
+ *   <li>Deleting an {@link Behavior} entity by its ID.</li>
+ * </ul>
+ * <p>
+ * Each method utilizes Hibernate sessions for database interactions and includes
+ * appropriate transaction handling to ensure data integrity.
+ */
 public class BehaviorDao extends EntityDao<Behavior> {
 
+    /**
+     * Constructs an {@code BehaviorDao} for performing CRUD operations on the {@link Behavior} entity.
+     * {@inheritDoc}
+     */
     public BehaviorDao() {
         super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Behavior get(int id) {
         try (Session session = createSession()) {
@@ -21,6 +43,9 @@ public class BehaviorDao extends EntityDao<Behavior> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Behavior> getAll() {
         try (Session session = createSession()) {
@@ -28,6 +53,9 @@ public class BehaviorDao extends EntityDao<Behavior> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean add(Behavior behavior) {
         if (behavior.getId() == null) {
@@ -38,6 +66,9 @@ public class BehaviorDao extends EntityDao<Behavior> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Behavior insert(Behavior behavior) {
         Behavior newBehavior = null;
@@ -57,6 +88,9 @@ public class BehaviorDao extends EntityDao<Behavior> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(int id, Behavior behavior) {
         if (get(id) != null) {
@@ -66,6 +100,9 @@ public class BehaviorDao extends EntityDao<Behavior> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(int id) {
         try (Session session = createSession()) {

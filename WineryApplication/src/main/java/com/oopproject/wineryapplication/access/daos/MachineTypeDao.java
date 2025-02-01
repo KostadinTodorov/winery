@@ -1,5 +1,6 @@
 package com.oopproject.wineryapplication.access.daos;
 
+import com.oopproject.wineryapplication.access.entities.Client;
 import com.oopproject.wineryapplication.access.entities.MachineType;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 import jakarta.persistence.RollbackException;
@@ -8,12 +9,33 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * A DAO class for performing CRUD operations on the {@link MachineType} entity using Hibernate.
+ * <p>
+ * This class extends {@link EntityDao} and provides implementations for:
+ * <ul>
+ *   <li>Retrieving single or multiple {@link MachineType} entities.</li>
+ *   <li>Adding a new {@link MachineType} entity.</li>
+ *   <li>Updating an existing {@link MachineType} entity.</li>
+ *   <li>Deleting an {@link MachineType} entity by its ID.</li>
+ * </ul>
+ * <p>
+ * Each method utilizes Hibernate sessions for database interactions and includes
+ * appropriate transaction handling to ensure data integrity.
+ */
 public class MachineTypeDao extends EntityDao<MachineType> {
 
+    /**
+     * Constructs an {@code MachineTypeDao} for performing CRUD operations on the {@link MachineType} entity.
+     * {@inheritDoc}
+     */
     public MachineTypeDao() {
         super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MachineType get(int id) {
         try (Session session = createSession()) {
@@ -21,6 +43,9 @@ public class MachineTypeDao extends EntityDao<MachineType> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<MachineType> getAll() {
         try (Session session = createSession()) {
@@ -28,6 +53,9 @@ public class MachineTypeDao extends EntityDao<MachineType> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean add(MachineType machineType) {
         if (machineType.getId() == null) {
@@ -38,6 +66,9 @@ public class MachineTypeDao extends EntityDao<MachineType> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MachineType insert(MachineType machineType) {
         MachineType newMachineType = null;
@@ -57,6 +88,9 @@ public class MachineTypeDao extends EntityDao<MachineType> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(int id, MachineType machineType) {
         if (get(id) != null) {
@@ -66,6 +100,9 @@ public class MachineTypeDao extends EntityDao<MachineType> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(int id) {
         try (Session session = createSession()) {

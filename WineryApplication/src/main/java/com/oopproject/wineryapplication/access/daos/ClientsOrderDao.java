@@ -1,5 +1,6 @@
 package com.oopproject.wineryapplication.access.daos;
 
+import com.oopproject.wineryapplication.access.entities.Client;
 import com.oopproject.wineryapplication.access.entities.ClientsOrder;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 import jakarta.persistence.RollbackException;
@@ -8,12 +9,33 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * A DAO class for performing CRUD operations on the {@link ClientsOrder} entity using Hibernate.
+ * <p>
+ * This class extends {@link EntityDao} and provides implementations for:
+ * <ul>
+ *   <li>Retrieving single or multiple {@link ClientsOrder} entities.</li>
+ *   <li>Adding a new {@link ClientsOrder} entity.</li>
+ *   <li>Updating an existing {@link ClientsOrder} entity.</li>
+ *   <li>Deleting an {@link ClientsOrder} entity by its ID.</li>
+ * </ul>
+ * <p>
+ * Each method utilizes Hibernate sessions for database interactions and includes
+ * appropriate transaction handling to ensure data integrity.
+ */
 public class ClientsOrderDao extends EntityDao<ClientsOrder> {
 
+    /**
+     * Constructs an {@code ClientsOrderDao} for performing CRUD operations on the {@link ClientsOrder} entity.
+     * {@inheritDoc}
+     */
     public ClientsOrderDao() {
         super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ClientsOrder get(int id) {
         try (Session session = createSession()) {
@@ -21,6 +43,9 @@ public class ClientsOrderDao extends EntityDao<ClientsOrder> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ClientsOrder> getAll() {
         try (Session session = createSession()) {
@@ -28,6 +53,9 @@ public class ClientsOrderDao extends EntityDao<ClientsOrder> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean add(ClientsOrder clientsOrder) {
         if (clientsOrder.getId() == null) {
@@ -38,6 +66,9 @@ public class ClientsOrderDao extends EntityDao<ClientsOrder> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ClientsOrder insert(ClientsOrder clientsOrder) {
         ClientsOrder newClientsOrder = null;
@@ -57,6 +88,9 @@ public class ClientsOrderDao extends EntityDao<ClientsOrder> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(int id, ClientsOrder clientsOrder) {
         if (get(id) != null) {
@@ -66,6 +100,9 @@ public class ClientsOrderDao extends EntityDao<ClientsOrder> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(int id) {
         try (Session session = createSession()) {

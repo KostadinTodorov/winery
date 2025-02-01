@@ -1,5 +1,6 @@
 package com.oopproject.wineryapplication.access.daos;
 
+import com.oopproject.wineryapplication.access.entities.Client;
 import com.oopproject.wineryapplication.access.entities.Company;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 import jakarta.persistence.RollbackException;
@@ -8,12 +9,33 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * A DAO class for performing CRUD operations on the {@link Company} entity using Hibernate.
+ * <p>
+ * This class extends {@link EntityDao} and provides implementations for:
+ * <ul>
+ *   <li>Retrieving single or multiple {@link Company} entities.</li>
+ *   <li>Adding a new {@link Company} entity.</li>
+ *   <li>Updating an existing {@link Company} entity.</li>
+ *   <li>Deleting an {@link Company} entity by its ID.</li>
+ * </ul>
+ * <p>
+ * Each method utilizes Hibernate sessions for database interactions and includes
+ * appropriate transaction handling to ensure data integrity.
+ */
 public class CompanyDao extends EntityDao<Company> {
 
+    /**
+     * Constructs an {@code CompanyDao} for performing CRUD operations on the {@link Company} entity.
+     * {@inheritDoc}
+     */
     public CompanyDao() {
         super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Company get(int id) {
         try (Session session = createSession()) {
@@ -21,6 +43,9 @@ public class CompanyDao extends EntityDao<Company> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Company> getAll() {
         try (Session session = createSession()) {
@@ -28,6 +53,9 @@ public class CompanyDao extends EntityDao<Company> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean add(Company company) {
         if (company.getId() == null) {
@@ -38,6 +66,9 @@ public class CompanyDao extends EntityDao<Company> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Company insert(Company company) {
         Company newCompany = null;
@@ -57,6 +88,9 @@ public class CompanyDao extends EntityDao<Company> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(int id, Company company) {
         if (get(id) != null) {
@@ -66,6 +100,9 @@ public class CompanyDao extends EntityDao<Company> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(int id) {
         try (Session session = createSession()) {
