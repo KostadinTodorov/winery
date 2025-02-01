@@ -1,6 +1,7 @@
 package com.oopproject.wineryapplication.managment.orders;
 
 import com.oopproject.wineryapplication.access.daos.BatchDao;
+import com.oopproject.wineryapplication.access.daos.ClientsOrderDao;
 import com.oopproject.wineryapplication.access.entities.*;
 
 import java.util.ArrayList;
@@ -14,8 +15,11 @@ public class OrderRequirements {
     private List<Batch> batchesForOrder;
     private double totalNeededVolume;
     public OrderRequirements(ClientsOrder order) {
-        this.order = order;
-        this.totalNeededVolume = order.getQuantity() * 0.75;
+        if (order.getId() != null) {
+            this.order = order;
+            this.totalNeededVolume = order.getQuantity() * 0.75;
+        }
+        throw new IllegalArgumentException("Order ID cannot be null");
     }
 
     public double getTotalNeededVolume() {
@@ -23,7 +27,7 @@ public class OrderRequirements {
     }
 
     public ClientsOrder getOrder() {
-        return order;
+        return new ClientsOrderDao().get(order.getId());
     }
 
     public Double volumeForOrder(){
