@@ -12,10 +12,10 @@ public class ButtonsMapHolderForEachCategory extends ButtonsMapBase{
         LoggerHelper.logData(ButtonsMapHolderForEachCategory.class, LoggerLevels.INFO, "Creation of the category buttons");
 
         return Map.ofEntries(
-                Map.entry(0, new ButtonsHelper.ButtonAction("Manage workers")),
-                Map.entry(1, new ButtonsHelper.ButtonAction("Manage wine inventory")),
-                Map.entry(2, new ButtonsHelper.ButtonAction("Manage orders")),
-                Map.entry(3, new ButtonsHelper.ButtonAction("Manage machines"))
+                Map.entry(0, new ButtonsHelper.CategoryButtonAction("Manage workers")),
+                Map.entry(1, new ButtonsHelper.CategoryButtonAction("Manage wine inventory")),
+                Map.entry(2, new ButtonsHelper.CategoryButtonAction("Manage orders")),
+                Map.entry(3, new ButtonsHelper.CategoryButtonAction("Manage machines"))
         );
     }
 }

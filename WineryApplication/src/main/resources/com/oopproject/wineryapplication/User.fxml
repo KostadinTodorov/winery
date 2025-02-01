@@ -41,7 +41,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="124.0">
                            <children>
-                              <VBox fx:id="placeHolderVBox" layoutX="22.0" layoutY="-29.0" maxHeight="-Infinity" prefHeight="276.0" prefWidth="146.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <VBox fx:id="placeHolderVBoxCat" layoutX="22.0" layoutY="-29.0" maxHeight="-Infinity" prefHeight="276.0" prefWidth="146.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -55,7 +55,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="124.0">
                            <children>
-                              <VBox fx:id="placeHolderVBox1" layoutX="22.0" layoutY="-29.0" maxHeight="-Infinity" prefHeight="276.0" prefWidth="146.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <VBox fx:id="placeHolderVBoxNtf" layoutX="22.0" layoutY="-29.0" maxHeight="-Infinity" prefHeight="276.0" prefWidth="146.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </content>

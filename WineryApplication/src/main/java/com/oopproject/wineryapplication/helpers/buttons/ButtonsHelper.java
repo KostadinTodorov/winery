@@ -9,121 +9,115 @@ import com.oopproject.wineryapplication.helpers.scenes.SceneHelper;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class ButtonsHelper {
 
-    public static class ButtonAction {
+    public abstract static class ButtonAction {
         private final String label;
-        private final EntityProvider entityProvider;
-
-        // Using this interface instantiation it can provide whatever the method usage I'm throwing in it
-        public ButtonAction(String label, EntityProvider entityProvider) {
-            this.label = label;
-            this.entityProvider = entityProvider;
-        }
 
         public ButtonAction(String label) {
             this.label = label;
-            this.entityProvider = null;
         }
 
         public String getLabel() {
             return label;
         }
 
+        public abstract void execute(Scene scene) throws IOException;
+    }
+
+    // Specific action for crating entities buttons --------------------------------------------------------
+    public static class EntityButtonAction extends ButtonAction {
+        private final EntityProvider entityProvider;
+
+        public EntityButtonAction(String label, EntityProvider entityProvider) {
+            super(label);
+            this.entityProvider = entityProvider;
+        }
+
+        @Override
         public void execute(Scene scene) throws IOException {
             try {
                 Entity entity = entityProvider.provide();
-                ButtonsHelper.displayBase((AnchorPane) scene.lookup("#placeHolderAnchorPane"), entity);
+                LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.INFO, String.format("Opening a display controller for Entity <[ %s ]>", entity.getClass().getSimpleName() ));
+                SceneHelper.<DisplayBaseController>addNode((AnchorPane) scene.lookup("#placeHolderAnchorPane"), Nodes.DISPLAYBASE, new DisplayBaseController(entity.getClass()));
             } catch (NullPointerException e) {
                 LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.ERROR, e.getMessage());
                 throw new NullPointerException();
             }
         }
+    }
 
-        public void execute(Scene scene, String category) throws IOException {
-            if (this.entityProvider == null) {
-                ButtonsHelper.displayCategoryButtons((HBox) scene.lookup("#placeHolderHBox"), category);
-            }
-            else {
-                LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.ERROR, "entityProvider had to be null");
-                throw new RuntimeException("entityProvider had to be null");
+    // Specific action for creating category buttons ---------------------------------------------------------
+    public static class CategoryButtonAction extends ButtonAction {
+
+        public CategoryButtonAction(String label) {
+            super(label);
+        }
+
+        @Override
+        public void execute(Scene scene) throws IOException {
+            try {
+                ButtonsMapHolderForEachEntity entitiesMap = new ButtonsMapHolderForEachEntity();
+                HBox placeHolderHBox = (HBox) scene.lookup("#placeHolderHBox");
+
+                LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.INFO, String.format("Loading entities buttons for category [ %s ]", getLabel() ));
+                placeHolderHBox.getChildren().clear();
+                ButtonsHelper.addButtons(ButtonsMappingRegisters.valueOf(getLabel().toUpperCase().replaceAll("\\s", "")), placeHolderHBox, entitiesMap.getActionMap(), true);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } catch (NullPointerException e) {
+                throw new NullPointerException();
             }
         }
     }
 
-    public static void setButtonsFor(ButtonsMappingRegisters actionBitmap, VBox vboxHolder, Map<Integer, ButtonAction> actionMap) {
+    // Specific action for loading different notification FXMLs  ---------------------------------------------
+    public static class NotificationButtonAction extends ButtonAction {
 
-        LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.INFO, "Generate category buttons");
+        public NotificationButtonAction(String label) {
+            super(label);
+        }
 
+        @Override
+        public void execute(Scene scene) throws IOException {
+            // TODO - add functionality
+        }
+    }
+
+
+    public static <T extends Pane> void addButtons(ButtonsMappingRegisters actionBitmap, T holder, Map<Integer, ButtonAction> actionMap, boolean forVBox) {
         Integer actionInstance = actionBitmap.getButtonsMapping();
 
         for (Map.Entry<Integer, ButtonAction> entry : actionMap.entrySet()) {
             int bitPosition = entry.getKey();
             ButtonAction action = entry.getValue();
 
-            if ((actionInstance & (1 << bitPosition)) != 0) { // Check if the bit is set
+            if ((actionInstance & (1 << bitPosition)) != 0) {
                 Button button = new Button(action.getLabel());
                 button.setOnAction(e -> {
                     try {
-                        action.execute(vboxHolder.getScene(), action.getLabel());
+                        action.execute(holder.getScene());
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
                 });
-                button.setMaxWidth(Double.MAX_VALUE);
-                button.setMaxHeight(Double.MAX_VALUE);
-                vboxHolder.getChildren().add(button);
-            }
-        }
-    }
 
-
-    public static void setButtonsFor(ButtonsMappingRegisters actionBitmap, HBox hboxHolder, Map<Integer, ButtonAction> actionMap) {
-
-        LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.INFO, "Generate entities buttons");
-
-        Integer actionInstance = actionBitmap.getButtonsMapping();
-
-        for (Map.Entry<Integer, ButtonAction> entry : actionMap.entrySet()) {
-            int bitPosition = entry.getKey();
-            ButtonAction action = entry.getValue();
-
-            if ((actionInstance & (1 << bitPosition)) != 0) { // Check if the bit is set
-                Button button = new Button(action.getLabel());
-                button.setOnAction(e -> {
-                    try {
-                        action.execute(hboxHolder.getScene());
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
                 button.setMaxWidth(Double.MAX_VALUE);
 
-                hboxHolder.getChildren().add(button);
+                if (forVBox && holder instanceof VBox vbox) {
+                    vbox.getChildren().add(button);
+                } else if (holder instanceof HBox hbox) {
+                    hbox.getChildren().add(button);
+                }
             }
         }
-        hboxHolder.setAlignment(Pos.CENTER);
-    }
-
-
-    protected static void displayBase(AnchorPane parentHolder, Entity entity) throws IOException {
-        LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.INFO, String.format("Opening a display controller for Entity <[ %s ]>", entity.getClass().getSimpleName() ));
-
-        SceneHelper.<DisplayBaseController>addNode(parentHolder, Nodes.DISPLAYBASE, new DisplayBaseController(entity.getClass()));
-    }
-
-    protected static void displayCategoryButtons(HBox placeHolderHBox, String category) throws IOException {
-        LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.INFO, String.format("Loading buttons for category [ %s ]", category ));
-
-        ButtonsMapHolderForEachEntity entitiesMap = new ButtonsMapHolderForEachEntity();
-        placeHolderHBox.getChildren().clear();
-        ButtonsHelper.setButtonsFor(ButtonsMappingRegisters.valueOf(category.toUpperCase().replaceAll("\\s", "")), placeHolderHBox, entitiesMap.getActionMap());
+        if (holder instanceof HBox hbox) {
+            hbox.setAlignment(Pos.CENTER);
+        }
     }
 }

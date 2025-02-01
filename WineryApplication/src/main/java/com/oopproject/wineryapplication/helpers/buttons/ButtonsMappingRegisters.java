@@ -2,10 +2,17 @@ package com.oopproject.wineryapplication.helpers.buttons;
 
 public enum ButtonsMappingRegisters {
 
-    STORAGEORGANISER(0b1111),
-    CEO             (0b1111),
-    ACCOUNTANT      (0b1111),
-    DEVISIONLEAD    (0b1111),
+    // CAT from category
+    CATSTORAGEORGANISER(0b1111),
+    CATCEO             (0b1111),
+    CATACCOUNTANT      (0b1111),
+    CATDEVISIONLEAD    (0b1111),
+
+    // NTF from notification
+    NTFSTORAGEORGANISER(0b1111),
+    NTFCEO             (0b1111),
+    NTFACCOUNTANT      (0b1111),
+    NTFDEVISIONLEAD    (0b1111),
 
     MANAGEWORKERS      (0b00001100000100000000000),
     MANAGEWINEINVENTORY(0b11100010010010000001100),
