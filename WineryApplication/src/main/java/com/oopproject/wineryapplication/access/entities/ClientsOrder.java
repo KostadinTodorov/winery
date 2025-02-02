@@ -37,8 +37,8 @@ public class ClientsOrder extends com.oopproject.wineryapplication.access.entiti
     @JoinColumn(name = "progress_id")
     private com.oopproject.wineryapplication.access.entities.Progress progress;
 
-    @Column(name = "end_price", nullable = false, precision = 7, scale = 3)
-    private BigDecimal endPrice;
+    @Column(name = "end_price", nullable = false)
+    private Double endPrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "wine_type_id", nullable = false)
@@ -100,11 +100,11 @@ public class ClientsOrder extends com.oopproject.wineryapplication.access.entiti
         this.progress = progress;
     }
 
-    public BigDecimal getEndPrice() {
+    public Double getEndPrice() {
         return endPrice;
     }
 
-    public void setEndPrice(BigDecimal endPrice) {
+    public void setEndPrice(Double endPrice) {
         this.endPrice = endPrice;
     }
 

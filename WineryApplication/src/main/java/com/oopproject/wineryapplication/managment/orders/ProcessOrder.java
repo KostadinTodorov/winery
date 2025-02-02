@@ -41,6 +41,9 @@ public class ProcessOrder {
         return orderRequirements;
     }
 
+    public void testdisplay() {
+    }
+
 //    public void setOrderRequirements(OrderRequirements orderRequirements) {
 //        this.orderRequirements = orderRequirements;
 //    }
