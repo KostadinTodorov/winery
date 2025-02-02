@@ -10,23 +10,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link Mix} entity using Hibernate.
+ * DAO клас за изпълнение на CRUD операции върху {@link Mix} чрез Hibernate.
  * <p>
- * This class extends {@link EntityDao} and provides implementations for:
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
  * <ul>
- *   <li>Retrieving single or multiple {@link Mix} entities.</li>
- *   <li>Adding a new {@link Mix} entity.</li>
- *   <li>Updating an existing {@link Mix} entity.</li>
- *   <li>Deleting an {@link Mix} entity by its ID.</li>
+ *   <li>Извличане на единични или множество {@link Mix} обекти.</li>
+ *   <li>Добавяне на нов {@link Mix} обект.</li>
+ *   <li>Актуализиране на съществуващ {@link Mix} обект.</li>
+ *   <li>Изтриване на {@link Mix} обект по неговото ID.</li>
  * </ul>
  * <p>
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействие с базата данни и включва
+ * подходящо управление на транзакции за осигуряване на целостта на данните.
  */
 public class MixDao extends EntityDao<Mix> {
 
     /**
-     * Constructs an {@code MixDao} for performing CRUD operations on the {@link Mix} entity.
+     * Конструира {@code MixDao} за изпълнение на CRUD операции върху {@link Mix}.
      * {@inheritDoc}
      */
     public MixDao() {

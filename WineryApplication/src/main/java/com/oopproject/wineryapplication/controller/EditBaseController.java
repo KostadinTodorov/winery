@@ -4,6 +4,7 @@ import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
 import com.oopproject.wineryapplication.access.entities.creator.EntityFactory;
 import com.oopproject.wineryapplication.access.entities.creator.GenericEntityFactory;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
+import com.oopproject.wineryapplication.access.entities.mappers.EntityFieldMapper;
 import com.oopproject.wineryapplication.access.entities.mappers.EntityTypeNodeMapper;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -17,10 +18,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The {@code EditBaseController} class provides a controller for editing and managing
- * the properties of an {@code Entity} in a JavaFX-based UI. This controller dynamically
- * generates forms based on the fields of the entity and supports saving the entity's
- * data back to a database or persistence layer.
+ * Класът {@code EditBaseController} служи като контролер за редактиране на обекти от тип {@link Entity}
+ * чрез JavaFX интерфейси. Той управлява потребителския интерфейс и позволява динамично генериране на елементи
+ * в зависимост от структурата на обекта.
  */
 public class EditBaseController {
     @FXML
@@ -34,11 +34,18 @@ public class EditBaseController {
     private Map<String, Entity> entityMap;
 
     /**
-     * Constructs an instance of EditBaseController with the specified entity.
-     * This constructor ensures that the provided entity has a valid non-null ID.
+     * Конструкторът на {@code EditBaseController}, който инициализира нов обект на базата на
+     * предоставеното entity. Уверява се, че entity-то има валидно ID, което е необходимо
+     * за управлението на неговите данни.
      *
-     * @param entity the entity to be managed by the controller. The entity must have a non-null ID.
-     * @throws IllegalArgumentException if the entity's ID is null.
+     * @param entity обект {@link Entity}, който се използва за инициализацията на контролера.
+     *               Този обект не трябва да бъде {@code null} и трябва да има валидно ID.
+     *               Ако {@code entity.getId()} върне {@code null}, се хвърля
+     *               {@link IllegalArgumentException}.
+     * @throws IllegalArgumentException когато ID на предоставения {@code entity} е {@code null}.
+     *                                   Това гарантира, че няма да има опити за управление на
+     *                                   entity без валиден идентификатор.
+     * @return {@inheritDoc}
      */
     public EditBaseController(Entity entity) {
         if (entity.getId() == null) {
@@ -48,17 +55,25 @@ public class EditBaseController {
     }
 
     /**
-     * Initializes the JavaFX controller and sets up the user interface.
+     * Инициализира потребителския интерфейс за контролера, като извършва следните действия:
      *
-     * This method is called automatically after the FXML file has been loaded. It performs the
-     * following tasks:
-     * 1. Creates a "Save" button and assigns an action event to it. On clicking the button,
-     *    the {@code saveButton()} method is invoked to handle saving functionality.
-     * 2. Adds the "Save" button to the {@code entityProps} layout container for display in the UI.
-     * 3. Calls the {@code toFieldNodesMap} method on the associated {@code entity} object with an
-     *    {@code EntityTypeNodeMapper} to dynamically generate a map of fields and corresponding UI nodes.
-     * 4. Passes the field-node mapping to the {@code generateNodes()} method, which creates UI elements
-     *    and adds them to the layout container.
+     * 1. Създава бутон за запис {@code saveButton} със съответен текст "Save".
+     *    Добавя обработчик на събития за този бутон, който извиква метода {@link #saveButton()}
+     *    при натискане.
+     *
+     * 2. Добавя създадения бутон като child елемент в потребителския интерфейс на контейнера
+     *    {@code entityProps}.
+     *
+     * 3. Инициализира {@code fieldNodeMap}, като преобразува полетата на обекта {@code entity}
+     *    в карта от полета към UI възли (nodes), използвайки метода {@link Entity#toFieldNodesMap(EntityFieldMapper)}.
+     *    Това съпоставяне позволява генерирането на съответните UI възли.
+     *
+     * 4. Генерира UI възли въз основа на картата {@code fieldNodeMap} чрез извикване на
+     *    метода {@link #generateNodes(Map)}. Тези възли се използват за свързването на
+     *    полетата на entity-то със съответните визуални елементи.
+     *
+     * Този метод подготвя интерфейса за взаимодействие с потребителя и връзката му с данните
+     * на entity-то.
      */
     @FXML
     public void initialize() {
@@ -70,15 +85,21 @@ public class EditBaseController {
     }
 
     /**
-     * Generates and adds UI nodes to a container based on the provided field-to-node map.
+     * Генерира потребителски интерфейс компоненти (възли) за полетата от предоставената карта ({@link Map}),
+     * свързваща обекти от тип {@link Field} с техните съответни {@link Node}.
      *
-     * This method iterates over the provided map of {@code Field} to {@code Node},
-     * and for each entry, it creates a label with the field name and adds the
-     * corresponding node if the field type is not {@code Set} and the field name is not "id".
+     * Методът преминава през всички записи в предоставената карта ({@code fieldNodeMap}) и за всяко поле:
+     * <ul>
+     *   <li>Проверява дали типът на полето не е {@link Set}, както и дали името на полето не е {@code "id"}.
+     *       Ако някое от тези условия е изпълнено, полето бива пропуснато.</li>
+     *   <li>За всички други случаи, създава {@link Label} с името на полето и добавя
+     *       този етикет заедно със съответния {@link Node} в потребителския интерфейс, съдържащ се в
+     *       {@code entityProps}.</li>
+     * </ul>
      *
-     * @param fieldNodeMap a map where keys are {@code Field} objects representing class fields,
-     *                     and values are {@code Node} objects representing the corresponding
-     *                     JavaFX UI nodes to be added.
+     * @param fieldNodeMap карта, съдържаща асоциация между
+     *                     полетата от тип {@link Field} и тяхната визуализация като {@link Node}.
+     *                     Тази карта се използва за създаване на съответстващите елементи в потребителския интерфейс.
      */
     private void generateNodes(Map<Field, Node> fieldNodeMap){
         for (Map.Entry<Field, Node> entry : fieldNodeMap.entrySet()) {
@@ -99,25 +120,26 @@ public class EditBaseController {
 //    }
 
     /**
-     * Handles the action of the "Save" button in the user interface.
+     * Обработва натискането на бутона за запис, като проверява, инициализира и съхранява
+     * предоставеното entity в базата данни.
      *
-     * This method performs the following steps:
-     * 1. Attempts to set the entity using the {@code setEntity()} method.
-     *    If the entity cannot be set due to incorrect or incomplete input,
-     *    an alert dialog is displayed, informing the user that fields are not
-     *    filled correctly.
-     * 2. If the entity is successfully set, the method then attempts to save
-     *    the entity to the database using the {@code saveEntity()} method.
-     *    - If the save operation is successful, a confirmation alert is shown
-     *      to notify the user of the success, and the fields are cleared
-     *      using the {@code clearNodes()} method.
-     *    - If the save operation fails, an error alert is displayed, indicating
-     *      that the save operation encountered an issue.
-     * 3. Alerts are displayed dynamically based on the outcome of each step
-     *    to guide the user's actions and provide feedback.
+     * Методът изпълнява следните стъпки:
+     * <ul>
+     *   <li>Извиква {@link #setEntity()}, за да се увери, че данни от полетата са валидирани
+     *       и entity-то е правилно инициализирано.</li>
+     *   <li>Ако entity-то е успешно инициализирано, се извиква {@code saveEntity},
+     *       за да се опита да запише информацията в базата данни.</li>
+     *   <li>На успешен запис: показва {@link Alert} с тип {@link Alert.AlertType#INFORMATION},
+     *       указващ, че данните са успешно съхранени, и извиква {@link #clearNodes()}
+     *       за почистване на съдържанието на полетата.</li>
+     *   <li>Ако възникне грешка при запис: показва {@link Alert}, уведомяващ потребителя за
+     *       неуспешна операция.</li>
+     *   <li>Ако инициализацията на entity с {@code setEntity} е неуспешна, методът показва
+     *       {@link Alert} за неправилно попълнени полета, напомняйки потребителя да
+     *       коригира грешките.</li>
+     * </ul>
      *
-     * The method ensures user interactions are responded to with appropriate
-     * feedback and updates the user interface accordingly.
+     * Използва {@link #clearNodes()} за почистване на полетата на формуляра след успешен запис.
      */
     private void saveButton(){
         if (setEntity()) {
@@ -143,12 +165,12 @@ public class EditBaseController {
     }
 
     /**
-     * Initializes and sets an entity using the GenericEntityFactory.
-     * The method creates a new entity instance by delegating to the factory
-     * and handles any exceptions that may occur during the creation process.
+     * Настройва и създава нова инстанция на {@link Entity} чрез фабриката {@link GenericEntityFactory}.
+     * Този метод използва {@code entity} и {@code fieldNodeMap} за инициализиране и
+     * създаване на обект от типа {@code Entity}.
      *
-     * @return {@code true} if the entity is successfully created and initialized;
-     *         {@code false} otherwise.
+     * @return {@code true}, ако създаването на обекта е успешно;
+     *         {@code false}, ако възникне изключение по време на процеса на създаване.
      */
     private boolean setEntity() {
         EntityFactory genericEntityFactory = new GenericEntityFactory(entity,fieldNodeMap);
@@ -160,14 +182,12 @@ public class EditBaseController {
         }
     }
     /**
-     * Saves the current entity to the data source by delegating the operation
-     * to the entity's data access object (DAO).
+     * Запазва дадената единица в базата данни чрез метода {@code update} на {@link TemplateDao}.
+     * Този метод използва {@link Entity#getDao()} за получаване на DAO обекта, свързан с типа на единицата.
+     * Ако възникне изключение по време на запазването, методът ще върне {@code false}.
      *
-     * This method first retrieves the DAO instance associated with the entity type,
-     * and then attempts to update the entity using its unique identifier and current state.
-     * In case of any exceptions during the save operation, the method returns {@code false}.
-     *
-     * @return {@code true} if the entity was successfully saved; {@code false} otherwise
+     * @return {@code true}, ако единицата е успешно обновена в базата данни,
+     * или {@code false}, ако е възникнала грешка.
      */
     public boolean saveEntity() {
         try{
@@ -180,15 +200,16 @@ public class EditBaseController {
     }
 
     /**
-     * Checks if a given class implements a specified interface either directly or through its superclasses.
+     * Проверява дали даден клас {@code clazz} имплементира даден интерфейс {@code interfaceClass}.
+     * Това включва както директната имплементация на интерфейса, така и имплементациите
+     * в наследени класове.
      *
-     * This method iterates over the interfaces implemented by the class and its superclasses
-     * to determine whether the specified interface is implemented.
-     *
-     * @param clazz the class to check for interface implementation. Must not be null.
-     * @param interfaceClass the interface to verify implementation of. Must not be null.
-     * @return {@code true} if the class or any of its superclasses implement the specified interface;
-     *         {@code false} otherwise.
+     * @param clazz Класът, който се проверява за имплементация на интерфейса.
+     *              Може да бъде всеки обект от тип {@link Class}.
+     * @param interfaceClass Интерфейсът, за който се проверява дали е имплементиран.
+     *                       Трябва да бъде обект от тип {@link Class}, който представлява интерфейс.
+     * @return {@code true} ако класът {@code clazz} или някой от неговите наследени класове
+     *         имплементира интерфейса {@code interfaceClass}; {@code false} в противен случай.
      */
     public boolean classImplementsInterface(Class<?> clazz, Class<?> interfaceClass) {
         // Check if the class directly implements the interface
@@ -211,17 +232,20 @@ public class EditBaseController {
     }
 
     /**
-     * Clears the content or selection of UI nodes contained within the fieldNodeMap.
-     *
-     * This method iterates through the values of the fieldNodeMap and resets each node
-     * to its default state based on its type:
-     * - For TextField nodes, the text content is cleared.
-     * - For ComboBox nodes, the current selection is cleared.
-     * - For DatePicker nodes, the value is set to null.
-     * - For CheckBox nodes, the selection is set to false.
-     *
-     * The method ensures that all UI elements associated with the map are returned to their
-     * initial state for reuse or reinitialization.
+     * Изчиства съдържанието на всички {@code Node} обекти, съхранени във {@code fieldNodeMap}.
+     * Методът преминава през всички стойности в {@code fieldNodeMap} и ги нулира в зависимост
+     * от техния специфичен тип:
+     * <ul>
+     *     <li>За {@link TextField} съдържанието ще се нулира чрез {@link TextField#setText(String)} като
+     *     празен низ.</li>
+     *     <li>За {@link ComboBox} селекцията ще бъде премахната чрез {@link ComboBox#getSelectionModel()}
+     *     и метода {@link SelectionModel#clearSelection()}.</li>
+     *     <li>За {@link DatePicker} стойността ще бъде нулирана чрез {@link DatePicker#setValue(java.time.LocalDate)}
+     *     като {@code null}.</li>
+     *     <li>За {@link CheckBox} селекцията ще бъде изчистена чрез {@link CheckBox#setSelected(boolean)}
+     *     чрез задаване на {@code false}.</li>
+     * </ul>
+     * Всички други типове {@code Node} обекти няма да бъдат променени.
      */
     private void clearNodes() {
         for (var node : fieldNodeMap.values()) {

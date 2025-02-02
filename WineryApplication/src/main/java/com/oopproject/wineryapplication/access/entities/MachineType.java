@@ -8,6 +8,39 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Представлява entity MachineType в системата, съответстващо на таблицата "machine_type" в базата данни.
+ * Този клас разширява {@link com.oopproject.wineryapplication.access.entities.entity.Entity}
+ * и наследява общата функционалност от него, като добавя специфични атрибути и връзки, свързани с концепцията за "MachineType".
+ *
+ * MachineType е предназначен да опише типа на дадена машина и има свързани машини,
+ * които са моделирани чрез връзка един-към-много.
+ *
+ * Полета:
+ * <ul>
+ *     <li>{@code id}: Уникален идентификатор за MachineType.</li>
+ *     <li>{@code machineType}: Тип на машината, представен като низ с максимална дължина 12 знака.</li>
+ *     <li>{@code machines}: Набор от {@link Machine}, които са свързани с този MachineType.</li>
+ * </ul>
+ *
+ * Методи:
+ * <ul>
+ *     <li>{@code getId()}: Извлича идентификатора на текущото MachineType.</li>
+ *     <li>{@code setId(Integer id)}: Задава идентификатора на MachineType.</li>
+ *     <li>{@code getMachineType()}: Извлича типа на текущото MachineType като низ.</li>
+ *     <li>{@code setMachineType(String machineType)}: Задава типа на MachineType.</li>
+ *     <li>{@code getMachines()}: Извлича набора от обекти {@link Machine}, свързани с MachineType.</li>
+ *     <li>{@code setMachines(Set<Machine> machines)}: Задава набора от свързани машини.</li>
+ *     <li>{@code toString()}: Връща низово представяне на MachineType, включващо уникалния идентификатор
+ *         и стойността на {@code machineType}. Наследява {@inheritDoc} от базовия клас {@link com.oopproject.wineryapplication.access.entities.entity.Entity}.</li>
+ *     <li>{@code getDao()}: Връща {@link Dao} обект за управление на MachineType в базата данни.</li>
+ * </ul>
+ *
+ * Връзки:
+ * <ul>
+ *     <li>Връзка един-към-много с {@link Machine}, осъществявана чрез полето {@code machines}.</li>
+ * </ul>
+ */
 @Entity
 @Table(name = "machine_type", schema = "public")
 public class MachineType extends com.oopproject.wineryapplication.access.entities.entity.Entity {

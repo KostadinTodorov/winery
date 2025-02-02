@@ -9,23 +9,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A concrete implementation of the {@link EntityDao} class for managing entities of a specific type.
+ * Конкретна имплементация на класа {@link EntityDao} за управление на обекти от специфичен тип.
  *
- * This class provides CRUD operations for entities of type {@code T}, where {@code T} is a subclass
- * of {@link Entity}. It utilizes Hibernate for database interactions. The specific type of entity
- * managed by this DAO is determined by the type parameter {@code T} and the associated class {@code type}.
+ * Този клас предоставя CRUD операции за обекти от тип {@code T}, където {@code T} е подклас
+ * на {@link Entity}. Използва Hibernate за взаимодействия с базата данни. Специфичният тип на обекта,
+ * управляван от това DAO, се определя от параметъра за тип {@code T} и свързания клас {@code type}.
  *
- * @param <T> the type of entity managed by this DAO, extending {@link Entity}
+ * @param <T> типът на обекта, управляван от това DAO, разширяващ {@link Entity}
  */
 public class TemplateDao<T extends Entity> extends EntityDao<T> {
 
     private final Class<T> type;
 
     /**
-     * Constructs a new instance of {@code TemplateDao} for managing entities of the specified type.
+     * Конструира нов инстанция на {@code TemplateDao} за управление на обекти от посочения тип.
      *
-     * @param type the {@code Class} object representing the specific type of entity {@code T}
-     *             managed by this instance of the {@code TemplateDao}. {@code T} must extend {@code Entity}.
+     * @param type {@code Class} обект, представляващ специфичния тип на обект {@code T},
+     *             управляем от тази инстанция на {@code TemplateDao}. {@code T} трябва да разширява {@code Entity}.
      */
     public TemplateDao(Class<T> type) {
         super();

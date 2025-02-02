@@ -5,6 +5,21 @@ import com.oopproject.wineryapplication.access.daos.MixDao;
 import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
+/**
+ * Класът {@code Mix} представлява entity, което съхранява информация за свързването
+ * между реколта ({@link Harvest}) и партида ({@link Batch}). Този клас наследява
+ * {@link com.oopproject.wineryapplication.access.entities.entity.Entity} и предоставя специфична функционалност
+ * за работа с данни, свързани с винопроизводството.
+ *
+ * Анотации:
+ * <ul>
+ *     <li>{@code @Entity}: Определя класа като JPA entity.</li>
+ *     <li>{@code @Table}: Дефинира името на таблицата и схемата, в която се съхранява entity-то.</li>
+ *     <li>{@code @Id} и {@code @Column}: Маркират полето за уникален идентификатор и неговите настройки.</li>
+ *     <li>{@code @ManyToOne} и {@code @JoinColumn}: Дефинират връзките към другите entity-та
+ *         ({@link Harvest} и {@link Batch}).</li>
+ * </ul>
+ */
 @Entity
 @Table(name = "mix", schema = "public")
 public class Mix extends com.oopproject.wineryapplication.access.entities.entity.Entity {

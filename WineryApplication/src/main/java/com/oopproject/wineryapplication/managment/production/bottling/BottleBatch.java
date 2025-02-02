@@ -9,27 +9,34 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Represents a batch of bottles created from a specific batch of wine or other liquid.
- * This class handles the association between a batch and its corresponding bottles along with
- * the process of bottling the batch.
+ * {@code BottleBatch} представлява клас, използван за управление на процеса на бутилиране
+ * на определена партида от напитки. Този клас съчетава информация за бъчвата, бутилките, както
+ * и количеството бутилки, които трябва да бъдат напълнени.
+ * <p>
+ * Основната функционалност на {@code BottleBatch} е да обединява данни за производствена партида
+ * и съдържание за бутилирането, като улеснява и изпълнява процеса на "източване" от склада (BatchStoridge)
+ * и запис на промени в базата данни.
  *
- * Key responsibilities:
- * - Creates and initializes a Bottle object with specific properties such as batch, residual sugar,
- *   number of bottles to be filled, and bottle type.
- * - Manages the bottling process by calculating the total volume from storage units and updating their states.
+ * Полета:
+ * <ul>
+ *   <li>{@code bottledBatch}: Връзка към {@link Bottle}, отразяваща информация за конкретната бутилирана партида.</li>
+ *   <li>{@code batch}: Връзка към {@link Batch}, показваща настоящата производствена партида за бутилиране.</li>
+ *   <li>{@code bottlesToFill}: Цяло число, указващо броя на бутилките, които трябва да се напълнят.</li>
+ * </ul>
  *
- * Fields:
- * - bottledBatch: A Bottle entity representing the bottled product derived from the batch.
- * - batch: A Batch entity representing the source batch for bottling.
- * - bottlesToFill: An integer specifying the number of bottles to be filled from the given batch.
+ * Конструктор:
+ * <p>
+ * {@link BottleBatch#BottleBatch(Batch, Sweetness, Short, Integer, BottleType)} изгражда инстанцията
+ * на класа, като задава основните параметри, необходими за процеса на бутилиране. Той автоматично
+ * създава обект за бутилка и го настройва с подадените характеристики като бъчва, сладост, остатъчна захар,
+ * количество за пълнене и тип бутилка.
  *
- * Constructors:
- * - BottleBatch(Batch batch, Sweetness sweetness, Short residualSugar, Integer bottlesToFill, BottleType bottleType):
- *   Initializes the BottleBatch with the associated batch, sweetness, residual sugar level, number of bottles, and bottle type.
- *
- * Methods:
- * - bottle(): Executes the bottling process by clearing the storage associated with the batch,
- *   computing the total volume used, and persisting updated information in the database.
+ * <p>
+ * Методи:
+ * <ul>
+ *   <li>{@link BottleBatch#bottle()}: Изпълнява процеса на бутилиране, където обемите от склада
+ *   се "източват" и промените се записват в базата данни.</li>
+ * </ul>
  */
 public class BottleBatch {
     Bottle bottledBatch;
@@ -47,14 +54,14 @@ public class BottleBatch {
     }
 
     /**
-     * Executes the bottling process for the batch associated with this BottleBatch instance.
+     * Изпълнява процеса на "източване" на обемите течност в склада за съответната партида и актуализира записите
+     * в базата данни. Методът първо сортира складовите обеми {@link BatchStoridge} по техния съхранен обем
+     * чрез {@link Comparator#comparingInt}. След това обхожда всяка складова единица, като добавя текущия обем
+     * към общия събран обем, нулира стойността на съхранения обем, и чрез {@link BatchStoridge#getDao() DAO}
+     * актуализира данните в базата.
      *
-     * In this process, all storage units (BatchStoridge) related to the batch are iterated over.
-     * The total stored volume from these units is accumulated, and each unit's stored volume
-     * is reset to zero. Each updated storage unit is then persisted into the database through
-     * its associated Data Access Object (DAO).
-     *
-     * @return true if the bottling process completes successfully
+     * @return {@code true} винаги при успешно изпълнение.
+     * Обърнете внимание, че този метод предполага успешна работа с базата данни и не обработва грешки.
      */
     public boolean bottle(){
         var ref = new Object() {

@@ -9,29 +9,29 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Abstract implementation of the {@link Dao} interface for entity management using Hibernate.
+ * Абстрактна имплементация на интерфейса {@link Dao} за управление на обекти чрез Hibernate.
  *
- * <p>This class provides a base implementation for DAO classes that manage entities. It sets up
- * the Hibernate {@code SessionFactory} and provides functionality to create sessions. Concrete
- * DAO implementations should extend this class to inherit its behavior and optionally override
- * methods.</p>
+ * <p>Този клас предоставя базова имплементация за DAO класове, които управляват обекти. Той конфигурира
+ * Hibernate {@code SessionFactory} и осигурява функционалност за създаване на сесии. Конкретните
+ * DAO имплементации трябва да наследят този клас, за да използват неговото поведение и при необходимост
+ * да презапишат методи.</p>
  *
- * @param <T> the type of entity managed by this DAO
+ * @param <T> типът на обекта, управляван от този DAO
  */
 public abstract class EntityDao<T extends Entity> implements Dao<T> {
     /**
-     * The Hibernate {@code SessionFactory} used to manage database sessions.
+     * Hibernate {@code SessionFactory}, използван за управление на сесиите с базата данни.
      */
     protected SessionFactory sessionFactory;
 
     /**
-     * Constructs an {@code EntityDao} and initializes the Hibernate {@code SessionFactory}.
+     * Създава {@code EntityDao} и инициализира Hibernate {@code SessionFactory}.
      *
-     * <p>This constructor configures Hibernate using the {@code hibernate.cfg.xml} file and
-     * registers entity classes required for the application. If the configuration fails,
-     * a {@code RuntimeException} is thrown.</p>
+     * <p>Този конструктор конфигурира Hibernate, използвайки файла {@code hibernate.cfg.xml}, и
+     * регистрира класовете на обектите, необходими за приложението. Ако конфигурацията не успее,
+     * се хвърля {@code RuntimeException}.</p>
      *
-     * @throws RuntimeException if the Hibernate {@code SessionFactory} cannot be created
+     * @throws RuntimeException ако {@code SessionFactory} не може да бъде създаден
      */
     public EntityDao() {
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml")
@@ -71,12 +71,12 @@ public abstract class EntityDao<T extends Entity> implements Dao<T> {
     /**
      * {@inheritDoc}
      *
-     * <p>This implementation uses the configured {@code SessionFactory} to create a new session.
-     * If a {@code HibernateException} occurs during session creation, a {@code RuntimeException}
-     * is thrown.</p>
+     * <p>Тази имплементация използва конфигурирания {@code SessionFactory} за създаване на нова сесия.
+     * Ако възникне {@code HibernateException} по време на създаването на сесията, се хвърля
+     * {@code RuntimeException}.</p>
      *
-     * @return a new {@code Session} for database interactions
-     * @throws RuntimeException if the session cannot be created
+     * @return нова {@code Session} за взаимодействие с базата данни
+     * @throws RuntimeException ако сесията не може да бъде създадена
      */
     @Override
     public Session createSession() {

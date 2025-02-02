@@ -3,18 +3,18 @@ package com.oopproject.wineryapplication.access.entities.creator;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 
 /**
- * Defines a factory interface for creating instances of the {@link Entity} class.
- * Implementations of this interface are responsible for encapsulating the logic
- * required to create and initialize an entity, potentially using specific mappings
- * or other contextual information.
+ * Дефинира интерфейс на фабрика за създаване на инстанции на класа {@link Entity}.
+ * Имплементациите на този интерфейс са отговорни за капсулиране на логиката, необходима
+ * за създаване и инициализиране на обект, потенциално използвайки специфични映射
+ * или друга контекстна информация.
  */
 public interface EntityFactory {
     /**
-     * Creates and returns a new instance of the Entity class. The method is responsible
-     * for initializing and populating the fields of the entity with the appropriate
-     * values, which may involve mapping user-input data or other contextual information.
+     * Създава и връща нова инстанция на класа Entity. Методът е отговорен
+     * за инициализиране и попълване на полетата на обекта със съответните
+     * стойности, което може да включва картографиране на входни данни от потребителя или друга контекстна информация.
      *
-     * @return a newly created and initialized instance of the Entity class
+     * @return новосъздаден и инициализиран екземпляр на класа Entity
      */
     public Entity createEntity();
 }

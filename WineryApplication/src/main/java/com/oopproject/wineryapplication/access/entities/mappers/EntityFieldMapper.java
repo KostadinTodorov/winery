@@ -6,29 +6,29 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
- * Provides a mapping between the fields of an entity and corresponding UI nodes.
+ * Предоставя съпоставяне между полетата на entity-то и съответните UI възли.
  *
- * This interface defines a contract for classes that are responsible for creating
- * and managing a relationship between entity fields and specific UI components,
- * enabling seamless interaction between data models and the user interface.
+ * Този интерфейс дефинира договор за класове, които са отговорни за създаването
+ * и управлението на връзка между полетата на entity-то и специфични UI компоненти,
+ * позволявайки безпроблемно взаимодействие между моделите на данни и потребителския интерфейс.
  *
- * Implementations of this interface can utilize reflection to inspect the fields
- * of an entity class, dynamically associate them with relevant UI components,
- * and return the mapping as a {@code Map<Field, Node>}.
+ * Имплементациите на този интерфейс могат да използват рефлексия, за да инспектират полетата
+ * на клас entity, динамично да ги свързват със съответните UI компоненти
+ * и да връщат съпоставянето като {@code Map<Field, Node>}.
  */
 public interface EntityFieldMapper {
     /**
-     * Generates a map that associates the fields of the current entity class with corresponding UI nodes.
-     * The type of node generated depends on the field type:
-     * - For {@code Boolean} fields, a {@code CheckBox} is created.
-     * - For {@code LocalDate} fields, a {@code DatePicker} is created.
-     * - For fields referencing other entities, a {@code ComboBox} containing the entities is created.
-     * - For all other field types, a {@code TextField} is created, with the type name used as a prompt text.
+     * Генерира карта, която свързва полетата на текущия клас entity със съответните UI възли.
+     * Типът на генерирания възел зависи от типа на полето:
+     * - За полета от тип {@code Boolean} се създава {@code CheckBox}.
+     * - За полета от тип {@code LocalDate} се създава {@code DatePicker}.
+     * - За полета, които се отнасят до други entity-та, се създава {@code ComboBox}, съдържащ entity-тата.
+     * - За всички други типове полета се създава {@code TextField}, като името на типа се използва като текст на подкана.
      *
-     * The method uses reflection to retrieve all declared fields of the entity class, determines the type
-     * of each field, and dynamically creates and maps the appropriate UI node.
+     * Методът използва рефлексия, за да извлече всички декларирани полета на класа entity, определя типа
+     * на всяко поле и динамично създава и съпоставя подходящия UI възел.
      *
-     * @return a map where the keys are the fields of the entity class and the values are the corresponding UI nodes
+     * @return карта, където ключовете са полетата на класа entity, а стойностите са съответните UI възли.
      */
     public Map<Field, Node> getFieldNodeMap();
 }

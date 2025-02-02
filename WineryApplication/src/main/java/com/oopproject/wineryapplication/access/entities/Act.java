@@ -11,36 +11,43 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Represents an Act entity in the system, corresponding to the "act" table in the database.
- * This class extends the base entity class to inherit common functionalities and adds
- * specific attributes and relationships for the "Act" concept.
+ * Представлява entity Act в системата, съответстващо на таблицата "act" в базата данни.
+ * Този клас разширява базовия клас entity, за да наследи общи функционалности и добавя
+ * специфични атрибути и връзки за концепцията "Act".
  *
- * Each instance of Act is identified by a unique ID,
- * has a name, a weight, and is associated with a collection of behaviors.
+ * Всяка инстанция на Act се идентифицира с уникален ID,
+ * има име, тегло и е свързана с колекция от поведения.
  *
- * The Act class also implements methods for retrieving and setting its properties,
- * interacting with a DAO, and overriding the default string representation.
+ * Класът Act също имплементира методи за извличане и задаване на неговите свойства,
+ * взаимодействие с DAO и предефиниране на string представянето по подразбиране.
  *
- * Fields:
- * - id: A unique identifier for the Act entity.
- * - name: A string representing the name of the Act (maximum length 100).
- * - weight: An integer representing the weight of the Act.
- * - behaviors: A set of behaviors associated with this Act, forming a one-to-many relationship.
+ * Полета:
+ * <ul>
+ *     <li>{@code id}: Уникален идентификатор за entity Act.</li>
+ *     <li>{@code name}: Низ, представляващ името на Act (максимална дължина 100).</li>
+ *     <li>{@code weight}: Цяло число, представляващо теглото на Act.</li>
+ *     <li>{@code behaviors}: Набор от поведения, свързани с този Act, образуващи връзка един-към-много.</li>
+ * </ul>
  *
- * Methods:
- * - getId(): Retrieves the ID of the Act.
- * - setId(Integer id): Sets the ID of the Act.
- * - getDao(): Provides a DAO implementation specific to Act for interacting with the database.
- * - getName(): Retrieves the name of the Act.
- * - setName(String name): Sets the name of the Act.
- * - getWeight(): Retrieves the weight of the Act.
- * - setWeight(Integer weight): Sets the weight of the Act.
- * - getBehaviors(): Retrieves the set of behaviors associated with the Act.
- * - setBehaviors(Set<Behavior> behaviors): Sets the behaviors associated with the Act.
- * - toString(): Returns a string representation of the Act entity including its base representation and name.
+ * Методи:
+ * <ul>
+ *     <li>{@code getId()}: Извлича ID на Act.</li>
+ *     <li>{@code setId(Integer id)}: Задава ID на Act.</li>
+ *     <li>{@code getDao()}: Предоставя DAO имплементация, специфична за Act, за взаимодействие с базата данни.</li>
+ *     <li>{@code getName()}: Извлича името на Act.</li>
+ *     <li>{@code setName(String name)}: Задава името на Act.</li>
+ *     <li>{@code getWeight()}: Извлича теглото на Act.</li>
+ *     <li>{@code setWeight(Integer weight)}: Задава теглото на Act.</li>
+ *     <li>{@code setWeight(Integer weight)}: Задава теглото на Act.</li>
+ *     <li>{@code setWeight(Integer weight)}: Задава теглото на Act.</li>
+ *     <li>{@code setWeight(Integer weight)}: Задава теглото на Act.</li>
+ *     <li>{@code getBehaviors()}: Извлича набора от поведения, свързани с Act.</li>
+ *     <li>{@code setBehaviors(Set<Behavior> behaviors)}: Задава поведенията, свързани с Act.</li>
+ *     <li>{@code toString()}: Връща string представяне на entity Act, включващо неговото базово представяне и име.</li>
+ * <li>
  *
- * Relationships:
- * - One-to-many relationship with the Behavior entity, mapped by the "act" field in Behavior.
+ * Връзки:
+ * - Връзка един-към-много с {@code Behavior entity}, съпоставена чрез полето "act" в Behavior.
  */
 @Entity
 @Table(name = "act", schema = "public")

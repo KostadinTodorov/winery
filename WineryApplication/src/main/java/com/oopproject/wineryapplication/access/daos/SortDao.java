@@ -10,23 +10,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link Sort} entity using Hibernate.
+ * DAO клас за извършване на CRUD операции върху обекта {@link Sort} с помощта на Hibernate.
  * <p>
- * This class extends {@link EntityDao} and provides implementations for:
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
  * <ul>
- *   <li>Retrieving single or multiple {@link Sort} entities.</li>
- *   <li>Adding a new {@link Sort} entity.</li>
- *   <li>Updating an existing {@link Sort} entity.</li>
- *   <li>Deleting an {@link Sort} entity by its ID.</li>
+ *   <li>Извличане на единични или множество обекти {@link Sort}.</li>
+ *   <li>Добавяне на нов обект {@link Sort}.</li>
+ *   <li>Актуализиране на съществуващ обект {@link Sort}.</li>
+ *   <li>Изтриване на обект {@link Sort} по неговия ID.</li>
  * </ul>
  * <p>
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействия с базата данни и включва
+ * подходяща обработка на транзакциите, за да се гарантира целостта на данните.
  */
 public class SortDao extends EntityDao<Sort> {
 
     /**
-     * Constructs an {@code SortDao} for performing CRUD operations on the {@link Sort} entity.
+     * Конструира {@code SortDao} за извършване на CRUD операции върху обекта {@link Sort}.
      * {@inheritDoc}
      */
     public SortDao() {

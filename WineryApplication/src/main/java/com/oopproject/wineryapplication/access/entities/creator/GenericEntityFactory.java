@@ -14,10 +14,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * GenericEntityFactory is a concrete implementation of the EntityFactory interface,
- * responsible for creating and initializing instances of the {@link Entity} class in javafx environment.
- * It utilizes a mapping between fields of the entity and UI components represented
- * by {@link Node}) to populate the entity fields with corresponding values from the different implementations of {@code class Node}.
+ * GenericEntityFactory е конкретна имплементация на интерфейса EntityFactory,
+ * отговаряща за създаването и инициализирането на инстанции на класа {@link Entity} в javafx среда.
+ * Използва съпоставяне между полетата на entity-то и UI компонентите, представени от {@link Node},
+ * за да попълни полетата на entity-то със съответните стойности от различните имплементации на {@code class Node}.
  */
 public class GenericEntityFactory <T extends Entity> implements EntityFactory{
     private final T entity;
@@ -25,10 +25,10 @@ public class GenericEntityFactory <T extends Entity> implements EntityFactory{
 
 
     /**
-     * Constructs a new GenericEntityFactory instance.
+     * Конструира нов инстанция на GenericEntityFactory.
      *
-     * @param entity The base entity object used as a 'generic' prototype for creating new entities it is treated as being empty.
-     * @param fieldNodeMap A map associating entity fields with their corresponding graphical node representations. The map is expected to match
+     * @param entity Базовият обект entity, използван като "generic" прототип за създаване на нови entity-та, се третира като празен.
+     * @param fieldNodeMap Карта, свързваща полетата на entity-то със съответните им графични node представяния. Очаква се картата да съвпада
      */
     public GenericEntityFactory(T entity, Map<Field, Node> fieldNodeMap) {
         this.entity = entity;
@@ -41,14 +41,14 @@ public class GenericEntityFactory <T extends Entity> implements EntityFactory{
     }
 
     /**
-     * Creates and initializes an {@link Entity} object by mapping its fields to corresponding GUI nodes.
-     * This method iterates through the fields of the given entity, maps each field based on its type
-     * to the provided field-node mapping, and sets the corresponding values to the entity's fields.
+     * Създава и инициализира обект {@link Entity}, като съпоставя полетата му със съответните GUI възли.
+     * Този метод итерира през полетата на даденото entity, съпоставя всяко поле въз основа на неговия тип
+     * към предоставеното съпоставяне поле-възел и задава съответните стойности на полетата на entity-то.
      *
-     * @param entity The base entity object to be initialized. Its fields will be populated based on the provided mapping.
-     * @param fieldNodeMap A map associating entity fields with their corresponding GUI node representations.
-     *                     The keys are the fields of the entity, and the values are GUI nodes like TextField, ComboBox, etc.
-     * @return The updated {@link Entity} object with its fields populated based on the given field-node mapping.
+     * @param entity Базовият обект entity, който трябва да бъде инициализиран. Полетата му ще бъдат попълнени въз основа на предоставеното съпоставяне.
+     * @param fieldNodeMap Карта, свързваща полетата на entity-то със съответните им GUI node представяния.
+     *                     Ключовете са полетата на entity-то, а стойностите са GUI възли като TextField, ComboBox и т.н.
+     * @return Актуализираният обект {@link Entity} с попълнени полета въз основа на даденото съпоставяне поле-възел.
      */
     private Entity createEntity(T entity, Map<Field, Node> fieldNodeMap) {
         Set<Field> entityFields = entity.toFieldNodesMap(new EntityTypeNodeMapper(entity.getClass())).keySet();
@@ -76,16 +76,16 @@ public class GenericEntityFactory <T extends Entity> implements EntityFactory{
     }
 
     /**
-     * Sets the value of a specified field in an entity object based on the value taken
-     * from a corresponding GUI node, such as a TextField, CheckBox, or DatePicker.
-     * The value assignment depends on the field's type.
+     * Задава стойността на указано поле в обект entity въз основа на стойността, взета
+     * от съответния GUI възел, като например TextField, CheckBox или DatePicker.
+     * Присвояването на стойността зависи от типа на полето.
      *
-     * @param field The field of the entity object whose value is to be set.
-     * @param entity The entity object to which the field belongs.
-     * @param node The GUI node corresponding to the field, used to retrieve the input value.
-     * @param fieldType The data type of the field to ensure appropriate type handling and conversion.
-     * @throws IllegalAccessException If the field cannot be accessed or modified.
-     * @throws IllegalArgumentException If the field type is unsupported or the node is invalid.
+     * @param field Полето на обекта entity, чиято стойност трябва да бъде зададена.
+     * @param entity Обектът entity, към който принадлежи полето.
+     * @param node GUI възелът, съответстващ на полето, използван за извличане на входната стойност.
+     * @param fieldType Типът данни на полето, за да се осигури подходяща обработка и преобразуване на типа.
+     * @throws IllegalAccessException Ако полето не може да бъде достъпено или модифицирано.
+     * @throws IllegalArgumentException Ако типът на полето не се поддържа или възелът е невалиден.
      */
     private void setFieldValue(Field field, Entity entity, Node node, Class<?> fieldType) throws IllegalAccessException {
         switch (node) {

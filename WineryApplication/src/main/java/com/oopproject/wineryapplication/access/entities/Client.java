@@ -9,39 +9,41 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 
+
 /**
- * Represents a Client entity in the system, corresponding to the "client" table in the database.
- * This class extends the base Entity class to inherit common functionalities and adds
- * attributes, methods, and relationships unique to the "Client" concept.
+ * Представлява entity Client в системата, съответстващо на таблицата "client" в базата данни.
+ * Този клас разширява базовия клас entity, за да наследи общи функционалности и добавя
+ * специфични атрибути и връзки за концепцията "Client".
  * <p>
- * Each instance of Client is identified by a unique ID and can optionally be associated with
- * a person, a company, and a collection of orders (ClientsOrder).
+ * Всяка инстанция на Client се идентифицира с уникален ID, може да бъде свързан с
+ * физическо или юридическо лице и е асоцииран с множество поръчки.
  * <p>
- * The Client class also implements methods for retrieving and setting its properties,
- * interacting with a DAO, and overriding the default string representation.
+ * Полета:
+ * <ul>
+ *     <li>{@code id}: Уникален идентификатор за entity Client.</li>
+ *     <li>{@code person}: Информация за физическо лице, свързано с този Client (много-към-един).</li>
+ *     <li>{@code company}: Данни за юридическо лице, свързано с този Client (много-към-един).</li>
+ *     <li>{@code clientsOrders}: Набор от поръчки, свързани с този Client (едно-към-много).</li>
+ * </ul>
  * <p>
- * Fields:
- * - id: A unique identifier for the Client entity.
- * - person: Represents the associated person entity in a many-to-one relationship.
- * - company: Represents the associated company entity in a many-to-one relationship.
- * - clientsOrders: A set of orders related to this client in a one-to-many relationship.
+ * Методи:
+ * <ul>
+ *     <li>{@code getId()}: Извлича ID на Client.</li>
+ *     <li>{@code setId(Integer id)}: Задава ID на Client.</li>
+ *     <li>{@code getPerson()}: Извлича свързаното физическо лице.</li>
+ *     <li>{@code setPerson(Person person)}: Задава свързаното физическо лице.</li>
+ *     <li>{@code getCompany()}: Извлича свързаното юридическо лице.</li>
+ *     <li>{@code setCompany(Company company)}: Задава свързаното юридическо лице.</li>
+ *     <li>{@code getClientsOrders()}: Извлича поръчките, свързани с този Client.</li>
+ *     <li>{@code setClientsOrders(Set<ClientsOrder> clientsOrders)}: Задава поръчките, свързани с този Client.</li>
+ *     <li>{@code getDao()}: Предоставя DAO имплементация, специфична за Client, за взаимодействие с базата данни.</li>
+ *     <li>{@code toString()}: Връща string представяне на entity Client, включвайки базовото представяне и името на свързаното лице.</li>
+ * </ul>
  * <p>
- * Methods:
- * - getId(): Retrieves the ID of the Client.
- * - setId(Integer id): Sets the ID of the Client.
- * - getDao(): Provides a DAO implementation specific to Client for interacting with the database.
- * - getPerson(): Retrieves the associated person entity.
- * - setPerson(Person person): Sets the associated person entity.
- * - getCompany(): Retrieves the associated company entity.
- * - setCompany(Company company): Sets the associated company entity.
- * - getClientsOrders(): Retrieves the set of orders linked to this client.
- * - setClientsOrders(Set<ClientsOrder> clientsOrders): Sets the set of orders linked to this client.
- * - toString(): Returns a string representation of the Client entity, including its base representation and person's name if available.
- * <p>
- * Relationships:
- * - Many-to-one relationship with the Person entity (person_id column).
- * - Many-to-one relationship with the Company entity (company_id column).
- * - One-to-many relationship with the ClientsOrder entity, mapped by the "client" field.
+ * Връзки:
+ * - Много-към-един с {@code Person entity}.
+ * - Много-към-един с {@code Company entity}.
+ * - Едно-към-много с {@code ClientsOrder entity}.
  */
 @Entity
 @Table(name = "client", schema = "public")

@@ -6,81 +6,80 @@ import org.hibernate.Session;
 import java.util.List;
 
 /**
- * Generic Data Access Object (DAO) interface for CRUD operations.
+ * Общ интерфейс за Обектен Достъп до Данни (DAO) за CRUD операции.
  *
- * <p>This interface provides CRUD methods for working with data entities. It is designed to be implemented by concrete DAO
- * classes specific to a particular {@code Entity}.</p>
- * <p>The generic class {@code <T>} has to extend the {@code abstract class Entity}. It represents a database table the date of which is mapped on to a data entity class extending {@code Entity}. </p>
+ * <p>Този интерфейс предоставя CRUD методи за работа с обектни данни. Той е предназначен да бъде имплементиран от конкретни DAO
+ * класове, специфични за даден {@code Entity}.</p>
+ * <p>Генеричният клас {@code <T>} трябва да разширява {@code abstract class Entity}. Той представя база данни, чиито данни са свързани с клас на обектни данни, разширяващ {@code Entity}.</p>
  * <ul>
- *     The DAO {@code interface} provides methods contracts for
- *     <li>{@code T get{int id}} and {@code List<T> getAll()} are used to 'get' information out of the data source table.</li>
- *     <li>For making changes to the data source there are methods {@code boolean add(T t)} and {@code boolean update(int id, T t)} for adding and updating rows mapped in a given {@code T t} entity. The method {@code T insert(T t)} servers for both updating and adding.</li>
- *     <li>For deleting rows {@code boolean delete(int id)}</li>
+ *     DAO {@code interface} предоставя методи за:
+ *     <li>{@code T get{int id}} и {@code List<T> getAll()} се използват за извличане на информация от таблицата с данни.</li>
+ *     <li>За промяна на данните в източника съществуват методите {@code boolean add(T t)} и {@code boolean update(int id, T t)} за добавяне и актуализиране на редове, съответстващи на даден {@code T t} обект. Методът {@code T insert(T t)} служи както за актуализиране, така и за добавяне.</li>
+ *     <li>За изтриване на редове - {@code boolean delete(int id)}</li>
  * </ul>
- * <p>A contract for creating a session to a certain data source</p>
- * @param <T> the type of the entity this DAO will handle
+ * <p>Осигурява договор за създаване на сесия към определен източник на данни.</p>
+ * @param <T> типът на обекта, който този DAO ще обработва
  */
 public interface Dao<T extends Entity> {
 
     /**
-     * Retrieves a concrete entity from the generic type {@code T} by its given ID.
+     * Извлича конкретен обект от генеричния тип {@code T} по неговото ID.
      *
-     * @param id the {@code int} ID of the entity the method retrieves from the data source. It represents the primaryKey of a row. The PK has to be of type int.
-     * @return an instance of {@code T} entity with the specified ID, or {@code null} if no row with PK equaling {@code id} is found.
+     * @param id {@code int} ID на обекта, който методът извлича от източника на данни. Представлява първичния ключ на ред. Първичният ключ трябва да бъде от тип int.
+     * @return инстанция на {@code T} обект със зададеното ID или {@code null}, ако няма ред с първичен ключ, равен на {@code id}.
      */
     public T get(int id);
 
     /**
-     * Retrieves all entities mapped from the rows in a table.
+     * Извлича всички обекти, съответстващи на редовете в таблицата.
      *
-     * @return a {@code List<T>} of all entities
+     * @return {@code List<T>} със всички обекти
      */
     public List<T> getAll();
 
     /**
-     * Adds a new entity to the data source. The entity maps onto a new row in a table.
+     * Добавя нов обект към източника на данни. Обектът съответства на нов ред в таблицата.
      *
-     * @param entity the entity to add. The {@code T entity} could have an id represented in the data source but {@code entity.getId()} will be ignored. Tha database will generate an ID for the row.
-     * @return {@code true} if the entity was added successfully, {@code false} otherwise
+     * @param entity обектът, който ще бъде добавен. {@code T entity} може да има ID, представено в източника на данни, но {@code entity.getId()} ще бъде игнорирано. Базата данни ще генерира ID за реда.
+     * @return {@code true}, ако обектът е добавен успешно, {@code false} в противен случай
      */
     public boolean add(T entity);
 
     /**
-     * Inserts a new entity into the data source and returns the inserted entity.
+     * Вмъква нов обект в източника на данни и връща вмъкнатия обект.
      *
-     * <p>This method can be used for adding or updating an entity.</p>
+     * <p>Този метод може да се използва както за добавяне, така и за актуализиране на обект.</p>
      *
-     * @param entity the entity to insert. The {@code T entity} is inserted into a table row with the same PK as {@code T entity}'s ID. If no such ID exists in the represented table or the entities ID is {@code null} the entity is added as a new row.
-     * @return the inserted entity, potentially modified (e.g., with a generated ID)
+     * @param entity обектът, който ще бъде вмъкнат. {@code T entity} се вмъква в таблицата с първичен ключ, съответстващ на ID на {@code T entity}. Ако такова ID не съществува в представената таблица или ID на обекта е {@code null}, той се добавя като нов ред.
+     * @return вмъкнатият обект, потенциално модифициран (например с генерирано ID)
      */
     public T insert(T entity);
 
     /**
-     * Updates an existing entity in the data source by its ID.
+     * Актуализира съществуващ обект в източника на данни по неговото ID.
      *
-     * @param id the ID of the entity to update
-     * @param entity the new entity that is assigned to the row with PK equal to {@code id}. The {@code T entity} could have an id represented in the data source but {@code entity.getId()} will be ignored. Tha information will be added according to the value of {@code int id}.
-     * @return {@code true} if the entity was updated successfully, {@code false} otherwise
+     * @param id ID на обекта, който ще бъде актуализиран
+     * @param entity новият обект, който ще бъде зададен за реда с първичен ключ, равен на {@code id}. {@code T entity} може да има ID, представено в източника на данни, но {@code entity.getId()} ще бъде игнорирано. Информацията ще бъде актуализирана според стойността на {@code int id}.
+     * @return {@code true}, ако обектът е актуализиран успешно, {@code false} в противен случай
      */
     public boolean update(int id, T entity);
 
     /**
-     * Deletes an entity by its ID.
+     * Изтрива обект по неговото ID.
      *
-     * @param id the ID of the entity to delete
-     * @return {@code true} if the entity was deleted successfully, {@code false} otherwise
+     * @param id ID на обекта, който ще бъде изтрит
+     * @return {@code true}, ако обектът е изтрит успешно, {@code false} в противен случай
      */
     public boolean delete(int id);
 
     /**
-     * Creates a session for interacting with the data source.
+     * Създава сесия за взаимодействие с източника на данни.
      *
-     * <p>This method is used to manage transactions or maintain a persistent connection
-     * to the data source.</p>
+     * <p>Този метод се използва за управление на транзакции или поддържане на постоянна връзка
+     * с източника на данни.</p>
      *
-     * @return a {@code Session} object for data operations
-     * @throws RuntimeException if a session cannot be created
+     * @return {@code Session} обект за операции с данни
+     * @throws RuntimeException ако не може да бъде създадена сесия
      */
     public Session createSession() throws RuntimeException;
 }
-

@@ -10,23 +10,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link FaultCode} entity using Hibernate.
+ * DAO клас за извършване на CRUD операции върху обекта {@link FaultCode} с помощта на Hibernate.
  * <p>
- * This class extends {@link EntityDao} and provides implementations for:
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
  * <ul>
- *   <li>Retrieving single or multiple {@link FaultCode} entities.</li>
- *   <li>Adding a new {@link FaultCode} entity.</li>
- *   <li>Updating an existing {@link FaultCode} entity.</li>
- *   <li>Deleting an {@link FaultCode} entity by its ID.</li>
+ *   <li>Извличане на единични или множество обекти {@link FaultCode}.</li>
+ *   <li>Добавяне на нов обект {@link FaultCode}.</li>
+ *   <li>Актуализиране на съществуващ обект {@link FaultCode}.</li>
+ *   <li>Изтриване на обект {@link FaultCode} по неговия ID.</li>
  * </ul>
  * <p>
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействия с базата данни и включва
+ * подходяща обработка на транзакциите, за да се гарантира целостта на данните.
  */
 public class FaultCodeDao extends EntityDao<FaultCode> {
 
     /**
-     * Constructs an {@code FaultCodeDao} for performing CRUD operations on the {@link FaultCode} entity.
+     * Конструира {@code FaultCodeDao} за извършване на CRUD операции върху обекта {@link FaultCode}.
      * {@inheritDoc}
      */
     public FaultCodeDao() {

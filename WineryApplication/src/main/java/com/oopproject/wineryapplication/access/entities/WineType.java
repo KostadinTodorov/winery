@@ -8,6 +8,26 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Класът {@code WineType} представлява тип вино, използван в системата.
+ * Този клас наследява основната функционалност на {@link com.oopproject.wineryapplication.access.entities.entity.Entity}
+ * и служи за управление и съхранение на информация, свързана с типове вина.
+ *
+ * Той използва JPA анотации за взаимодействие с база данни
+ * и е част от схемата {@code public} в базата данни.
+ *
+ * Основни характеристики:
+ * <ul>
+ *     <li>{@link javax.persistence.Entity}: Декларира класа като JPA entity.</li>
+ *     <li>{@link javax.persistence.Table}: Задава свързаната таблица в базата данни.</li>
+ * </ul>
+ *
+ * Връзки:
+ * <ul>
+ *     <li>Връзка "Едно към много" към {@link Batch} обекти чрез асоциацията {@code batches}.</li>
+ *     <li>Връзка "Едно към много" към {@link ClientsOrder} обекти чрез асоциацията {@code clientsOrders}.</li>
+ * </ul>
+ */
 @Entity
 @Table(name = "wine_type", schema = "public")
 public class WineType extends com.oopproject.wineryapplication.access.entities.entity.Entity {

@@ -8,6 +8,23 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Класът {@code Occupation} представлява entity за професия/занятие в системата.
+ * Той служи за съхраняване на информация относно професии, които могат да бъдат свързани
+ * с множество служители. Таблицата се намира в схемата {@code public} на базата данни.
+ *
+ * Класът разширява базовия {@link com.oopproject.wineryapplication.access.entities.entity.Entity},
+ * предоставяйки основна реализация за entityта в рамките на системата.
+ *
+ * Този клас включва следните полета:
+ * - {@code id}: Уникален идентификатор за професията. Генерира се автоматично чрез
+ *   последователност ({@code SEQUENCE}).
+ * - {@code occupation}: Името на професията. Това е задължително поле с максимална
+ *   дължина от 20 символа.
+ * - {@code employees}: Сет от обекти {@link Employee}, асоциирани с тази професия.
+ *
+ * Entity-то се картографира към таблицата {@code occupation} в базата данни.
+ */
 @Entity
 @Table(name = "occupation", schema = "public")
 public class Occupation extends com.oopproject.wineryapplication.access.entities.entity.Entity {

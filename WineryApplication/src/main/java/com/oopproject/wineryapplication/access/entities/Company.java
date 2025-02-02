@@ -8,33 +8,38 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+
 /**
- * Represents a Company entity in the system, corresponding to the "company" table in the database.
- * This class extends the base entity class to inherit common functionalities and adds
- * specific attributes and relationships for the "Company" concept.
+ * Представлява entity Company в системата, съответстващо на таблицата "company" в базата данни.
+ * Този клас разширява базовия клас entity, за да наследи общи функционалности и добавя
+ * специфични атрибути и връзки за концепцията "Company".
  * <p>
- * Each instance of Company is identified by a unique ID,
- * has an address, and is associated with a collection of clients.
+ * Всяка инстанция на Company се идентифицира с уникален ID,
+ * има адрес и е свързана с колекция от клиенти.
  * <p>
- * The Company class also implements methods for retrieving and setting its properties,
- * interacting with a Company-specific DAO, and overriding the default string representation.
+ * Класът Company също имплементира методи за извличане и задаване на неговите свойства,
+ * взаимодействие с DAO и предефиниране на string представянето по подразбиране.
  * <p>
- * Fields:
- * - id: A unique identifier for the Company entity.
- * - address: A string representing the address of the Company (maximum length 200).
- * - clients: A set of clients associated with this Company, forming a one-to-many relationship.
+ * Полета:
+ * <ul>
+ *     <li>{@code id}: Уникален идентификатор за entity Company.</li>
+ *     <li>{@code address}: Низ, представляващ адреса на компанията (максимална дължина 200).</li>
+ *     <li>{@code clients}: Набор от клиенти, свързани с тази компания, образуващи връзка един-към-много.</li>
+ * </ul>
  * <p>
- * Methods:
- * - getId(): Retrieves the ID of the Company.
- * - setId(Integer id): Sets the ID of the Company.
- * - getDao(): Provides a DAO implementation specific to the Company for interacting with the database.
- * - getAddress(): Retrieves the address of the Company.
- * - setAddress(String address): Sets the address of the Company.
- * - getClients(): Retrieves the set of clients associated with the Company.
- * - setClients(Set<Client> clients): Sets the clients associated with the Company.
+ * Методи:
+ * <ul>
+ *     <li>{@code getId()}: Извлича ID на Company.</li>
+ *     <li>{@code setId(Integer id)}: Задава ID на Company.</li>
+ *     <li>{@code getAddress()}: Извлича адреса на Company.</li>
+ *     <li>{@code setAddress(String address)}: Задава адреса на Company.</li>
+ *     <li>{@code getClients()}: Извлича набора от клиенти, свързани с Company.</li>
+ *     <li>{@code setClients(Set<Client> clients)}: Задава клиентите, свързани с Company.</li>
+ *     <li>{@code getDao()}: Предоставя DAO имплементация, специфична за Company, за взаимодействие с базата данни.</li>
+ * </ul>
  * <p>
- * Relationships:
- * - One-to-many relationship with the Client entity, mapped by the "company" field in Client.
+ * Връзки:
+ * - Връзка един-към-много с {@code Client entity}, съпоставена чрез полето "company" в Client.
  */
 @Entity
 @Table(name = "company", schema = "public")

@@ -10,23 +10,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link Progress} entity using Hibernate.
+ * DAO клас за извършване на CRUD операции върху обекта {@link Progress} с помощта на Hibernate.
  * <p>
- * This class extends {@link EntityDao} and provides implementations for:
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
  * <ul>
- *   <li>Retrieving single or multiple {@link Progress} entities.</li>
- *   <li>Adding a new {@link Progress} entity.</li>
- *   <li>Updating an existing {@link Progress} entity.</li>
- *   <li>Deleting an {@link Progress} entity by its ID.</li>
+ *   <li>Извличане на единични или множество обекти {@link Progress}.</li>
+ *   <li>Добавяне на нов обект {@link Progress}.</li>
+ *   <li>Актуализиране на съществуващ обект {@link Progress}.</li>
+ *   <li>Изтриване на обект {@link Progress} по неговия ID.</li>
  * </ul>
  * <p>
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействия с базата данни и включва
+ * подходяща обработка на транзакциите, за да се гарантира целостта на данните.
  */
 public class ProgressDao extends EntityDao<Progress> {
 
     /**
-     * Constructs an {@code ProgressDao} for performing CRUD operations on the {@link Progress} entity.
+     * Конструира {@code ProgressDao} за извършване на CRUD операции върху обекта {@link Progress}.
      * {@inheritDoc}
      */
     public ProgressDao() {

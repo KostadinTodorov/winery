@@ -8,6 +8,19 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Представлява entity "Progress", което отразява прогреса на даден процес или състояние в системата.
+ * Класът е свързан с таблицата "progress" в schema "public" в базата данни и е основна част от ORM модела.
+ *
+ * Основни характеристики на класа Progress:
+ * - Идентификационен номер ({@code id}), автоматично генериран чрез {@link SequenceGenerator}.
+ * - Състояние ({@code status}), съхранено като текстов низ с ограничена дължина.
+ * - Едно към много връзка с {@link ClientsOrder}, представляваща всички поръчки на клиенти,
+ *   свързани с дадено състояние на прогреса.
+ *
+ * Класът разширява {@link com.oopproject.wineryapplication.access.entities.entity.Entity},
+ * осигурявайки общата функционалност на entity в системата.
+ */
 @Entity
 @Table(name = "progress", schema = "public")
 public class Progress extends com.oopproject.wineryapplication.access.entities.entity.Entity {

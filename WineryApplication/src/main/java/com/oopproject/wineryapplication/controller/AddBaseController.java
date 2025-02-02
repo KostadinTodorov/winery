@@ -14,12 +14,14 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * Controller class responsible for managing the AddBase view and its functionality.
- * This class handles the creation, initialization, and handling of UI elements
- * for adding or editing an entity based on the provided {@code Entity} model.
+ * Класът {@code AddBaseController} предоставя логиката за динамично генериране на графичен интерфейс за
+ * създаване и редактиране на обекти от тип {@link Entity}.
  *
- * The {@code AddBaseController} connects the JavaFX UI with the underlying business logic
- * and entity model by mapping fields to UI nodes and managing user interactions.
+ * Този клас работи с JavaFX елементи и се грижи за правилното свързване между полетата на обекта
+ * {@link Entity} и съответстващите им UI компоненти. Основните му функционалности включват:
+ * - Генериране на графичен потребителски интерфейс на база на полетата на обекта {@link Entity}.
+ * - Обработка и запазване на данните, въведени от потребителя, във външна база данни.
+ * - Предоставяне на обратна връзка на потребителя относно успешно или неуспешно съхранение.
  */
 public class AddBaseController {
     @FXML
@@ -37,18 +39,17 @@ public class AddBaseController {
     }
 
     /**
-     * Initializes the controller by setting up UI components and their corresponding behaviors.
+     * Инициализира потребителския интерфейс на контролера, генерира динамични възли за полетата
+     * на entity-то и добавя "Save" бутон с функционалност за записване.
      *
-     * This method is automatically invoked after the FXML file has been loaded. It adds a "Save" button
-     * to the UI, maps entity fields to their corresponding nodes, and generates UI nodes dynamically.
-     * The "Save" button is configured to trigger the `saveButton` private method when clicked, which
-     * handles saving the entity and displaying appropriate alerts.
+     * Методът изпълнява следните стъпки:
+     * - Създава нов бутон "Save" и свързва неговото действие с метода {@link #saveButton()}.
+     * - Добавя бутона към контейнера {@code entityProps}.
+     * - Извиква {@code AddBase#toFieldNodesMap(EntityFieldMapper)}, за да създаде карта от полета към съответните UI възли.
+     * - Подготвя и генерира визуални компоненти чрез {@link #generateNodes(Map)} за всяко поле.
      *
-     * Operations performed in this method include:
-     * - Creating and adding a "Save" button to the UI layout.
-     * - Setting an action handler for the "Save" button.
-     * - Using the `toFieldNodesMap` method of the `emptyEntity` object to generate a field-to-node mapping.
-     * - Dynamically generating UI nodes based on the field-to-node mapping using the `generateNodes` method.
+     * @see #saveButton()
+     * @see #generateNodes(Map)
      */
     @FXML
     public void initialize() {
@@ -60,12 +61,21 @@ public class AddBaseController {
     }
 
     /**
-     * Dynamically generates UI nodes based on the provided mapping of fields to nodes.
-     * Adds a label for each field (excluding fields of type Set or named "id") and the corresponding
-     * node to the entity properties container.
+     * Генерира визуални компоненти (възли) за дадените полета в мапа {@code fieldNodeMap}
+     * и ги добавя към потребителския интерфейс.
      *
-     * @param fieldNodeMap a map where keys represent fields of the entity and values represent
-     *                     their corresponding UI nodes
+     * Методът изпълнява следните действия:
+     * - Проверява типа и името на всяко поле от мапа.
+     * - Ако типът на полето не е {@code Set.class} и името му не е "id", създава етикет {@link Label}
+     *   за името на полето и го добавя заедно със съответния възел {@link Node} към контейнера {@code entityProps}.
+     *
+     * @param fieldNodeMap карта, която съдържа като ключове обекти от тип {@code Field} и като стойности –
+     *                     съответните UI компоненти (възли) {@link Node}, които трябва да бъдат визуализирани.
+     *
+     * @see Field#getType()
+     * @see Field#getName()
+     * @see Label
+     * @see Node
      */
     private void generateNodes(Map<Field, Node> fieldNodeMap){
         for (Map.Entry<Field, Node> entry : fieldNodeMap.entrySet()) {
@@ -86,16 +96,16 @@ public class AddBaseController {
 //    }
 
     /**
-     * Handles the logic for saving the current entity to the database and providing user feedback.
+     * Бутона за записване обработва логиката за валидиране и запис на данни в базата.
      *
-     * This method is invoked when a "Save" button is triggered in the UI. It performs the following steps:
-     * - Calls the `setEntity` method to populate the entity based on user input.
-     * - If `setEntity` fails, displays an alert informing users to correctly fill in required fields.
-     * - If `setEntity` succeeds, calls the `saveEntity` method to attempt persistence of the entity in the database.
-     * - If `saveEntity` succeeds, clears all input fields via `clearNodes` and displays a success alert.
-     * - If `saveEntity` fails, displays an error alert indicating that the saving process was unsuccessful.
+     * Този метод извършва следните стъпки:
+     * - Проверява дали данните са правилно попълнени чрез извикване на метода {@link #setEntity()}.
+     * - Ако валидацията е успешна, се опитва да запише данните в базата чрез {@link #saveEntity()}.
+     * - Ако записът е успешен, извежда информационно съобщение за успех и изчиства UI възлите чрез {@link #clearNodes()}.
+     * - Ако записът е неуспешен, извежда предупреждение, че е възникнала грешка.
+     * - Ако валидацията не е успешна, извежда уведомление за неправилно попълнени полета.
      *
-     * Alerts inform users about the status of the save operation and provide guidance on how to proceed.
+     * Методът използва клас {@link Alert} за извеждане на визуални съобщения при всяко действие.
      */
     private void saveButton(){
         if (setEntity()) {
@@ -121,14 +131,19 @@ public class AddBaseController {
     }
 
     /**
-     * Attempts to create an entity using a factory implementation and assign it to the `entity` field.
+     * Настройва и инициализира текущата инстанция на {@link Entity} чрез фабрика за създаване
+     * на обекти {@link EntityFactory}. Методът се опитва да създаде нова инстанция
+     * и да я зададе като стойност на полето {@code entity}.
      *
-     * This method uses a `GenericEntityFactory` initialized with an empty entity and a field-to-node
-     * mapping to generate a populated entity. If the entity creation is successful, the `entity` field
-     * is updated, and the method returns `true`. If an exception occurs during entity creation, the
-     * method catches the exception and returns `false`.
+     * Извикването на фабриката {@link GenericEntityFactory} може да доведе до възникване
+     * на изключение, в случай на проблем при създаването на ентитета. Връщаната стойност
+     * индикира успеха или провала на операцията.
      *
-     * @return {@code true} if the entity has been successfully created and assigned; {@code false} otherwise.
+     * @return {@code true}, ако създаването и задаването на ентитета е успешно;
+     *         {@code false}, ако възникне изключение.
+     *
+     * @see EntityFactory#createEntity()
+     * @see GenericEntityFactory
      */
     private boolean setEntity() {
         EntityFactory genericEntityFactory = new GenericEntityFactory(emptyEntity,fieldNodeMap);

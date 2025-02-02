@@ -10,23 +10,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link BottleType} entity using Hibernate.
+ * DAO клас за извършване на CRUD операции върху обекта {@link BottleType} с помощта на Hibernate.
  * <p>
- * This class extends {@link EntityDao} and provides implementations for:
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
  * <ul>
- *   <li>Retrieving single or multiple {@link BottleType} entities.</li>
- *   <li>Adding a new {@link BottleType} entity.</li>
- *   <li>Updating an existing {@link BottleType} entity.</li>
- *   <li>Deleting an {@link BottleType} entity by its ID.</li>
+ *   <li>Извличане на единични или множество обекти {@link BottleType}.</li>
+ *   <li>Добавяне на нов обект {@link BottleType}.</li>
+ *   <li>Актуализиране на съществуващ обект {@link BottleType}.</li>
+ *   <li>Изтриване на обект {@link BottleType} по неговия ID.</li>
  * </ul>
  * <p>
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействия с базата данни и включва
+ * подходяща обработка на транзакциите, за да се гарантира целостта на данните.
  */
 public class BottleTypeDao extends EntityDao<BottleType> {
 
     /**
-     * Constructs an {@code BottleTypeDao} for performing CRUD operations on the {@link BottleType} entity.
+     * Конструира {@code BottleTypeDao} за извършване на CRUD операции върху обекта {@link BottleType}.
      * {@inheritDoc}
      */
     public BottleTypeDao() {

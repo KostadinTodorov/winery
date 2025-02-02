@@ -16,9 +16,13 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * The ButtonsHelper class provides functionality and actions related to button creation and execution
- * within a JavaFX UI context. It defines and manages various types of button actions, each implementing
- * specific behavior to interact with different aspects of the application.
+ * Класът {@code ButtonsHelper} предоставя помощни средства за генериране и работа с различни действия
+ * и бутони в потребителския интерфейс. Основната му функционалност е свързана със създаването на
+ * бутони, асоциирани с конкретни действия, и добавянето им към контейнери като {@link VBox} или {@link HBox},
+ * както и дефинирането на специфични действия за работа с ентитети, категории и операции.
+ *
+ * Този клас съдържа вътрешни класове, които разширяват {@code ButtonAction} за реализиране на конкретни
+ * функционалности, както и методи за динамично създаване и настройване на бутони.
  */
 public class ButtonsHelper {
 
@@ -37,15 +41,12 @@ public class ButtonsHelper {
     }
 
     /**
-     * Represents a specific button action for creating and handling entities in the application.
-     * This class extends the {@link ButtonAction} to provide functionality specialized for
-     * interacting with and managing {@link Entity} objects through an {@link EntityProvider}.
+     * Класът {@code EntityButtonAction} представлява конкретен {@link ButtonAction}, който е предназначен
+     * за създаване и обработване на бутон за взаимодействие със специфичен {@link Entity}.
+     * Той използва {@link EntityProvider}, за да осигури екземпляри на {@link Entity}, когато е необходимо.
      *
-     * Upon execution, this action creates an entity using the provided {@link EntityProvider},
-     * logs the relevant information, and initializes a display controller for the created entity.
-     *
-     * Any failure in obtaining or displaying the entity is logged, and a {@link NullPointerException}
-     * may be thrown if a null value is encountered during the operation.
+     * {@code EntityButtonAction} изпълнява действията, свързани със създаването на елемент,
+     * извеждането на лог и визуализация на съответния контролер чрез добавяне на възел в потребителския интерфейс.
      */
     // Specific action for crating entities buttons --------------------------------------------------------
     public static class EntityButtonAction extends ButtonAction {
@@ -70,26 +71,14 @@ public class ButtonsHelper {
     }
 
     /**
-     * Represents a specific type of button action that generates category-related buttons within a
-     * user interface and configures them based on a predefined mapping.
+     * Специфично действие за създаване на бутони за категории.
+     * Класът {@code CategoryButtonAction} наследява {@link ButtonAction} и е предназначен за
+     * управление на действия, свързани с бутони за категории. При изпълнение на метода
+     * {@link #execute(Scene)}, той динамично зарежда и добавя съответните бутони в {@link HBox},
+     * базирайки се на зададената категория.
      *
-     * This class extends the {@code ButtonAction} class and is intended to handle actions
-     * for categories by dynamically creating buttons associated with entities and configuring their behavior.
-     * The category is determined by the label provided during the instantiation of the class.
-     *
-     * The {@code execute} method is overridden to implement the functionality required to
-     * generate buttons for entities associated with the selected category. The implementation
-     * clears existing buttons in the UI placeholder (`HBox`) and populates it with new buttons
-     * based on a mapping registry (`ButtonsMappingRegisters`) aligned to the category.
-     *
-     * Logging is utilized during execution to trace the creation of buttons and their association
-     * with the given category label. Exceptions are handled for situations such as invalid category
-     * names or null references.
-     *
-     * Note: This class provides functionality specific to the application's entity-related
-     * button configuration mechanism. It works in conjunction with other components in the
-     * system, such as `ButtonsMapHolderForEachEntity`, `LoggerHelper`, and category-specific
-     * button mappings.
+     * Конструкторът приема етикет за съответната категория, който служи за идентификация
+     * и управление на действието.
      */
     // Specific action for creating category buttons ---------------------------------------------------------
     public static class CategoryButtonAction extends ButtonAction {
@@ -117,15 +106,9 @@ public class ButtonsHelper {
     }
 
     /**
-     * Represents a specific action for loading different notification FXML files.
-     * This class extends the abstract {@code ButtonAction} class to provide a concrete implementation for handling button
-     * operations related to notifications. It maps the button's label to the corresponding enum value, loads the associated
-     * FXML, and initializes it with a specified controller.
-     *
-     * Responsibilities:
-     * - Override the {@code execute} method to define the specific behavior for interacting with the scene when the button is clicked.
-     * - Map button labels to their respective notification FXMLs using {@code ButtonsNotificationsRegisters}.
-     * - Log operations and handle any exceptions that may arise during execution.
+     * {@code OperationButtonAction} е подклас на {@link ButtonAction}, създаден за изпълнение
+     * на специфични действия, свързани с отварянето на известия, използвайки FXML файлове.
+     * Той предоставя фунционалност за зареждане и управление на известия чрез поп-ъп прозорци.
      */
     // Specific action for loading different notification FXMLs  ---------------------------------------------
     public static class OperationButtonAction extends ButtonAction {
@@ -149,28 +132,26 @@ public class ButtonsHelper {
 
 
     /**
-     * Adds buttons to a container based on the provided action bitmap and action map.
-     * This method dynamically generates buttons for a given {@link Pane}, associates
-     * them with actions, and organizes them either in a {@link VBox} or an {@link HBox},
-     * depending on the provided container type.
+     * Добавя бутони към зададен потребителски интерфейс контейнер (тип {@link Pane}), базирайки се
+     * на зададената карта за действия на бутоните и активния битов флаг в {@link ButtonsMappingRegisters}.
+     * Ако параметърът {@code forVBox} е истинен и контейнерът е от тип {@link VBox}, бутоните ще бъдат добавени
+     * към {@link VBox}. В противен случай, ако контейнерът е от тип {@link HBox}, бутоните ще бъдат добавени към него.
      *
-     * The method checks which actions, represented by bits in the {@code actionBitmap},
-     * should have corresponding buttons created. For each bit set in the bitmap,
-     * the corresponding {@link ButtonAction} is mapped to a button, which is then added
-     * to the container.
+     * Бутоните се настройват така, че когато бъдат натиснати, изпълняват действие чрез метода
+     * {@link ButtonAction#execute(Scene)}. Ако възникне {@link IOException} по време на изпълнението
+     * на задача, тя се прехвърля като {@link RuntimeException}.
      *
-     * @param <T>       the type of container, extending {@link Pane}, to which the buttons
-     *                  will be added. Can be a {@link VBox} or {@link HBox}.
-     * @param actionBitmap the {@link ButtonsMappingRegisters} instance representing the bitmap
-     *                  of actions. Each bit in the bitmap corresponds to whether an action
-     *                  is enabled or not.
-     * @param holder    the container, of type {@link Pane}, to which the generated buttons will
-     *                  be added. Supported types are {@link VBox} and {@link HBox}.
-     * @param actionMap a map associating integer bit positions with {@link ButtonAction} instances.
-     *                  Each entry maps a bit position to the action associated with it.
-     * @param forVBox   a flag indicating whether the buttons should be added to a {@link VBox}.
-     *                  If {@code true}, the method assumes {@code holder} is a {@link VBox};
-     *                  otherwise, it assumes {@code holder} is an {@link HBox}.
+     * @param <T>        Типът на контейнера, в който бутоните ще бъдат добавени. Трябва да наследява {@link Pane}.
+     * @param actionBitmap Битовата карта за активиране на бутоните. Определя кои бутони да бъдат създадени
+     *                     въз основа на активни битове.
+     * @param holder      Контейнер (напр. {@link VBox} или {@link HBox}), в който бутоните ще бъдат добавени.
+     *                    Типът трябва да бъде {@link Pane} или наследник на него.
+     * @param actionMap   Карта, която свързва индекси на бутоните (цели числа) с техните свързани действия
+     *                    чрез обекти от тип {@link ButtonAction}.
+     * @param forVBox     Флаг, указващ дали контейнерът е от тип {@link VBox}. Ако е истинен, бутоните ще бъдат
+     *                    добавени към {@link VBox}. Ако е {@code false}, се очаква контейнерът да е {@link HBox}.
+     *
+     * @return Няма стойност за връщане.
      */
     public static <T extends Pane> void addButtons(ButtonsMappingRegisters actionBitmap, T holder, Map<Integer, ButtonAction> actionMap, boolean forVBox) {
         Integer actionInstance = actionBitmap.getButtonsMapping();

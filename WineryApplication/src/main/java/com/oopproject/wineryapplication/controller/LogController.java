@@ -16,15 +16,9 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 /**
- * The LogController class is a JavaFX controller responsible for managing interactions
- * with the login screen of the application. It handles user input, navigation between
- * scenes, and logging user actions for monitoring purposes.
- *
- * This class facilitates the following:
- * - Accepts user input for employee credentials (employee name and password).
- * - Provides feedback messages to users for actions or errors.
- * - Handles user logout and transitions between screens.
- * - Logs significant user actions using the LoggerHelper utility.
+ * Класът {@code LogController} отговаря за контролиране на потребителския интерфейс свързан
+ * с влизането на потребители в системата. Той управлява логическите операции като проверка
+ * на потребителски данни, промяна на сцени и изписване на информация в логовете.
  */
 public class LogController {
 
@@ -39,14 +33,15 @@ public class LogController {
 
 
     /**
-     * Initializes the LogController by setting up the initial configuration for the UI elements
-     * and logging the initialization event.
+     * Методът {@code initialize} служи за инициализация на графичния компонент {@link LogController}
+     * и настройва началните взаимодействия за потребителския интерфейс.
      *
-     * Functionality:
-     * - Logs the initialization message with an INFO log level.
-     * - Configures the "Go Back" button to handle user logout.
-     * - Dynamically sets the label text prompting the user to enter credentials
-     *   based on the current employee occupation retrieved from the User class.
+     * Функционалност:
+     * - Логва информационно съобщение чрез {@link LoggerHelper#logData(Class, LoggerLevels, String)}, което
+     * указва, че инициализацията на контролера е стартирана.
+     * - Настройва бутонът за връщане назад ({@code btnGoBack}) да извърши операцията {@link User#userLogout()} при натискане.
+     * - Актуализира текста на етикета {@code lblEnterCredentials}, като го форматира с длъжността
+     * на потребителя, взета чрез метода {@link User#getEmployeeOccupationBasedOnWellcome()}.
      */
     @FXML
     public void initialize() {
@@ -57,21 +52,21 @@ public class LogController {
     }
 
     /**
-     * Handles the user login process by verifying employee credentials and switching
-     * the application scene for valid users. This method is invoked when a user attempts
-     * to access the user-specific functionality by providing their username and password.
+     * Методът {@code switchToUser} отговаря за проверка на автентичността на въведени потребителски
+     * данни и, в случай на успешна проверка, превключва потребителя към сцена, подходяща за неговата роля.
      *
-     * Functionality:
-     * - Retrieves and validates employee credentials (employee name and password) provided via text input fields.
-     * - Uses the User class to verify the validity of the entered credentials and fetches the associated Employee entity.
-     * - Logs the operation if the credentials are valid, including the employee's username and occupation.
-     * - Switches the application’s UI to the "USER" scene upon successful login.
+     * Операция:
+     * - Извлича въведените данни от полетата {@link LogController#employeeName} и {@link LogController#password}.
+     * - Проверява данните чрез метода {@link User#CheckEmployee(String, String)}.
+     * - Ако потребителят е валиден ({@code emp != null}), логва съобщение с използването на
+     *   {@link LoggerHelper#logData(Class, LoggerLevels, String)}.
+     * - При успешна проверка променя сцената към потребителския изглед с помощта на метода {@link SceneHelper#switchTo(Scenes)}.
      *
-     * Exception Handling:
-     * - If a NullPointerException is encountered (e.g., missing or null inputs), logs the exception message
-     *   and rethrows it for further handling.
+     * Изключения и обработка:
+     * - Методът прихваща {@link NullPointerException} в случай че липсват необходимите потребителски данни
+     *   или възникне неочаквано събитие, и го прехвърля нагоре със съхранение на съобщението за грешка.
      *
-     * @throws IOException if an input or output error occurs during scene transition.
+     * @throws IOException Възниква при грешка в смяната на сцената.
      */
     @FXML
     protected void switchToUser() throws IOException {

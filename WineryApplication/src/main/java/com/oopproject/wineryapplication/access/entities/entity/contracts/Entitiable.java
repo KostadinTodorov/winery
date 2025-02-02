@@ -4,35 +4,35 @@ import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 
 /**
- * Represents an entity with a unique identifier and associated data access object.
+ * Представлява entity с уникален идентификатор и свързан обект за достъп до данни.
  *
- * This interface defines a contract for classes representing entities
- * that can be stored, retrieved, and updated in a data source.
+ * Този интерфейс дефинира договор за класове, представящи entity-та,
+ * които могат да бъдат съхранявани, извличани и актуализирани в източник на данни.
  *
- * Methods in this interface:
- * - Provide access to a unique identifier (`id`) associated with the entity.
- * - Allow retrieval of the Data Access Object (DAO) associated with the entity's type.
+ * Методи в този интерфейс:
+ * - Осигуряват достъп до уникален идентификатор (`id`), свързан с entity-то.
+ * - Позволяват извличане на Data Access Object (DAO), свързан с типа на entity-то.
  */
 public interface Entitiable {
     /**
-     * Retrieves the unique identifier associated with the entity.
+     * Извлича уникалния идентификатор, свързан с entity-то.
      *
-     * @return the unique identifier of the entity as an {@code Integer}, or {@code null} if the identifier is not set.
+     * @return уникалният идентификатор на entity-то като {@code Integer} или {@code null}, ако идентификаторът не е зададен.
      */
     Integer getId();
 
     /**
-     * Sets the unique identifier for the entity.
+     * Задава уникалния идентификатор за entity-то.
      *
-     * @param id the unique identifier to assign to the entity, represented as an {@code Integer}.
-     *           This value can be {@code null}, which indicates that the entity may not have an assigned ID yet.
+     * @param id уникалният идентификатор, който да бъде присвоен на entity-то, представен като {@code Integer}.
+     *           Тази стойност може да бъде {@code null}, което показва, че entity-то може да няма присвоен ID все още.
      */
     void setId(Integer id);
 
     /**
-     * Retrieves the Data Access Object (DAO) associated with the entity's type.
+     * Извлича Data Access Object (DAO), свързан с типа на entity-то.
      *
-     * @return the DAO instance that provides CRUD operations and data management for the entity
+     * @return инстанцията на DAO, която предоставя CRUD операции и управление на данни за entity-то.
      */
     Dao getDao();
 }

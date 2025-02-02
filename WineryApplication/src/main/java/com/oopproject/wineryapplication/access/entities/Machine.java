@@ -8,6 +8,57 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+
+/**
+ * Represents the Machine entity in the system, corresponding to the "machines" table in the database.
+ * This class extends the base Entity class to inherit common functionalities and adds
+ * specific attributes and relationships for the concept of a "Machine".
+ * <p>
+ * Each instance of Machine is identified by a unique ID, has attributes such as machine type,
+ * production year, fault code, service and replacement requirements, service cost,
+ * and a related answer.
+ * <p>
+ * The class also implements methods to retrieve and set its properties,
+ * interact with the DAO, and override the default string representation.
+ * <p>
+ * Fields:
+ * <ul>
+ *     <li>{@code id}: Unique identifier for the Machine entity.</li>
+ *     <li>{@code machineType}: The type of the machine, forming a many-to-one relationship with {@link MachineType}.</li>
+ *     <li>{@code productionYear}: The year when the machine was produced, represented as a {@link LocalDate}.</li>
+ *     <li>{@code faultCode}: A reference to the fault code, forming a many-to-one relationship with {@link FaultCode}.</li>
+ *     <li>{@code needsService}: Indicates whether the machine needs servicing, represented as a boolean.</li>
+ *     <li>{@code needsReplacement}: Indicates whether the machine needs replacement, represented as a boolean.</li>
+ *     <li>{@code serviceCost}: The cost of servicing the machine, stored with a precision of 7 and scale of 3 as a {@link BigDecimal}.</li>
+ *     <li>{@code answer}: A reference to an answer, forming a many-to-one relationship with {@link Answer}.</li>
+ * </ul>
+ * <p>
+ * Methods:
+ * <ul>
+ *     <li>{@code getId()}: Retrieves the ID of the Machine.</li>
+ *     <li>{@code setId(Integer id)}: Sets the ID of the Machine.</li>
+ *     <li>{@code getMachineType()}: Retrieves the type of the Machine.</li>
+ *     <li>{@code setMachineType(MachineType machineType)}: Sets the type of the Machine.</li>
+ *     <li>{@code getProductionYear()}: Retrieves the production year of the Machine.</li>
+ *     <li>{@code setProductionYear(LocalDate productionYear)}: Sets the production year of the Machine.</li>
+ *     <li>{@code getFaultCode()}: Retrieves the fault code of the Machine.</li>
+ *     <li>{@code setFaultCode(FaultCode faultCode)}: Sets the fault code of the Machine.</li>
+ *     <li>{@code getNeedsService()}: Retrieves whether the Machine needs servicing.</li>
+ *     <li>{@code setNeedsService(Boolean needsService)}: Sets whether the Machine needs servicing.</li>
+ *     <li>{@code getNeedsReplacement()}: Retrieves whether the Machine needs replacement.</li>
+ *     <li>{@code setNeedsReplacement(Boolean needsReplacement)}: Sets whether the Machine needs replacement.</li>
+ *     <li>{@code getServiceCost()}: Retrieves the service cost of the Machine.</li>
+ *     <li>{@code setServiceCost(BigDecimal serviceCost)}: Sets the service cost of the Machine.</li>
+ *     <li>{@code getAnswer()}: Retrieves the related answer for the Machine.</li>
+ *     <li>{@code setAnswer(Answer answer)}: Sets the related answer for the Machine.</li>
+ *     <li>{@code getDao()}: Provides the DAO implementation specific to Machine for database interaction.</li>
+ * </ul>
+ * <p>
+ * Relationships:
+ * - Many-to-one relationship with {@code MachineType} defining the machine type.
+ * - Many-to-one relationship with {@code FaultCode} defining fault codes associated with the Machine.
+ * - Many-to-one relationship with {@code Answer} linking possible answers or resolutions.
+ */
 @Entity
 @Table(name = "machines", schema = "public")
 public class Machine extends com.oopproject.wineryapplication.access.entities.entity.Entity {

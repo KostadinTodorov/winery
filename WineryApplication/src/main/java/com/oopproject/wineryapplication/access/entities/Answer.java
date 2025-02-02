@@ -8,33 +8,38 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+
 /**
- * Represents an Answer entity in the system, corresponding to the "answers" table in the database.
- * This class extends the base entity class to inherit common functionalities and adds
- * specific attributes and relationships for the "Answer" concept.
- *
- * Each instance of Answer is identified by a unique ID,
- * includes a string representing the answer, and is associated with a collection of machines.
- *
- * The Answer class also implements methods for retrieving and setting its properties,
- * interacting with a DAO, and overriding the default string representation.
- *
- * Fields:
- * - id: A unique identifier for the Answer entity.
- * - answers: A string representing the answer (maximum length 20).
- * - machines: A set of machines associated with this Answer, forming a one-to-many relationship.
- *
- * Methods:
- * - getId(): Retrieves the ID of the Answer.
- * - setId(Integer id): Sets the ID of the Answer.
- * - getDao(): Provides a DAO implementation specific to Answer for interacting with the database.
- * - getAnswers(): Retrieves the string representing the answer.
- * - setAnswers(String answers): Sets the string representing the answer.
- * - getMachines(): Retrieves the set of machines associated with the Answer.
- * - setMachines(Set<Machine> machines): Sets the machines associated with the Answer.
- *
- * Relationships:
- * - One-to-many relationship with the Machine entity, mapped by the "answer" field in Machine.
+ * Представлява entity Answer в системата, съответстващо на таблицата "answers" в базата данни.
+ * Този клас разширява базовия клас entity, за да наследи общи функционалности и добавя
+ * специфични атрибути и връзки за концепцията "Answer".
+ * <p>
+ * Всяка инстанция на Answer се идентифицира с уникален ID,
+ * има низ отговор и е свързана с колекция от машини.
+ * <p>
+ * Класът Answer също имплементира методи за извличане и задаване на неговите свойства,
+ * взаимодействие с DAO и предефиниране на string представянето по подразбиране.
+ * <p>
+ * Полета:
+ * <ul>
+ *     <li>{@code id}: Уникален идентификатор за entity Answer.</li>
+ *     <li>{@code answers}: Низ, представляващ отговора (максимална дължина 20).</li>
+ *     <li>{@code machines}: Набор от машини, свързани с този Answer, образуващи връзка един-към-много.</li>
+ * </ul>
+ * <p>
+ * Методи:
+ * <ul>
+ *     <li>{@code getId()}: Извлича ID на Answer.</li>
+ *     <li>{@code setId(Integer id)}: Задава ID на Answer.</li>
+ *     <li>{@code getDao()}: Предоставя DAO имплементация, специфична за Answer, за взаимодействие с базата данни.</li>
+ *     <li>{@code getAnswers()}: Извлича отговора.</li>
+ *     <li>{@code setAnswers(String answers)}: Задава отговора.</li>
+ *     <li>{@code getMachines()}: Извлича набора от машини, свързани с Answer.</li>
+ *     <li>{@code setMachines(Set<Machine> machines)}: Задава машините, свързани с Answer.</li>
+ * </ul>
+ * <p>
+ * Връзки:
+ * - Връзка един-към-много с {@code Machine entity}, съпоставена чрез полето "answer" в Machine.
  */
 @Entity
 @Table(name = "answers", schema = "public")

@@ -3,28 +3,20 @@ package com.oopproject.wineryapplication.helpers.buttons;
 import java.util.Map;
 
 /**
- * Interface representing a map of button actions, where each button is identified
- * by an integer key and associated with a specific action. The actions are encapsulated
- * using {@link ButtonsHelper.ButtonAction}, which provides the behavior to be executed
- * on interacting with the button.
- *
- * Implementations of this interface are expected to provide a mapping of button keys
- * to their corresponding actions. This allows for flexible button behavior assignment
- * and convenient retrieval of button actions at runtime.
- *
- * The interface defines the contract for accessing the button-action map, but it does not
- * enforce any specific way of initializing or organizing the map. Implementations may
- * define their own logic for populating and managing the map.
+ * Интерфейсът {@code ButtonsMap} предоставя метод за извличане на карта,
+ * която свързва числови идентификатори на бутони с техните съответни действия.
+ * Основната идея е да се дефинира начин за организиране на действията на бутоните
+ * чрез карта, където ключовете са идентификаторите на бутоните, а стойностите
+ * са инстанции на {@link ButtonsHelper.ButtonAction}, описващи поведението на бутоните.
  */
 public interface ButtonsMap {
     /**
-     * Retrieves a mapping of integer keys to button actions.
-     * Each entry in the map associates an integer identifier with a specific
-     * {@link ButtonsHelper.ButtonAction} that defines the behavior of the corresponding button.
+     * Извлича карта, която свързва числови идентификатори с действия на бутони.
+     * Картата представлява асоциация между {@code Integer} идентификаторите и обекти
+     * от тип {@link ButtonsHelper.ButtonAction}.
      *
-     * @return a map where the keys are integers representing button identifiers
-     *         and the values are {@link ButtonsHelper.ButtonAction} instances describing
-     *         the actions to be executed for each button.
+     * @return {@link Map}, която съдържа съответствието между числови идентификатори и
+     * обекти от тип {@link ButtonsHelper.ButtonAction}.
      */
     Map<Integer, ButtonsHelper.ButtonAction> getActionMap();
 }

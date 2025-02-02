@@ -8,18 +8,18 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
- * Represents a contract for converting an entity's fields into a mapping of fields to UI nodes.
+ * Представлява договор за преобразуване на полетата на entity-то в съпоставяне на полета към UI възли.
  *
- * This interface provides a single method that maps fields of an entity to corresponding UI nodes,
- * facilitating interaction between data models and graphical user interfaces.
+ * Този интерфейс предоставя единствен метод, който съпоставя полетата на entity-то със съответните UI възли,
+ * улеснявайки взаимодействието между моделите на данни и графичните потребителски интерфейси.
  */
 public interface EntityFieldNodeble {
     /**
-     * Converts the fields of an entity into a mapping of fields to corresponding UI nodes.
+     * Преобразува полетата на entity-то в съпоставяне на полета към съответните UI възли.
      *
-     * @param entityFieldMapper an {@code EntityFieldMapper} instance that provides the mapping of fields to nodes.
-     * @return a {@code Map} where the keys are {@code Field} objects representing the entity's fields,
-     *         and the values are {@code Node} objects representing the corresponding UI components.
+     * @param entityFieldMapper инстанция на {@code EntityFieldMapper}, която предоставя съпоставянето на полета към възли.
+     * @return {@code Map}, където ключовете са обекти {@code Field}, представляващи полетата на entity-то,
+     *         а стойностите са обекти {@code Node}, представляващи съответните UI компоненти.
      */
     Map<Field,Node> toFieldNodesMap(EntityFieldMapper entityFieldMapper);
 //    Entity fromNode(Map<Field,Node> fieldNodeMap);

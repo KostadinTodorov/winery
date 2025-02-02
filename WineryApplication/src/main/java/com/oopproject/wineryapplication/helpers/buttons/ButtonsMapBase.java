@@ -7,17 +7,13 @@ import java.util.LinkedHashMap;
 import java.util.stream.Stream;
 
 /**
- * Provides a base implementation for managing a map of button identifiers to corresponding
- * actions. Each button is identified by an integer key, and its functionality is defined
- * by a {@link ButtonsHelper.ButtonAction}.
+ * Абстрактният клас {@code ButtonsMapBase} служи като основа за управление на карта,
+ * която асоциира числови идентификатори на бутони с техните съответни действия.
+ * Този клас прилага интерфейса {@link ButtonsMap} и осигурява стандартна функционалност
+ * за управление и сортиране на тази карта.
  *
- * This abstract class simplifies the process of creating and managing button-action mappings
- * by offering a structure for initialization and optional sorting of the action map.
- * Subclasses are required to implement the {@link #initializeMap()} method to define their
- * specific button-action mappings.
- *
- * The class also includes a protected `Map` to store the mappings and a public method
- * to retrieve the finalized map for use.
+ * Класът изисква от разширяващите го класове да предоставят специфична реализация
+ * за инициализация на картата чрез метода {@link #initializeMap()}.
  */
 public abstract class ButtonsMapBase implements ButtonsMap {
 
@@ -32,27 +28,21 @@ public abstract class ButtonsMapBase implements ButtonsMap {
     protected abstract Map<Integer, ButtonsHelper.ButtonAction> initializeMap();
 
     /**
-     * Sorts the `actionMap` by the labels of its corresponding {@link ButtonsHelper.ButtonAction} values.
+     * Сортира картата {@code actionMap}, като подрежда записите в нарастващ ред по стойността на етикетите
+     * (labels) на действията {@code ButtonAction}.
+     * <p>
+     * Методът използва {@link Stream} за преобразуване и сортиране на записите в картата
+     * и създава нова инстанция на {@link LinkedHashMap}, за да запази подредбата на елементите
+     * според сортирането.
+     * </p>
      *
-     * This method updates the `actionMap` by sorting its entries based on the natural order of the
-     * labels of the {@link ButtonsHelper.ButtonAction} objects. The resulting map retains the
-     * key-value associations but organizes them in the order determined by the labels.
+     * @implNote Сортирането се изпълнява, като се извика методът {@link Comparator#comparing} с референция
+     * до метода {@code getLabel} на класа {@link ButtonsHelper.ButtonAction}. Новата карта е подредена,
+     * използвайки {@link Collectors#toMap}, като се гарантира, че ключовете и стойностите няма да бъдат дублирани.
      *
-     * The sorting operation produces a new {@link LinkedHashMap} to preserve the order of entries.
-     * The sorting is applied using a {@link Stream} of entries and converting it back to a map.
-     *
-     * The method uses:
-     * - {@link Map.Entry#comparingByValue} with a comparator that accesses the `label` property
-     *   of each {@link ButtonsHelper.ButtonAction}.
-     * - {@link Collectors#toMap} to collect sorted entries into a {@link LinkedHashMap}, ensuring
-     *   that the original order of insertion is replaced with the sorted order.
-     *
-     * Note: This method assumes that the `label` property of {@link ButtonsHelper.ButtonAction} is
-     * not null and implements {@link Comparable} to define its natural sorting order.
-     *
-     * Implementation details:
-     * - If multiple entries have the same label, their relative order is unspecified.
-     * - Resolves key collisions by retaining the first encountered entry.
+     * @throws NullPointerException ако някоя от стойностите в {@code actionMap} е {@code null}.
+     * @throws IllegalStateException ако има дублирани записи след сортирането. Това е предотвратено чрез
+     * предоставеното разрешаване на конфликти в {@link Collectors#toMap}.
      */
     private void sortActionMap() {
         actionMap = actionMap.entrySet().stream()

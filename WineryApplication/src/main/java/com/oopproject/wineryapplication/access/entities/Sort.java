@@ -8,6 +8,18 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Класът {@code Sort} представлява модел за сорта на грозде в системата.
+ * Този клас е entity, което е свързано с базата данни чрез JPA анотации,
+ * и наследява функционалността на {@link com.oopproject.wineryapplication.access.entities.entity.Entity}.
+ *
+ * Класът включва следните основни атрибути:
+ * - {@code id}: Уникален идентификатор за сорта.
+ * - {@code name}: Името на сорта.
+ * - {@code harvests}: Колекция от реколти, свързани с този сорт.
+ *
+ * Чрез този модел се управляват сортовете, съхранявани в базата данни.
+ */
 @Entity
 @Table(name = "sort", schema = "public")
 public class Sort extends com.oopproject.wineryapplication.access.entities.entity.Entity {

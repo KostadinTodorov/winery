@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
+            <version>23.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -87,6 +87,23 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <sourcepath>${basedir}/src/main/java</sourcepath>
+                    <reportOutputDirectory>${basedir}/target/site/javadoc</reportOutputDirectory>
+                    <doctitle>Winery Management System Documentation</doctitle>
+                    <windowtitle>WMSDocs</windowtitle>
+                    <header>Winery Management System</header>
+                    <bottom>Generated on {date}</bottom>
+                    <modulePaths>
+                        <modulePath>path/to/module1.jar</modulePath>
+                        <modulePath>path/to/module2.jar</modulePath>
+                    </modulePaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

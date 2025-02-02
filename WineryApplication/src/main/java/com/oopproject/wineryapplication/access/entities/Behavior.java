@@ -6,27 +6,37 @@ import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import jakarta.persistence.*;
 
 
+
 /**
- * Represents a Behavior entity in the system, corresponding to the "behavior" table in the database.
- * This class extends the base Entity class to inherit common functionalities and defines attributes
- * and relationships unique to the "Behavior" concept.
+ * The {@code Behavior} class represents an entity in the system, corresponding to the "behavior" table in the database.
+ * This class inherits from a base {@code Entity} class to gain reusable functionality and defines specific attributes
+ * and relations representing the concept of a "Behavior."
  * <p>
- * Each instance of Behavior is identified by a unique ID,
- * and is associated with an Employee and an Act entity.
+ * Each instance of {@code Behavior} is uniquely identified by its ID, is associated with an Employee entity,
+ * and establishes a many-to-one relationship with an Act entity. This relationship allows several behaviors
+ * to be linked to a single act or employee.
  * <p>
- * Fields:
- * - id: A unique identifier for the Behavior entity.
- * - employee: The Employee associated with this Behavior, forming a many-to-one relationship.
- * - act: The Act associated with this Behavior, forming a many-to-one relationship.
+ * Attributes:
+ * <ul>
+ *     <li>{@code id}: The unique identifier for the Behavior entity, automatically generated.</li>
+ *     <li>{@code employee}: The Employee entity that this behavior is linked to; establishes a many-to-one relationship.</li>
+ *     <li>{@code act}: The Act entity associated with this behavior; establishes a many-to-one relationship.</li>
+ * </ul>
  * <p>
  * Methods:
- * - getId(): Retrieves the ID of the Behavior.
- * - setId(Integer id): Sets the ID of the Behavior.
- * - getEmployee(): Retrieves the Employee associated with the Behavior.
- * - setEmployee(Employee employee): Sets the Employee associated with the Behavior.
- * - getAct(): Retrieves the Act associated with the Behavior.
- * - setAct(Act act): Sets the Act associated with the Behavior.
- * - getDao(): Provides a DAO implementation specific to Behavior for interacting with the database.
+ * <ul>
+ *     <li>{@code getId()}: Retrieves the unique ID of the Behavior entity.</li>
+ *     <li>{@code setId(Integer id)}: Assigns a unique ID to the Behavior entity.</li>
+ *     <li>{@code getEmployee()}: Retrieves the Employee entity linked to this Behavior.</li>
+ *     <li>{@code setEmployee(Employee employee)}: Associates this Behavior with an Employee entity.</li>
+ *     <li>{@code getAct()}: Retrieves the Act entity linked to this Behavior.</li>
+ *     <li>{@code setAct(Act act)}: Associates this Behavior with an Act entity.</li>
+ *     <li>{@code getDao()}: Returns a DAO implementation specific to the Behavior entity for database interaction.</li>
+ * </ul>
+ * <p>
+ * Relationships:
+ * - Many-to-one relationship with {@code Employee} entity, linked through the field "employee_id."
+ * - Many-to-one relationship with {@code Act} entity, linked through the field "act_id."
  */
 @Entity
 @Table(name = "behavior", schema = "public")

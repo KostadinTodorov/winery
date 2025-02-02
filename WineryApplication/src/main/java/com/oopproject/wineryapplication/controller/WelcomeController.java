@@ -12,9 +12,15 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 
 /**
- * The WelcomeController class acts as the controller for the Welcome scene in a JavaFX application.
- * It handles interactions with the UI elements present in the Welcome screen, including button presses
- * for different user roles.
+ * Клас {@code WelcomeController} отговаря за началната сцена на приложението,
+ * предоставяйки възможност на потребителите да изберат тяхната роля
+ * (CEO, Организатор на склада, Счетоводител или Лидер на отдел) и
+ * преминаване към екрана за вход.
+ *
+ * Ключови функции:
+ * - Записва информация за събития с помощта на {@link LoggerHelper}.
+ * - Настройва ролята на потребителя чрез {@link User#setEmployeeOccupationBasedOnWelcome(String)}.
+ * - Осъществява преход към екрана за вход с {@link SceneHelper#switchTo(Scenes)}.
  */
 public class WelcomeController {
 
@@ -28,13 +34,12 @@ public class WelcomeController {
     Button btnDevisionLead;
 
     /**
-     * Initializes the WelcomeController by performing any required setup tasks
-     * before the controller is used. This method is automatically called after
-     * the FXML file has been loaded and ensures that the controller's state is initialized.
+     * Методът {@code initialize} се използва за инициализиране на контролера {@link WelcomeController}.
+     * При извикване методът записва лог съобщение с ниво {@link LoggerLevels#INFO}, указвайки,
+     * че инициализацията на контролера е започнала. Логването се извършва с помощта на
+     * {@link LoggerHelper#logData(Class, LoggerLevels, String)}.
      *
-     * Functionality:
-     * - Logs an informational message indicating the initialization of the
-     *   WelcomeController using the LoggerHelper utility.
+     * @see LoggerHelper#logData(Class, LoggerLevels, String)
      */
     @FXML
     public void initialize() {
@@ -42,13 +47,18 @@ public class WelcomeController {
     }
 
     /**
-     * Handles the action of switching to the login screen based on the button pressed.
-     * Updates the user's occupation in the system depending on the selected role and
-     * transitions to the login scene.
+     * Методът {@code switchToLogin} обработва събитие от типа {@link ActionEvent}, стартирано от потребителски избор,
+     * и извършва следните действия:
+     * <ul>
+     * <li>Регистрира лог съобщение за определената роля на потребителя с помощта на {@link LoggerHelper#logData(Class, LoggerLevels, String)}.</li>
+     * <li>Настройва ролята на потребителя чрез {@link User#setEmployeeOccupationBasedOnWelcome(String)}
+     *      на база избрания бутон от сцената (например CEO, Организатор на склада, Счетоводител или Лидер на отдел).</li>
+     * <li>Превключва сцената към {@code LOG} екрана чрез {@link SceneHelper#switchTo(Scenes)}.</li>
+     * </ul>
      *
-     * @param event The ActionEvent triggered by pressing one of the role selection buttons
-     *              (e.g., CEO, Storage Organiser, Accountant, or Division Lead).
-     * @throws IOException if an I/O error occurs during the scene transition.
+     * @param event {@link ActionEvent}, който се задейства при натискане на един от бутоните за избор на роля.
+     *              Чрез параметъра {@code event.getSource()} се идентифицира кой бутон е натиснат.
+     * @throws IOException ако възникне грешка при промяната на сцената.
      */
     @FXML
     protected void switchToLogin(ActionEvent event) throws IOException {

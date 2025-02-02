@@ -10,23 +10,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link Container} entity using Hibernate.
+ * DAO клас за изпълнение на CRUD операции върху {@link Container} чрез Hibernate.
  * <p>
- * This class extends {@link EntityDao} and provides implementations for:
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
  * <ul>
- *   <li>Retrieving single or multiple {@link Container} entities.</li>
- *   <li>Adding a new {@link Container} entity.</li>
- *   <li>Updating an existing {@link Container} entity.</li>
- *   <li>Deleting an {@link Container} entity by its ID.</li>
+ *   <li>Извличане на единични или множество {@link Container} обекти.</li>
+ *   <li>Добавяне на нов {@link Container} обект.</li>
+ *   <li>Актуализиране на съществуващ {@link Container} обект.</li>
+ *   <li>Изтриване на {@link Container} обект по неговото ID.</li>
  * </ul>
  * <p>
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействие с базата данни и включва
+ * подходящо управление на транзакции за осигуряване на целостта на данните.
  */
 public class ContainerDao extends EntityDao<Container> {
 
     /**
-     * Constructs an {@code ContainerDao} for performing CRUD operations on the {@link Container} entity.
+     * Конструира {@code ContainerDao} за изпълнение на CRUD операции върху {@link Container}.
      * {@inheritDoc}
      */
     public ContainerDao() {

@@ -11,21 +11,21 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link Answer} entity using Hibernate.
+ * DAO клас за извършване на CRUD операции върху обекта {@link Answer} с помощта на Hibernate.
  *
- * This class extends {@link EntityDao} and provides implementations for:
- * - Retrieving single or multiple {@link Answer} entities.
- * - Adding a new {@link Answer} entity.
- * - Updating an existing {@link Answer} entity.
- * - Deleting an {@link Answer} entity by its ID.
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
+ * - Извличане на единични или множество обекти {@link Answer}.
+ * - Добавяне на нов обект {@link Answer}.
+ * - Актуализиране на съществуващ обект {@link Answer}.
+ * - Изтриване на обект {@link Answer} по неговия ID.
  *
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействия с базата данни и включва
+ * подходяща обработка на транзакциите, за да се гарантира целостта на данните.
  */
 public class AnswerDao extends EntityDao<Answer> {
 
     /**
-     * Constructs an {@code AnswerDao} for performing CRUD operations on the {@link Answer} entity.
+     * Конструира {@code AnswerDao} за извършване на CRUD операции върху обекта {@link Answer}.
      * {@inheritDoc}
      */
     public AnswerDao() {

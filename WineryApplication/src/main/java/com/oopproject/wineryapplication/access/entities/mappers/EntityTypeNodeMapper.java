@@ -17,39 +17,39 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Represents a concrete implementation of the {@link EntityFieldMapper} interface.
- * This class provides functionality to generate a map that associates fields of a specific
- * {@link Entity} class with corresponding JavaFX UI nodes.
+ * Представлява конкретна имплементация на интерфейса {@link EntityFieldMapper}.
+ * Този клас предоставя функционалност за генериране на карта, която свързва полетата на специфичен
+ * клас {@link Entity} със съответните JavaFX UI възли.
  *
- * This class is used to dynamically map entity fields to appropriate UI components, enabling automatic
- * generation of user interfaces for managing entities.
+ * Този клас се използва за динамично съпоставяне на полета на entity-то към подходящи UI компоненти,
+ * позволявайки автоматично генериране на потребителски интерфейси за управление на entity-та.
  */
 public class EntityTypeNodeMapper implements EntityFieldMapper{
     private final Class<? extends Entity> entityClass;
 
     /**
-     * Constructor for the EntityTypeNodeMapper class.
-     * Creates a new instance that maps fields of the specified {@code entityClass}
-     * to corresponding JavaFX UI nodes.
+     * Конструктор за класа EntityTypeNodeMapper.
+     * Създава нов инстанция, която съпоставя полета на указания {@code entityClass}
+     * към съответните JavaFX UI възли.
      *
-     * @param entityClass the class type of the {@code Entity} to be used for field-to-node mapping
+     * @param entityClass типът на класа на {@code Entity}, който ще се използва за съпоставяне поле-към-възел.
      */
     public EntityTypeNodeMapper(Class<? extends Entity> entityClass) {
         this.entityClass = entityClass;
     }
 
     /**
-     * Generates and returns a mapping between the declared fields of the entity class
-     * and their corresponding JavaFX UI nodes. The method dynamically assigns appropriate
-     * UI components based on the type of each field.
+     * Генерира и връща съпоставяне между декларираните полета на класа entity
+     * и техните съответни JavaFX UI възли. Методът динамично присвоява подходящи
+     * UI компоненти въз основа на типа на всяко поле.
      *
-     * Fields of type {@link Entity} are associated with a {@link ComboBox} populated with
-     * all instances of the entity type. Boolean fields are mapped to a {@link CheckBox},
-     * {@link LocalDate} fields are assigned a {@link DatePicker}, and other field types are
-     * linked to a {@link TextField} with a prompt indicating the field's type.
+     * Полетата от тип {@link Entity} са свързани с {@link ComboBox}, попълнен с
+     * всички инстанции на типа entity. Булевите полета са съпоставени с {@link CheckBox},
+     * полетата от тип {@link LocalDate} получават {@link DatePicker}, а другите типове полета са
+     * свързани с {@link TextField} с подкана, показваща типа на полето.
      *
-     * @return a map where keys are {@link Field} objects representing the fields of the
-     *         entity class, and values are corresponding {@link Node} objects for the UI.
+     * @return карта, където ключовете са обекти {@link Field}, представляващи полетата на
+     *         класа entity, а стойностите са съответни обекти {@link Node} за UI.
      */
     public Map<Field, Node> getFieldNodeMap() {
         Map<Field, Node> fieldNodeMap = new HashMap<>();
@@ -83,14 +83,14 @@ public class EntityTypeNodeMapper implements EntityFieldMapper{
     }
 
     /**
-     * Retrieves the class type of the entity associated with this mapper.
+     * Извлича типа на класа на entity-то, свързано с този mapper.
      *
-     * This method provides access to the entity class that is used for creating
-     * field-to-node mappings or other operations requiring knowledge of the
-     * entity's type. The returned class type is determined during the
-     * instantiation of the containing class.
+     * Този метод предоставя достъп до класа entity, който се използва за създаване
+     * на съпоставяния поле-към-възел или други операции, изискващи познаване на
+     * типа на entity-то. Върнатият тип на класа се определя по време на
+     * инстанцирането на съдържащия клас.
      *
-     * @return the class type of the associated entity, extending {@code Entity}.
+     * @return типът на класа на свързаното entity, разширяващ {@code Entity}.
      */
     protected Class<? extends Entity> getEntityClass() {
         return entityClass;

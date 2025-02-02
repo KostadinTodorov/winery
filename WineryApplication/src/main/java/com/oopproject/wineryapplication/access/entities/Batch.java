@@ -8,42 +8,47 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+
 /**
- * Represents a Batch entity in the system, corresponding to the "batch" table in the database.
- * This class extends the base entity class to inherit common functionalities and adds
- * specific attributes and relationships for the "Batch" concept.
+ * Представлява entity Batch в системата, съответстващо на таблицата "batch" в базата данни.
+ * Този клас разширява базовия клас entity, за да наследи общи функционалности и добавя
+ * специфични атрибути и връзки за концепцията "Batch".
  * <p>
- * Each instance of Batch is identified by a unique ID, has a volume that denotes the quantity
- * associated with the batch, and is linked to specific wine types and other related entities.
+ * Всяка инстанция на Batch се идентифицира с уникален ID,
+ * съхранява обем, е свързана с тип вино и включва колекции на хранилища, бутилки и смеси.
  * <p>
- * Fields:
- * - id: A unique identifier for the Batch entity.
- * - volume: An integer representing the volume associated with the batch.
- * - wineType: A reference to the WineType entity that describes the associated wine type.
- * - batchStoridges: A collection of BatchStoridge entities associated with this batch.
- * - bottles: A collection of Bottle entities produced from this batch.
- * - mixes: A collection of Mix entities to which this batch contributes.
+ * Полета:
+ * <ul>
+ *     <li>{@code id}: Уникален идентификатор за entity Batch.</li>
+ *     <li>{@code volume}: Цяло число, представляващо обема на партидата.</li>
+ *     <li>{@code wineType}: Връзка към обект от тип WineType, представящ типа вино за партидата.</li>
+ *     <li>{@code batchStoridges}: Набор от "BatchStoridge" обекти, свързани с партидата.</li>
+ *     <li>{@code bottles}: Набор от "Bottle" обекти, свързани с партидата.</li>
+ *     <li>{@code mixes}: Набор от "Mix" обекти, свързани с партидата.</li>
+ * </ul>
  * <p>
- * Methods:
- * - getId(): Retrieves the unique ID of the Batch entity.
- * - setId(Integer id): Sets the unique ID of the Batch entity.
- * - getVolume(): Retrieves the volume of the Batch entity.
- * - setVolume(Integer volume): Sets the volume of the Batch entity.
- * - getWineType(): Retrieves the associated WineType entity.
- * - setWineType(WineType wineType): Links a WineType entity to this Batch.
- * - getBatchStoridges(): Retrieves the associated set of BatchStoridge entities.
- * - setBatchStoridges(Set<BatchStoridge> batchStoridges): Sets the associated BatchStoridge entities.
- * - getBottles(): Retrieves the associated set of Bottle entities.
- * - setBottles(Set<Bottle> bottles): Sets the associated Bottle entities.
- * - getMixes(): Retrieves the associated set of Mix entities.
- * - setMixes(Set<Mix> mixes): Sets the associated Mix entities.
- * - getDao(): Provides a DAO implementation specific to Batch for interacting with the database.
+ * Методи:
+ * <ul>
+ *     <li>{@code getId()}: Извлича уникалния идентификатор на партидата.</li>
+ *     <li>{@code setId(Integer id)}: Задава уникалния идентификатор на партидата.</li>
+ *     <li>{@code getVolume()}: Извлича обема на партидата.</li>
+ *     <li>{@code setVolume(Integer volume)}: Задава обема на партидата.</li>
+ *     <li>{@code getWineType()}: Извлича свързания тип вино.</li>
+ *     <li>{@code setWineType(WineType wineType)}: Задава свързания тип вино.</li>
+ *     <li>{@code getBatchStoridges()}: Извлича набора от свързани BatchStoridge обекти.</li>
+ *     <li>{@code setBatchStoridges(Set<BatchStoridge> batchStoridges)}: Задава свързаните BatchStoridge обекти.</li>
+ *     <li>{@code getBottles()}: Извлича набора от свързани Bottle обекти.</li>
+ *     <li>{@code setBottles(Set<Bottle> bottles)}: Задава свързаните Bottle обекти.</li>
+ *     <li>{@code getMixes()}: Извлича набора от свързани Mix обекти.</li>
+ *     <li>{@code setMixes(Set<Mix> mixes)}: Задава свързаните Mix обекти.</li>
+ *     <li>{@code getDao()}: Връща DAO обекта за взаимодействие с базата данни за този клас.</li>
+ * </ul>
  * <p>
- * Relationships:
- * - Many-to-one relationship with the WineType entity, linked via the "wine_type_id" field.
- * - One-to-many relationship with the BatchStoridge entity, mapped by the "batch" field in BatchStoridge.
- * - One-to-many relationship with the Bottle entity, mapped by the "batch" field in Bottle.
- * - One-to-many relationship with the Mix entity, mapped by the "batch" field in Mix.
+ * Връзки:
+ * - Връзка един-към-много с {@code BatchStoridge entity}, съпоставена чрез полето "batch" в BatchStoridge.
+ * - Връзка един-към-много с {@code Bottle entity}, съпоставена чрез полето "batch" в Bottle.
+ * - Връзка един-към-много с {@code Mix entity}, съпоставена чрез полето "batch" в Mix.
+ * - Връзка много-към-един с {@code WineType entity}, съпоставена чрез полето "wineType" в Batch.
  */
 @Entity
 @Table(name = "batch", schema = "public")

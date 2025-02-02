@@ -13,15 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 /**
- * The UserMainController class acts as the main controller in a graphical user interface
- * environment. It manages and initializes the user-specific functionality, including
- * greeting messages, action buttons, and user interactions based on the user's occupation
- * within the system. Occupations dictate the visibility and availability of various categories
- * and operations buttons using mappings.
+ * {@code UserMainController} е клас, който управлява основния потребителски изглед в приложението.
  *
- * This class uses the JavaFX framework and provides functionality for initializing the
- * interface elements and maintaining user interaction logic. Logging is utilized to trace
- * user activity and system states during operation.
+ * Този контролер работи с JavaFX елементи, за да настрои интерфейса въз основа на ролята на потребителя
+ * и предоставя необходимата функционалност, за да се извършват специфични операции.
  */
 public class UserMainController {
 
@@ -37,21 +32,27 @@ public class UserMainController {
     private Label lblUserPrompt;
 
     /**
-     * Initializes the UserMainController with the necessary setup for user interaction
-     * based on the user's role.
+     * Методът {@code initialize} се използва за инициализация на потребителския контролер
+     * и настройка на различните данни и елементи в интерфейса според длъжността на потребителя.
+     * Извиква се автоматично посредством анотацията {@code @FXML}.
      *
-     * This method is triggered upon the application loading the associated UserMainController
-     * FXML. It performs the following configurations:
-     * - Logs the initialization of the controller.
-     * - Sets up category and operation button mappings.
-     * - Displays a prompt message instructing the user to choose a category and an attribute.
-     * - Sets the action for the logout button, allowing the user to log out.
-     * - Dynamically adjusts UI elements, such as greeting messages and button displays,
-     *   according to the user's role (e.g., CEO, storage organiser, accountant, division lead).
-     * - Logs the start of the work session for the user, specifying their role and name.
+     * <p>Методът изпълнява следните действия:
+     * <ul>
+     *     <li>Записва лог за инициализацията на потребителския контролер с помощта на
+     *         {@link LoggerHelper#logData(Class, LoggerLevels, String)}.</li>
+     *     <li>Създава екземпляри на {@link ButtonsMapHolderForEachCategory} и
+     *         {@link ButtonsMapHolderForEachOperation}, които държат асоциации на бутони за категории и операции.</li>
+     *     <li>Установява текстова информация в потребителския интерфейс - например приветстващ текст
+     *         и насоки за потребителите.</li>
+     *     <li>Настройва действие за изход с помощта на {@link Button#setOnAction(javafx.event.EventHandler)}
+     *         и метода {@link User#userLogout()} за изход от профила на потребителя.</li>
+     *     <li>Определя потребителската длъжност чрез {@link User#getEmployeeOccupationBasedOnWellcome()} и
+     *         настройва подходящо съдържание в интерфейса на базата на длъжността.</li>
+     *     <li>За всяка длъжност зарежда съответните бутони за категории и операции чрез
+     *         {@link ButtonsHelper#addButtons}.</li>
+     * </ul>
      *
-     * The method uses helper classes and methods to handle button generation and mappings,
-     * making the interface tailored to the logged-in user's responsibilities.
+     * @return {@inheritDoc}
      */
     @FXML
     public void initialize()

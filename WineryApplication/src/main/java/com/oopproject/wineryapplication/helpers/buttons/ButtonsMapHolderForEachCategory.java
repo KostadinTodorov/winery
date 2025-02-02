@@ -5,8 +5,40 @@ import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
 
 import java.util.Map;
 
+/**
+ * Класът {@code ButtonsMapHolderForEachCategory} разширява функционалността на {@link ButtonsMapBase},
+ * като предоставя специализирана реализация за създаване на карта, която асоциира числови идентификатори
+ * с предварително зададени действия на бутоните за различни категории.
+ * <p>
+ * За разлика от базовия клас, този клас конкретно инициализира действията на бутоните чрез метода {@link #initializeMap()},
+ * като всяко от действията представлява отделна категория за управление на ресурси.
+ * </p>
+ * Пример за категориите, които могат да бъдат управлявани, включва: работници, запаси от вино, поръчки и други.
+ *
+ * <p><strong>Примери за инициализирани категории:</strong></p>
+ * <ul>
+ *     <li>Управление на работници</li>
+ *     <li>Управление на запаси от вино</li>
+ *     <li>Управление на поръчки</li>
+ *     <li>Управление на машини</li>
+ *     <li>Управление на складови помещения</li>
+ *     <li>Управление на клиенти</li>
+ *     <li>Управление на бутилки</li>
+ * </ul>
+ */
 public class ButtonsMapHolderForEachCategory extends ButtonsMapBase{
 
+    /**
+     * Инициализира и връща карта, която свързва ключови индекси с действия от тип {@link ButtonsHelper.ButtonAction},
+     * предназначени за управление на различни категории в приложението.
+     * <p>
+     * При инициализация се извиква {@link LoggerHelper#logData(Class, LoggerLevels, String)} за записване на
+     * информация относно създаването на бутоните за категориите.
+     * </p>
+     *
+     * @return {@code Map<Integer, ButtonsHelper.ButtonAction>} - карта, която съдържа предварително дефинирани
+     * действия за различни категории.
+     */
     @Override
     protected Map<Integer, ButtonsHelper.ButtonAction> initializeMap() {
         LoggerHelper.logData(ButtonsMapHolderForEachCategory.class, LoggerLevels.INFO, "Creation of the category buttons");

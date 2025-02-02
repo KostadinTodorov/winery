@@ -10,23 +10,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link BatchStoridge} entity using Hibernate.
+ * DAO клас за изпълнение на CRUD операции върху {@link BatchStoridge} чрез Hibernate.
  * <p>
- * This class extends {@link EntityDao} and provides implementations for:
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
  * <ul>
- *   <li>Retrieving single or multiple {@link BatchStoridge} entities.</li>
- *   <li>Adding a new {@link BatchStoridge} entity.</li>
- *   <li>Updating an existing {@link BatchStoridge} entity.</li>
- *   <li>Deleting an {@link BatchStoridge} entity by its ID.</li>
+ *   <li>Извличане на единични или множество {@link BatchStoridge} обекти.</li>
+ *   <li>Добавяне на нов {@link BatchStoridge} обект.</li>
+ *   <li>Актуализиране на съществуващ {@link BatchStoridge} обект.</li>
+ *   <li>Изтриване на {@link BatchStoridge} обект по неговото ID.</li>
  * </ul>
  * <p>
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействие с базата данни и включва
+ * подходящо управление на транзакции за осигуряване на целостта на данните.
  */
 public class BatchStoridgeDao extends EntityDao<BatchStoridge> {
 
     /**
-     * Constructs an {@code BatchStoridgeDao} for performing CRUD operations on the {@link BatchStoridge} entity.
+     * Конструира {@code BatchStoridgeDao} за изпълнение на CRUD операции върху {@link BatchStoridge}.
      * {@inheritDoc}
      */
     public BatchStoridgeDao() {

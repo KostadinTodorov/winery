@@ -8,6 +8,28 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Класът {@code Sweetness} представлява entity, описващо категорията на сладостта
+ * в контекста на система за управление на винарска изба. Това entity е свързано
+ * с бутилки чрез релация "one-to-many".
+ *
+ * Класът наследява {@link com.oopproject.wineryapplication.access.entities.entity.Entity},
+ * който предоставя базова функционалност за всички entity-та в системата.
+ *
+ * Анотацията {@link Entity} обозначава класа като JPA entity, а {@link Table} указва
+ * неговата асоциация с таблицата "sweetness" в базата данни.
+ *
+ * Следните атрибути са дефинирани за класа:
+ * <ul>
+ *     <li>{@code id} - Уникален идентификатор на сладостта. Генерира се автоматично с помощта на {@code SequenceGenerator}.</li>
+ *     <li>{@code category} - Основна категория на сладостта.</li>
+ *     <li>{@code leCategory} - Допълнителна категория на сладостта.</li>
+ *     <li>{@code bottles} - Сет от бутилки, които са асоциирани към дадена категория сладост.</li>
+ * </ul>
+ *
+ * Методи на класа включват стандартни getter и setter методи за достъп до полетата,
+ * както и метод за генериране на стринг представяне и достъп до съответния DAO обект.
+ */
 @Entity
 @Table(name = "sweetness", schema = "public")
 public class Sweetness extends com.oopproject.wineryapplication.access.entities.entity.Entity {

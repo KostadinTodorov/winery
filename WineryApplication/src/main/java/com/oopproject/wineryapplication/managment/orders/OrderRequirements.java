@@ -10,11 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The OrderRequirements class represents the requirements needed to fulfill a client's order.
- * It calculates the total necessary volume, identifies stored batches available
- * for the order, determines additional batch requirements, and computes harvest needs.
- * This class ensures that all operations align with the client's specified wine type and
- * quantity for the order.
+ * Клас, който моделира изискванията за поръчка, международни обеми и връзките с наличните партиди и съхранени партиди.
+ * Осигурява методи за изчисление на нужния обем, наличностите и необходимата реколта за изпълнение на поръчката.
  */
 public class OrderRequirements {
     private final ClientsOrder order;
@@ -38,22 +35,26 @@ public class OrderRequirements {
     }
 
     /**
-     * Calculates the remaining volume required for the order by subtracting the total volume
-     * already stored in batches from the total needed volume.
+     * Изчислява оставащия обем, необходим за изпълнение на поръчката.
+     * Методът изчислява разликата между общо необходимия обем за поръчката
+     * и сумата от обемите, съхранени в {@link BatchStoridge}, налични за поръчката.
      *
-     * @return the remaining volume required for the order as a Double.
+     * @return {@code Double} представяща оставащия обем, който трябва да се добави,
+     * за да се изпълни поръчката. Ако всички необходими обеми вече са съхранени,
+     * резултатът ще бъде 0. Ако не достигат, ще се върне положителна стойност.
      */
     public Double volumeForOrder(){
         return totalNeededVolume - storedBatchesForOrder().stream().mapToInt(BatchStoridge::getVolumeStored).sum();
     }
 
     /**
-     * Retrieves a list of batches that match the wine type for the associated order
-     * and have a positive total volume stored across their storages.
-     * The result is filtered and calculated based on the current order's wine type
-     * and the sum of all stored volumes in the batch storages.
+     * Връща списък от обекти от тип {@link Batch}, които са налични и подходящи за изпълнение на поръчката.
+     * Методът филтрира всички налични партиди, така че върнатите партиди да отговарят на типа вино на
+     * текущата поръчка и да имат наличен обем, съхраняван в съответните {@link BatchStoridge}.
+     * Резултатът се изчислява само веднъж и се кешира, за да се избегне повторно извеждане в бъдеще.
      *
-     * @return a list of Batch objects that satisfy the required conditions.
+     * @return Списък от обекти {@link Batch}, които съответстват на типа вино на поръчката и имат
+     * наличен обем за покриване на изискванията.
      */
     public List<Batch> batchesForOrder(){
         if (batchesForOrder == null) {
@@ -67,11 +68,13 @@ public class OrderRequirements {
     }
 
     /**
-     * Retrieves a list of BatchStoridge objects associated with the order.
-     * These objects represent storage batches that are usable for fulfilling the order.
-     * The method calculates the list only once and caches the result.
+     * Методът връща списък от обекти {@link BatchStoridge}, съхранени за дадена поръчка.
+     * В случай че кеширането {@code storedBatchesForOrder} е празно (null), методът
+     * извлича наличните {@link BatchStoridge} обекти от метод {@link #batchesForOrder()},
+     * след което прави плоска мапинг операция с поток към всички съхранени {@link BatchStoridge}.
+     * Резултатният списък след това се кешира и връща.
      *
-     * @return a list of BatchStoridge objects representing the usable storage batches for the order.
+     * @return Списък от обекти {@link BatchStoridge}, съдържащ всички съхранени партиди за дадена поръчка.
      */
     public List<BatchStoridge> storedBatchesForOrder(){
         if (storedBatchesForOrder == null) {
@@ -94,17 +97,6 @@ public class OrderRequirements {
 //        for (int i = 0; i < batchStoridges.size(); i++) {
 //            if (closestDifference != 0) {
 //                BatchStoridge ibatchStoridge = batchStoridges.get(i);
-/**
- * Determines the harvests required to fulfill an order based on the given sort ratios and loss percentage.
- * This method calculates the required weight of each sort in proportion to its ratio in the order,
- * adjusted for any percentage loss, and returns a list of `Harvest` objects reflecting these requirements.
- *
- * @param sortRatioMap a map where each key is a `Sort` object representing the type of grape,
- *                     and the value is a Float representing the proportion of that sort in the order.
- * @param lossPercentage an integer representing the percentage of losses to be considered during calculation.
- * @return a list of `Harvest` objects, where each object specifies the sort and its corresponding weight,
- *         required to fulfill the order.
- */
 //                int currentDiff = wantedVolume - ibatchStoridge.getVolumeStored();
 //                if (currentDiff != 0) {
 //                    List<BatchStoridge> combination = new ArrayList<>();
@@ -143,6 +135,22 @@ public class OrderRequirements {
 //        return (number / divisor) % 2 == 1;
 //    }
 
+    /**
+     * Изчислява списък с необходимите реколти {@link Harvest} за изпълнение на поръчка,
+     * базирайки се на предоставените съотношения на сортовете {@link Sort} и процент на загуба.
+     *
+     * Методът използва наличните съотношения между различните сортове грозде и
+     * общия необходим обем за поръчката {@link #volumeForOrder()}, за да изчисли какво количество
+     * грозде (като тегло) е нужно от всяка реколта. Включва и корекция за процент на загуба,
+     * който влияе върху обема, необходим за отделен сорт.
+     *
+     * @param sortRatioMap Карта, съдържаща съотношенията на сортовете {@link Sort} към общия обем.
+     *                     Ключовете са сортове {@link Sort}, а стойностите са техните съотношения като {@code Float}.
+     * @param lossPercentage Процент на загуба върху общия обем, предоставен като цяло число ({@code int}).
+     *                       Например, 10 означава 10% загуба.
+     * @return Списък с обекти {@link Harvest}, съдържащи необходимите тегла (включващи корекция за загуби)
+     *         за всеки сорт грозде на базата на общия обем за поръчката.
+     */
     public List<Harvest> harvestsNeededForOrder(Map<Sort, Float> sortRatioMap, int lossPercentage) {
         List<Harvest> harvestsNeeded = new ArrayList<>();
         double neededVolume = volumeForOrder();

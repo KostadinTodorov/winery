@@ -8,37 +8,39 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+
 /**
- * Represents a Container entity in the system, corresponding to the "container" table in the database.
- * This class extends the base entity class to inherit common functionalities and adds
- * specific attributes and relationships for the "Container" concept.
+ * Представлява entity Container в системата, съответстващо на таблицата "container" в базата данни.
+ * Този клас разширява базовия entity клас, за да наследи общи функционалности, и добавя
+ * специфични атрибути и връзки за концепцията "Container".
  * <p>
- * Each instance of Container is identified by a unique ID,
- * has a name, a specific storage space, and is associated with a collection of batch storage records.
+ * Всяка инстанция на Container съдържа уникален идентификатор, пространство и име,
+ * както и връзка към набор от BatchStoridge обекти.
  * <p>
- * The Container class also implements methods for retrieving and setting its properties,
- * interacting with a DAO, and overriding the default string representation.
+ * Полета:
+ * <ul>
+ *     <li>{@code id}: Уникален идентификатор за entity Container.</li>
+ *     <li>{@code space}: Цяло число, представляващо пространството на Container.</li>
+ *     <li>{@code name}: Низ, представляващ името на Container (максимална дължина 30).</li>
+ *     <li>{@code batchStoridges}: Колекция от BatchStoridge обекти, свързани с този Container.</li>
+ * </ul>
  * <p>
- * Fields:
- * - id: A unique identifier for the Container entity.
- * - name: A string representing the name of the Container (maximum length 30).
- * - space: An integer representing the storage capacity of the Container.
- * - batchStoridges: A set of batch storage records associated with this Container.
+ * Методи:
+ * <ul>
+ *     <li>{@code getId()}: Извлича уникалния идентификатор на Container.</li>
+ *     <li>{@code setId(Integer id)}: Задава уникалния идентификатор на Container.</li>
+ *     <li>{@code getSpace()}: Извлича пространството на този Container.</li>
+ *     <li>{@code setSpace(Integer space)}: Задава пространството на този Container.</li>
+ *     <li>{@code getName()}: Извлича името на този Container.</li>
+ *     <li>{@code setName(String name)}: Задава името на този Container.</li>
+ *     <li>{@code getBatchStoridges()}: Извлича набора от BatchStoridge обекти, свързани с Container.</li>
+ *     <li>{@code setBatchStoridges(Set<BatchStoridge> batchStoridges)}: Задава набора от BatchStoridge обекти, свързани с Container.</li>
+ *     <li>{@code getDao()}: Предоставя DAO имплементация за взаимодействие с базата данни за Container.</li>
+ *     <li>{@code toString()}: Връща String представяне на Container, включващо неговото име.</li>
+ * </ul>
  * <p>
- * Methods:
- * - getId(): Retrieves the ID of the Container.
- * - setId(Integer id): Sets the ID of the Container.
- * - getDao(): Provides a DAO implementation specific to Container for interacting with the database.
- * - getSpace(): Retrieves the storage capacity of the Container.
- * - setSpace(Integer space): Sets the storage capacity of the Container.
- * - getName(): Retrieves the name of the Container.
- * - setName(String name): Sets the name of the Container.
- * - getBatchStoridges(): Retrieves the set of batch storage records associated with the Container.
- * - setBatchStoridges(Set<BatchStoridge> batchStoridges): Sets the batch storage records associated with the Container.
- * - toString(): Returns a string representation of the Container entity including its base representation and name.
- * <p>
- * Relationships:
- * - One-to-many relationship with the BatchStoridge entity, mapped by the "container" field in BatchStoridge.
+ * Връзки:
+ * - Връзка един-към-много с {@code BatchStoridge entity}, свързана чрез полето "container" в BatchStoridge.
  */
 @Entity
 @Table(name = "container", schema = "public")

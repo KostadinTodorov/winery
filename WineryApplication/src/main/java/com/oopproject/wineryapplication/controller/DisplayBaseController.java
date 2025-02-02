@@ -21,25 +21,27 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The DisplayBaseController class is a generic controller designed to manage
- * and display a collection of entities within a JavaFX application. It provides
- * functionality for viewing, adding, editing, and deleting entities from a table view.
+ * Класът {@code DisplayBaseController} е базов контролер, отговорен за управление на
+ * показването, редактирането и изтриването на обекти от определен обектен клас
+ * в свързана таблица с визуализирани данни.
  *
- * @param <T> the type of entity being managed by this controller, which extends the Entity class.
+ * Класът се използва за следните задачи:
+ * <ul>
+ * <li>Инициализация на таблицата за показване на данни за обекти от дадения клас.</li>
+ * <li>Добавяне на функционалности за изтриване и редактиране на редове от таблицата.</li>
+ * <li>Обработка на взаимодействията с бутоните за добавяне, редактиране и изтриване.</li>
+ * <li>Създаване на предупреждения за успех и неуспех на извършени действия.</li>
+ * </ul>
+ *
+ * @param <T> Типът на обектите, които се управляват от този контролер. Обектът трябва
+ *            да е наследник на {@link Entity}.
  */
 public class DisplayBaseController<T extends Entity> {
 
     /**
-     * The DeleteBase class provides functionality for deleting entities in the system.
-     * It uses the {@link TemplateDao} to perform delete operations on an entity
-     * identified by its unique ID.
-     *
-     * This class offers multiple constructors for flexibility:
-     * 1. Accepting an integer ID directly.
-     * 2. Accepting an {@link Entity} object, from which the ID is derived.
-     *
-     * The `delete` method is the primary operation of this class, executing
-     * the deletion of an entity through the data access object.
+     * Класът {@code DeleteBase} предоставя функционалност за изтриване на обект,
+     * идентифициран чрез уникалния си идентификатор {@code id}. Класът работи с
+     * данни, като използва {@link TemplateDao}.
      */
     public class DeleteBase {
         private final int id;
@@ -53,13 +55,14 @@ public class DisplayBaseController<T extends Entity> {
         }
 
         /**
-         * Deletes an entity identified by its unique ID using the {@link TemplateDao}.
+         * Изтрива обект, идентифициран чрез уникалния си идентификатор {@code id}, от базата данни.
          *
-         * This method leverages the data access object to remove the entity of the specified
-         * type from the underlying database or data storage. If the entity with the given ID
-         * exists, it is removed, and the operation is considered successful.
+         * Тази операция използва {@link TemplateDao}, който предоставя CRUD функционалности за управление на данни
+         * в базата. Методът се базира на класа {@code entityClass}, който репрезентира класа на съответния обект.
          *
-         * @return true if the entity is successfully deleted, false otherwise (e.g., if the entity does not exist or an exception occurs).
+         * @return {@code true}, ако обектът е успешно изтрит от базата данни;
+         *         {@code false}, ако обектът не съществува или операцията е неуспешна.
+         * @see TemplateDao#delete(int)
          */
         public boolean delete() {
             TemplateDao<?> dao = new TemplateDao<>(entityClass);
@@ -83,14 +86,15 @@ public class DisplayBaseController<T extends Entity> {
     }
 
     /**
-     * Initializes the controller's components and sets up the necessary configurations
-     * for the associated view. This method is called automatically after the
-     * FXML file has been loaded and the associated components are injected.
-     *
-     * The method performs the following actions:
-     * - Calls {@link #initializeAddButton()} to configure the behavior of the "Add" button.
-     * - Calls {@link #initializeTableView()} to set up the table view, including column creation
-     *   and the addition of edit and delete button functionalities.
+     * Инициализира основните компоненти на текущия потребителски интерфейс.
+     * Извиква методи за настройка и конфигуриране на бутон и таблица.
+     * <p>
+     * Този метод се извиква автоматично от JavaFX рамката по време на зареждането на контролера.
+     * </p>
+     * <ul>
+     * <li>{@link #initializeAddButton()} - настройва функционалностите на бутона за добавяне.</li>
+     * <li>{@link #initializeTableView()} - настройва изгледа и параметрите на таблицата.</li>
+     * </ul>
      */
     @FXML
     public void initialize() {
@@ -99,34 +103,29 @@ public class DisplayBaseController<T extends Entity> {
     }
 
     /**
-     * Configures the "Add" button to handle user interactions.
-     *
-     * This method sets the action event for the "Add" button, enabling it to trigger
-     * the {@link #addEntity()} method when clicked. The primary purpose of this
-     * functionality is to create and display a new instance of the entity type
-     * managed by the controller.
-     *
-     * The {@link #addEntity()} method is responsible for instantiating a new
-     * entity object using reflection and transitioning to a specific scene that
-     * handles its addition.
+     * Инициализира {@code add} бутона и задава неговото действие при кликване.
+     * <p>
+     * Логиката за обработка на действието е дефинирана в метода {@link #addEntity()}.
+     * Бутонът получава действие чрез {@code setOnAction}, което изпълнява ламбда функция
+     * за извикване на метода {@code addEntity}.
+     * </p>
      */
     private void initializeAddButton() {
         add.setOnAction(e -> addEntity());
     }
 
     /**
-     * Sets up and initializes the table view for displaying entity data.
+     * Инициализира изгледа на таблицата и попълва колоните и данните.
      *
-     * This method performs the following actions:
-     * 1. Calls the {@link #createColumns()} method to dynamically create table columns
-     *    based on the fields of the entity class.
-     * 2. Invokes {@link #addDeleteButtonColumn(List)} to add a delete button column functionality.
-     * 3. Invokes {@link #addEditButtonColumn(List)} to add an edit button column functionality.
-     * 4. Adds all the created and customized columns to the `entityTableView`.
-     * 5. Initializes the table's items with an observable list of the existing entities.
+     * Методът създава колони, добавя бутони за изтриване и редактиране
+     * като отделни колони, добавя тези колони към {@link TableView},
+     * а също така попълва таблицата със списък от ентитети.
      *
-     * The method ensures that the table view is configured with appropriate attributes,
-     * column definitions, and data bindings for displaying and interacting with entity data.
+     * @implNote Методът използва {@link FXCollections#observableArrayList}
+     * за работа с ObservableList от ентитети.
+     * @see #createColumns()
+     * @see #addDeleteButtonColumn(List)
+     * @see #addEditButtonColumn(List)
      */
     private void initializeTableView() {
         List<TableColumn<Entity, ?>> columns = createColumns();
@@ -140,18 +139,15 @@ public class DisplayBaseController<T extends Entity> {
     }
 
     /**
-     * Creates and returns a list of table columns dynamically generated based on the fields
-     * of the `Entity` class associated with this controller.
+     * Създава колекции от {@link TableColumn}, базирани на полетата,
+     * дефинирани в {@code entityClass}. Методът отразява всички
+     * декларирани полета на класа и за всяко от тях създава екземпляр
+     * на {@link TableColumn}, който се добавя към новосъздаден списък.
+     * Стойностите се задават с {@link PropertyValueFactory} използвайки
+     * името на полетата.
      *
-     * This method uses reflection to retrieve declared fields of the entity class.
-     * For each field, a corresponding `TableColumn` instance is created, and its
-     * cell value factory is configured to bind to the property with the name of the field.
-     * The generated columns are added to a list, which is then returned.
-     *
-     * Any exceptions that occur while creating the columns are caught and handled
-     * within the method, typically by logging the error or printing the stack trace.
-     *
-     * @return a list of `TableColumn` instances corresponding to the fields of the `Entity` class
+     * @return Списък от {@link TableColumn} елементи ({@link List}),
+     * които представляват колони за визуализация на полетата на дадения клас.
      */
     private List<TableColumn<Entity, ?>> createColumns() {
         List<TableColumn<Entity, ?>> columns = new ArrayList<>();
@@ -171,21 +167,15 @@ public class DisplayBaseController<T extends Entity> {
     }
 
     /**
-     * Adds a "Delete" button column to the provided list of table columns.
-     * Each row in the table column will include a button that, when clicked,
-     * triggers the deletion of the corresponding entity from the table and data source.
+     * Добавя колона с бутон за изтриване към предоставения списък
+     * {@link TableColumn} обекти. Тази колона съдържа бутони, които
+     * позволяват на потребителя да изтрие избрания {@link Entity}.
+     * Методът създава нова колона и задава нейната {@link TableColumn#setCellFactory(Callback)}
+     * чрез {@link #createDeleteButtonCellFactory()}, след което я добавя към предоставения списък.
      *
-     * The column header is labeled "Delete". In each cell of this column, a "Delete"
-     * button is rendered. Clicking the button will invoke the logic for confirming
-     * the deletion and removing the associated entity.
-     *
-     * This method relies on {@link #createDeleteButtonCellFactory()} to provide the
-     * cell factory that defines the behavior of the "Delete" button. The deletion
-     * process includes showing a confirmation dialog, attempting the delete operation,
-     * and showing a success or failure message.
-     *
-     * @param columns the list of {@code TableColumn} objects to which the "Delete"
-     *                button column will be added
+     * @param columns списък от {@link TableColumn}, към който ще бъде
+     *                добавена новата колона за изтриване.
+     * @return {@inheritDoc}
      */
     private void addDeleteButtonColumn(List<TableColumn<Entity, ?>> columns) {
         TableColumn<Entity, Void> deleteButtonColumn = new TableColumn<>("Delete");
@@ -194,18 +184,21 @@ public class DisplayBaseController<T extends Entity> {
     }
 
     /**
-     * Creates and returns a cell factory for a table column that includes a "Delete" button in each row.
+     * Метод, който създава фабрика за клетки с бутон за изтриване. Това позволява
+     * на всяка клетка в съответната колона на таблицата да съдържа бутон за
+     * изтриване на елемент от таблицата.
      *
-     * The "Delete" button, when clicked, triggers the following sequence:
-     * 1. Displays a confirmation dialog using {@code showDeleteConfirmation()}.
-     * 2. If confirmed, attempts to delete the corresponding entity using {@code deleteEntity(Entity entity)}.
-     * 3. If the deletion is successful, removes the entity from the table view and displays a success alert using {@code showDeleteSuccessAlert()}.
-     * 4. If the deletion fails, displays a failure alert using {@code showDeleteFailureAlert()}.
+     * Всяка клетка съдържа {@link Button}, който, когато бъде натиснат,
+     * извиква действия по изтриване на съответния елемент. Методът включва:
+     * <ul>
+     *     <li>Потвърждение на изтриването чрез диалог.</li>
+     *     <li>Изпълнение на логика за изтриване на елемента чрез метода {@code deleteEntity()}.</li>
+     *     <li>Показване на съобщения за успех или грешка.</li>
+     *     <li>Премахване на елемента от списъка в {@link TableView}, ако е изтрит успешно.</li>
+     * </ul>
      *
-     * The returned cell factory is designed to be set on a table column, rendering a button in each cell
-     * that provides functionality for the deletion of the associated entity.
-     *
-     * @return a callback that generates {@code TableCell} instances containing a "Delete" button with the outlined functionality
+     * @return {@inheritDoc} Фабрика от тип {@link Callback}, която генерира клетки
+     * с бутон за изтриване за {@link TableColumn} от тип {@code <Entity, Void>}.
      */
     private Callback<TableColumn<Entity, Void>, TableCell<Entity, Void>> createDeleteButtonCellFactory() {
         return new Callback<>() {
@@ -239,13 +232,15 @@ public class DisplayBaseController<T extends Entity> {
     }
 
     /**
-     * Displays a confirmation dialog asking the user to confirm a delete action.
+     * Показва диалог за потвърждение на изтриване.
      *
-     * The dialog includes a title, a header text, and a content text that warns
-     * the user the action cannot be reverted. The method waits for the user's
-     * response and determines whether the delete action has been confirmed.
+     * Този метод създава {@link Alert} от тип {@code Alert.AlertType.CONFIRMATION},
+     * който моли потребителя да потвърди изтриването на даден елемент. Диалогът
+     * съдържа заглавие, текст за заглавна част и съобщение, което предупреждава
+     * потребителя, че това действие не може да бъде възстановено.
      *
-     * @return true if the user confirms the deletion by clicking "OK", false otherwise
+     * @return {@code true}, ако потребителят потвърди операцията чрез натискане
+     * на {@link ButtonType#OK}, иначе {@code false}.
      */
     private boolean showDeleteConfirmation() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -256,63 +251,50 @@ public class DisplayBaseController<T extends Entity> {
     }
 
     /**
-     * Deletes the specified entity from the system.
+     * Изтрива съществуващ {@link Entity} от системата.
      *
-     * This method utilizes the functionality of the {@code DeleteBase} class to
-     * perform the deletion of the provided {@code Entity} instance. The deletion
-     * is attempted, and the result indicates whether the operation was successful.
-     *
-     * @param entity the {@code Entity} instance to be deleted
-     * @return {@code true} if the entity was successfully deleted;
-     *         {@code false} otherwise
+     * @param entity обекта от тип {@link Entity}, който трябва да бъде изтрит.
+     *               Не може да бъде {@code null}.
+     * @return {@code true}, ако обектът е изтрит успешно; {@code false}, ако изтриването е неуспешно.
      */
     private boolean deleteEntity(Entity entity) {
         return new DeleteBase(entity).delete();
     }
 
     /**
-     * Displays an informational alert to the user indicating that an item
-     * was successfully deleted.
+     * Показва информационен прозорец (alert), който уведомява потребителя, че
+     * избраното от него съдържание е успешно изтрито.
+     * <p>
+     * Използва {@code showAlert} метод с тип {@link Alert.AlertType#INFORMATION},
+     * за да създаде и покаже съобщението.
      *
-     * The alert includes a message with the title "Item deleted successfully!"
-     * and a header text that provides confirmation of the successful action.
-     * The method uses the {@code showAlert} utility to create and show the alert
-     * dialog with the specified parameters.
-     *
-     * This method can be utilized as part of a deletion workflow to provide
-     * user feedback after a successful deletion process.
+     * @see Alert
+     * @see #showAlert(Alert.AlertType, String, String)
      */
     private void showDeleteSuccessAlert() {
         showAlert(Alert.AlertType.INFORMATION, "Item deleted successfully!", "You have successfully deleted this item!");
     }
 
     /**
-     * Displays a failure alert to inform the user that an item could not be deleted.
+     * Показва информационен предупредителен прозорец при неуспешно изтриване на елемент.
+     * Методът се използва за уведомяване на потребителя, че даден елемент не може да бъде изтрит,
+     * защото е рефериран в други таблици.
      *
-     * This method is used when an attempt to delete an item fails due to external
-     * constraints, such as the item being referenced in other tables. It shows
-     * an alert of type {@link Alert.AlertType#INFORMATION}, providing the user with
-     * a title and a detailed message explaining why the deletion was unsuccessful.
-     *
-     * The alert contains the following:
-     * - Title: "Item wasn't deleted successfully!"
-     * - Content: "Items cannot be deleted if they are referenced in other tables."
-     *
-     * This method enhances the usability of the system by ensuring feedback is given
-     * when a delete operation does not proceed as expected.
+     * Използва {@link #showAlert(Alert.AlertType, String, String)} за създаване и показване на прозореца за предупреждение.
      */
     private void showDeleteFailureAlert() {
         showAlert(Alert.AlertType.INFORMATION, "Item wasn't deleted successfully!", "Items cannot be deleted if they are referenced in other tables.");
     }
 
     /**
-     * Creates and displays an alert dialog with the specified type, title, and content.
-     * The alert is configured to have a title, header text, and content text based on the provided parameters.
-     * After displaying the alert, the method waits for the user to close it.
+     * Показва предупредителен или информационен диалогов прозорец {@link Alert}.
      *
-     * @param type   the {@code Alert.AlertType} specifying the type of alert (e.g., INFORMATION, WARNING, ERROR, etc.)
-     * @param title  the title of the alert dialog
-     * @param content the content text to display in the alert dialog
+     * @param type типът на съобщението, което ще се покаже, използвайки {@link Alert.AlertType}.
+     *             Може да бъде стойности като {@code Alert.AlertType.INFORMATION},
+     *             {@code Alert.AlertType.WARNING}, {@code Alert.AlertType.ERROR} и т.н.
+     * @param title заглавие на прозореца, което ще се покаже в горната част на диалоговия прозорец.
+     * @param content текстово съдържание на диалоговия прозорец, което предоставя допълнителна информация за потребителя.
+     * @return {@inheritDoc}
      */
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
@@ -324,19 +306,13 @@ public class DisplayBaseController<T extends Entity> {
 
 
     /**
-     * Adds an "Edit" button column to the provided list of table columns.
+     * Добавя нова колона с бутон за редактиране към списъка с колони в таблицата.
+     * Колоната съдържа бутон "Edit", който може да бъде настроен с подходяща
+     * функционалност чрез {@link #createEditButtonCellFactory()}.
      *
-     * The column header is labeled "Edit". In each cell of this column,
-     * an "Edit" button is rendered. Clicking the button will invoke the
-     * functionality provided by the associated cell factory to handle
-     * editing actions for the corresponding entity.
-     *
-     * This method relies on the {@code createEditButtonCellFactory()}
-     * method to provide the cell factory that defines the behavior of
-     * the "Edit" button.
-     *
-     * @param columns the list of {@code TableColumn} objects to which the "Edit"
-     *                button column will be added
+     * @param columns списък от {@code TableColumn<Entity, ?>}, към който ще се добави
+     * новата колона с бутон за редактиране
+     * (например {@code List<TableColumn<Entity, ?>>}).
      */
     private void addEditButtonColumn(List<TableColumn<Entity, ?>> columns) {
         TableColumn<Entity, Void> editButtonColumn = new TableColumn<>("Edit");
@@ -345,10 +321,16 @@ public class DisplayBaseController<T extends Entity> {
     }
 
     /**
-     * Creates a cell factory for a TableColumn that generates cells containing an "Edit" button.
-     * When the button is clicked, the associated entity is passed to the editEntity method.
+     * Създава фабрика за клетки, която добавя бутон "Edit" в дадена колона
+     * на таблица {@link TableView}. Бутонът позволява редактирането на
+     * съответния елемент от таблицата.
      *
-     * @return A Callback that provides TableCell instances, each containing an "Edit" button, for the TableColumn.
+     * Всяка клетка, съдържаща бутона, извлича свързания обект
+     * {@link Entity} от таблицата и извиква метода {@code editEntity(Entity)}
+     * за редакция на този обект.
+     *
+     * @return {@link Callback}, който връща {@link TableCell} със
+     * бутон "Edit" за дадена колона {@link TableColumn}.
      */
     private Callback<TableColumn<Entity, Void>, TableCell<Entity, Void>> createEditButtonCellFactory() {
         return new Callback<>() {
@@ -376,26 +358,17 @@ public class DisplayBaseController<T extends Entity> {
 
 
     /**
-     * Creates a new instance of the entity managed by this controller and initializes a scene
-     * for adding it to the system.
+     * Методът {@code addEntity} добавя нов екземпляр на ентитет, използвайки
+     * предоставения клас {@code entityClass}, чрез създаване на негов
+     * инстанция и предаването й на контролера {@link AddBaseController}.
+     * <p>
+     * Методът се грижи за създаването и управлението на нов ентитет в рамките
+     * на сцената, като използва {@link SceneHelper#addNode}.
+     * </p>
      *
-     * This method performs the following actions:
-     * 1. Uses reflection to obtain the no-argument constructor of the entity class.
-     * 2. Instantiates a new entity object using the retrieved constructor.
-     * 3. Initializes and displays the "Add" scene by invoking the {@code SceneHelper.addNode} method,
-     *    passing the controller for the "Add" scene along with the created entity.
-     *
-     * If an exception occurs during the instantiation or scene rendering process, the method
-     * throws a runtime exception, providing specific details of the failure.
-     *
-     * Exceptions that may be handled include:
-     * - {@code NoSuchMethodException}: If the entity class lacks a no-argument constructor.
-     * - {@code InstantiationException}: If the entity class is abstract or cannot be instantiated.
-     * - {@code IllegalAccessException}: If the constructor is inaccessible.
-     * - {@code InvocationTargetException}: If the constructor throws an exception during instantiation.
-     *
-     * This method is primarily triggered by the "Add" button within the controller's user interface.
-     * It facilitates dynamically handling the creation of new entities based on the associated entity class.
+     * @throws RuntimeException ако възникне грешка при създаването на
+     *                          инстанция на ентитета, включително
+     *                          недостъпен конструктор или рефлекционна грешка.
      */
     private void addEntity() {
         try {
@@ -408,10 +381,11 @@ public class DisplayBaseController<T extends Entity> {
     }
 
     /**
-     * Edits the given entity by creating and adding an EditBaseController
-     * to the display base with the specified entity.
+     * Редактира съществуващ {@link Entity} като създава нов контролер и го добавя към сцена.
+     * Използва {@link SceneHelper} за зареждане на възел {@code Nodes.EDITBASE}.
      *
-     * @param entity the entity to be edited
+     * @param entity Обект от тип {@link Entity}, който ще бъде редактиран.
+     * @return {@inheritDoc}
      */
     private void editEntity(Entity entity) {
         SceneHelper.<EditBaseController>addNode(DisplayBase, Nodes.EDITBASE, new EditBaseController(entity));

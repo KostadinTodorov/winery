@@ -10,23 +10,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link Harvest} entity using Hibernate.
+ * DAO клас за изпълнение на CRUD операции върху {@link Harvest} чрез Hibernate.
  * <p>
- * This class extends {@link EntityDao} and provides implementations for:
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
  * <ul>
- *   <li>Retrieving single or multiple {@link Harvest} entities.</li>
- *   <li>Adding a new {@link Harvest} entity.</li>
- *   <li>Updating an existing {@link Harvest} entity.</li>
- *   <li>Deleting an {@link Harvest} entity by its ID.</li>
+ *   <li>Извличане на единични или множество {@link Harvest} обекти.</li>
+ *   <li>Добавяне на нов {@link Harvest} обект.</li>
+ *   <li>Актуализиране на съществуващ {@link Harvest} обект.</li>
+ *   <li>Изтриване на {@link Harvest} обект по неговото ID.</li>
  * </ul>
  * <p>
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействие с базата данни и включва
+ * подходящо управление на транзакции за осигуряване на целостта на данните.
  */
 public class HarvestDao extends EntityDao<Harvest> {
 
     /**
-     * Constructs an {@code HarvestDao} for performing CRUD operations on the {@link Harvest} entity.
+     * Конструира {@code HarvestDao} за изпълнение на CRUD операции върху {@link Harvest}.
      * {@inheritDoc}
      */
     public HarvestDao() {

@@ -1,19 +1,19 @@
 package com.oopproject.wineryapplication.access.entities.entity.contracts;
 
 /**
- * Defines a contract for entities that can be represented as a string.
+ * Дефинира договор за entity-та, които могат да бъдат представени като низ.
  *
- * This interface enforces the implementation of the {@code toString} method,
- * allowing objects to provide a meaningful string representation of their state.
+ * Този интерфейс изисква имплементацията на метода {@code toString},
+ * позволявайки на обектите да предоставят смислено string представяне на състоянието си.
  */
 public interface EntityPrintable {
     /**
-     * Returns a string representation of the object.
+     * Връща string представяне на обекта.
      *
-     * The string representation typically includes the object's class name,
-     * its unique identifier, and optionally additional relevant attributes.
+     * String представянето обикновено включва името на класа на обекта,
+     * неговия уникален идентификатор и, по желание, допълнителни подходящи атрибути.
      *
-     * @return a string representation of the object
+     * @return string представяне на обекта
      */
     @Override
     String toString();

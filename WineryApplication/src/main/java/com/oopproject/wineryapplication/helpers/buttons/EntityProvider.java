@@ -3,31 +3,29 @@ package com.oopproject.wineryapplication.helpers.buttons;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 
 /**
- * Functional interface for providing instances of {@link Entity}.
- * This is designed to facilitate the creation or retrieval of entity objects in scenarios
- * where dynamic or deferred instance creation is necessary, such as lambda expressions or method references.
+ * {@code EntityProvider} е функционален интерфейс, който представлява стратегия за доставяне
+ * на обекти от тип {@link Entity}. Този интерфейс може да бъде имплементиран от класове
+ * или използван директно чрез ламбда изрази и референтни методи.
  *
- * Implementing classes or lambda expressions must define the single abstract method {@link #provide()},
- * ensuring that an {@link Entity} object is returned.
- *
- * Common use cases include:
- * - Dependency injection scenarios where an {@link Entity} instance needs to be dynamically provided.
- * - Contexts where entities are created or loaded based on user interactions or system state.
- *
- * Since this interface is annotated with {@link FunctionalInterface}, it can be seamlessly
- * used in lambda expressions or method references, promoting concise and expressive code.
+ * Чрез използване на {@code EntityProvider}, разработчиците могат да дефинират
+ * динамично как се създават или извличат обектите {@link Entity}, подобрявайки модулността
+ * и повторната използваемост на кода.
  */
 // Ensures that there is only one abstract method. This allows it to be used in lambda expressions.
 @FunctionalInterface
 public interface EntityProvider {
     /**
-     * Provides an instance of the {@link Entity}.
+     * Предоставя обект от тип {@link Entity}, използвайки имплементацията на
+     * функционалния интерфейс {@code EntityProvider}.
      *
-     * This method is intended to be implemented by classes or used in lambda expressions
-     * where an {@link Entity} object is dynamically supplied. The returned entity
-     * can represent any specific type of entity within the system.
+     * Методът {@code provide} представлява основната операция в интерфейса {@code EntityProvider}.
+     * Той се използва за предоставяне на нова или съществуваща инстанция на {@link Entity},
+     * като начинът на създаване или извличане на обекта зависи от конкретната имплементация.
      *
-     * @return an instance of {@link Entity}, which can be used in the context where this method is invoked
+     * Тази функционалност е полезна за отделяне на логиката за създаване на обектите
+     * от тяхното използване и позволява лесна подмяна на доставчика при нужда.
+     *
+     * @return обект от тип {@link Entity}, предоставен от имплементацията на метода
      */
     Entity provide();
 }

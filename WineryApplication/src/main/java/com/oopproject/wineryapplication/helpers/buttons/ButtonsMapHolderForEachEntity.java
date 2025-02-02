@@ -5,8 +5,32 @@ import com.oopproject.wineryapplication.access.entities.*;
 import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
 import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
 
+/**
+ * Класът {@code ButtonsMapHolderForEachEntity} е разширение на абстрактния клас {@link ButtonsMapBase}
+ * и предоставя специфична реализация за инициализация на карта, съответстваща на бутони,
+ * които изпълняват действия върху различни типове ентитети.
+ * <p>
+ * Картата асоциира цялочислени идентификатори с действия чрез {@link ButtonsHelper.ButtonAction},
+ * които се използват за управление на функционалността на UI бутони, свързани с различни типове обекти.
+ * </p>
+ *
+ * <p>Методите в този клас работят с карта от тип {@code Map<Integer, ButtonsHelper.ButtonAction>},
+ * която се инициализира чрез метода {@link #initializeMap()}.</p>
+ */
 public class ButtonsMapHolderForEachEntity extends ButtonsMapBase {
 
+    /**
+     * Инициализира карта от тип {@code Map<Integer, ButtonsHelper.ButtonAction>}, която съдържа
+     * асоциации между уникални идентификатори и съответстващите действия на бутоните.
+     * Картата е предварително дефинирана с конкретни двойки {@link Map.Entry}, всяка от които
+     * съответства на специфичен бутон и неговото действие.
+     *
+     * По време на инициализацията се логва информация относно създаването чрез {@link LoggerHelper}.
+     *
+     * @return карта, съставена от двойки {@link Map.Entry}, където ключовете са от тип
+     * {@code Integer}, а стойностите са {@link ButtonsHelper.ButtonAction}, инстанциирани за специфични действия.
+     * {@inheritDoc}
+     */
     @Override
     protected Map<Integer, ButtonsHelper.ButtonAction> initializeMap() {
         LoggerHelper.logData(ButtonsMapHolderForEachEntity.class, LoggerLevels.INFO, "Creation of the entity buttons");

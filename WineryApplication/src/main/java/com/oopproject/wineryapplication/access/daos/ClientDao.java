@@ -10,23 +10,23 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link Client} entity using Hibernate.
+ * DAO клас за изпълнение на CRUD операции върху {@link Client} чрез Hibernate.
  * <p>
- * This class extends {@link EntityDao} and provides implementations for:
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
  * <ul>
- *   <li>Retrieving single or multiple {@link Client} entities.</li>
- *   <li>Adding a new {@link Client} entity.</li>
- *   <li>Updating an existing {@link Client} entity.</li>
- *   <li>Deleting an {@link Client} entity by its ID.</li>
+ *   <li>Извличане на единични или множество {@link Client} обекти.</li>
+ *   <li>Добавяне на нов {@link Client} обект.</li>
+ *   <li>Актуализиране на съществуващ {@link Client} обект.</li>
+ *   <li>Изтриване на {@link Client} обект по неговото ID.</li>
  * </ul>
  * <p>
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействие с базата данни и включва
+ * подходящо управление на транзакции за осигуряване на целостта на данните.
  */
 public class ClientDao extends EntityDao<Client> {
 
     /**
-     * Constructs an {@code ClientDao} for performing CRUD operations on the {@link Client} entity.
+     * Конструира {@code ClientDao} за изпълнение на CRUD операции върху {@link Client}.
      * {@inheritDoc}
      */
     public ClientDao() {

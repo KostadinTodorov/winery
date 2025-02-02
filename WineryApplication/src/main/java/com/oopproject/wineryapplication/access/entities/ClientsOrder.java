@@ -8,53 +8,57 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+
 /**
- * Represents a ClientsOrder entity in the system, corresponding to the "clients_orders" table in the database.
- * This class extends the base entity class to inherit common functionalities and adds
- * specific attributes and relationships for the "ClientsOrder" concept.
+ * Представлява entity ClientsOrder в системата, съответстващо на таблицата "clients_orders" в базата данни.
+ * Този клас разширява базовия клас entity, за да наследи общи функционалности и добавя
+ * специфични атрибути и връзки за концепцията "ClientsOrder".
  * <p>
- * Each instance of ClientsOrder is identified by a unique ID,
- * contains details about the client, the wine type ordered, the quantity, pricing, and order progress.
+ * Всяка инстанция на ClientsOrder се идентифицира с уникален ID
+ * и съдържа информация за клиента, поръчаното количество и дати на поръчка и завършване.
  * <p>
- * The ClientsOrder class implements methods for retrieving and setting its properties,
- * interacting with its DAO, and overriding its string representation.
+ * Полета:
+ * <ul>
+ *     <li>{@code id}: Уникален идентификатор за поръчка.</li>
+ *     <li>{@code client}: Клиентът, свързан с тази поръчка.</li>
+ *     <li>{@code quantity}: Количеството на поръчаните продукти.</li>
+ *     <li>{@code orderDate}: Датата, на която е направена поръчката.</li>
+ *     <li>{@code endDate}: Крайната дата за изпълнение на поръчката.</li>
+ *     <li>{@code completionDate}: Дата, на която е завършена поръчката (ако е налична).</li>
+ *     <li>{@code progress}: Статус или прогрес на изпълнение на поръчката.</li>
+ *     <li>{@code endPrice}: Общо цената на поръчката.</li>
+ *     <li>{@code wineType}: Типът вино, поръчан в тази поръчка.</li>
+ * </ul>
  * <p>
- * Fields:
- * - id: A unique identifier for the ClientsOrder entity.
- * - client: The client associated with this order, represented as a many-to-one relationship.
- * - quantity: An integer representing the amount of wine ordered.
- * - orderDate: The date when the order was placed.
- * - endDate: The desired end date for the order.
- * - completionDate: The date when the order was completed.
- * - progress: The progress status of the order, represented as a many-to-one relationship.
- * - endPrice: The final price for the order.
- * - wineType: The type of wine ordered, represented as a many-to-one relationship.
+ * Методи:
+ * <ul>
+ *     <li>{@code getId()}: Извлича уникалния идентификатор на поръчката.</li>
+ *     <li>{@code setId(Integer id)}: Задава уникалния идентификатор на поръчката.</li>
+ *     <li>{@code getClient()}: Извлича клиента, свързан с поръчката.</li>
+ *     <li>{@code setClient(Client client)}: Задава клиента, свързан с поръчката.</li>
+ *     <li>{@code getQuantity()}: Извлича количеството от поръчката.</li>
+ *     <li>{@code setQuantity(Integer quantity)}: Задава количеството от поръчката.</li>
+ *     <li>{@code getOrderDate()}: Извлича датата на поръчката.</li>
+ *     <li>{@code setOrderDate(LocalDate orderDate)}: Задава датата на поръчката.</li>
+ *     <li>{@code getEndDate()}: Извлича крайната дата за изпълнение на поръчката.</li>
+ *     <li>{@code setEndDate(LocalDate endDate)}: Задава крайната дата за изпълнение на поръчката.</li>
+ *     <li>{@code getCompletionDate()}: Извлича датата на завършване на поръчката (ако е налична).</li>
+ *     <li>{@code setCompletionDate(LocalDate completionDate)}: Задава датата на завършване на поръчката.</li>
+ *     <li>{@code getProgress()}: Извлича текущия прогрес/статус на поръчката.</li>
+ *     <li>{@code setProgress(Progress progress)}: Задава текущия прогрес/статус на поръчката.</li>
+ *     <li>{@code getEndPrice()}: Извлича крайната цена на поръчката.</li>
+ *     <li>{@code setEndPrice(Double endPrice)}: Задава крайната цена на поръчката.</li>
+ *     <li>{@code getWineType()}: Извлича типа вино, свързан с поръчката.</li>
+ *     <li>{@code setWineType(WineType wineType)}: Задава типа вино, свързан с поръчката.</li>
+ *     <li>{@code getDao()}: Предоставя DAO за изпълнение на операции с базата данни.</li>
+ * </ul>
  * <p>
- * Methods:
- * - getId(): Retrieves the ID of the ClientsOrder.
- * - setId(Integer id): Sets the ID of the ClientsOrder.
- * - getClient(): Retrieves the client associated with the order.
- * - setClient(Client client): Associates a client with the order.
- * - getWineType(): Retrieves the wine type associated with the order.
- * - setWineType(WineType wineType): Associates a wine type with the order.
- * - getOrderDate(): Retrieves the order date.
- * - setOrderDate(LocalDate orderDate): Sets the order date.
- * - getEndDate(): Retrieves the desired end date of the order.
- * - setEndDate(LocalDate endDate): Sets the desired order end date.
- * - getCompletionDate(): Retrieves the actual completion date.
- * - setCompletionDate(LocalDate completionDate): Sets the order completion date.
- * - getProgress(): Retrieves the progress of the order.
- * - setProgress(Progress progress): Updates the progress of the order.
- * - getQuantity(): Retrieves the quantity of wine ordered.
- * - setQuantity(Integer quantity): Sets the quantity of wine ordered.
- * - getEndPrice(): Retrieves the final price of the order.
- * - setEndPrice(Double endPrice): Sets the final price for the order.
- * - toString(): Returns a string representation of the ClientsOrder entity.
- * <p>
- * Relationships:
- * - Many-to-one relationship with the Client entity, referencing the client who placed the order.
- * - Many-to-one relationship with the WineType entity, indicating the type of wine requested in the order.
- * - Many-to-one relationship with the Progress entity, indicating the current progress state of the order.
+ * Връзки:
+ * <ul>
+ *     <li>Много-към-един връзка с {@code Client} (чрез полето client_id).</li>
+ *     <li>Много-към-един връзка с {@code Progress} (чрез полето progress_id).</li>
+ *     <li>Много-към-един връзка с {@code WineType} (чрез полето wine_type_id).</li>
+ * </ul>
  */
 @Entity
 @Table(name = "clients_orders", schema = "public")

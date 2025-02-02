@@ -8,6 +8,18 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Клас, представляващ ентитет "Person" в базата данни.
+ * Таблицата за този ентитет е дефинирана с име {@code person} в схемата {@code public}.
+ * Класът наследява {@link com.oopproject.wineryapplication.access.entities.entity.Entity}
+ * и предоставя функционалност за управление на данни, свързани с лица, в контекста на системата.
+ *
+ * Атрибутите на ентитета представляват информация за лицето като име, възраст, имейл,
+ * пол, телефонен номер и взаимоотношения с клиенти и служители.
+ *
+ * Връзките {@code @OneToMany} дефинират зависимости с други ентитети:
+ * {@link Client} и {@link Employee}.
+ */
 @Entity
 @Table(name = "person", schema = "public")
 public class Person extends com.oopproject.wineryapplication.access.entities.entity.Entity {

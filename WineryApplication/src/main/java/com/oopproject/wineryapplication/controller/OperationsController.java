@@ -19,9 +19,10 @@ import javafx.scene.layout.VBox;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * The OperationsController class is responsible for handling the operations related to
- * a designated order or batch, depending on the specified context title ("ORDERS" or "PRODUCTION").
- * It manages UI components and handles user interactions to process orders or production tasks.
+ * Този клас представлява контролер, който обработва функционалности, свързани с
+ * управление на операции. Използва се за обработка на потребителски действия и
+ * управление на данни, необходими за изпълнението на специфични операции, свързани
+ * с поръчки или производство.
  */
 public class OperationsController {
 
@@ -37,11 +38,14 @@ public class OperationsController {
     private Object operationInstance; // Store instance
 
     /**
-     * Constructs an instance of the OperationsController class and initializes it with
-     * the specified title. The title is used to describe or label the operations managed
-     * within this controller.
+     * Конструкторът {@code OperationsController} създава нов обект
+     * с предоставеното заглавие. Заглавието служи за контекстуална
+     * дефиниция на операциите, които ще бъдат обработвани от този
+     * контролер.
      *
-     * @param title the title or label to be assigned to the OperationsController
+     * @param title Заглавие, което определя контекста на операциите
+     *              (например "ORDERS" или "PRODUCTION"). Използва се
+     *              за ръководене на логиката в методите на класа.
      */
     public OperationsController(String title) {
         this.title = title;
@@ -53,30 +57,31 @@ public class OperationsController {
     }
 
     /**
-     * Handles the action of the "Select Order" button.
+     * Методът {@code handleSelectOrderButtonAction} се използва за обработка на действие
+     * при натискане на бутон за избор на поръчка. Той извлича въведения от потребителя
+     * идентификатор на поръчка и изпълнява различни логики в зависимост от контекста
+     * на заглавието на контролера. Възможните контексти са "ORDERS" и "PRODUCTION".
      *
-     * This method is triggered whenever the "Select Order" button is clicked. It retrieves
-     * the input from the `orderNameTextField`, attempts to parse it into an integer order ID,
-     * and performs operations based on the current context determined by the `title` field.
+     * <p>Следващите стъпки са изпълнени в метода:
+     * <ul>
+     *     <li>Проверява и преобразува въведения от текстовото поле идентификатор на поръчка
+     *     в числова стойност. При грешно форматиране се задава стойност по подразбиране.</li>
+     *     <li>Въз основа на заглавието се извършва различна обработка:
+     *         <ul>
+     *             <li>За "ORDERS" идентификатора се използва за извличане на обекта {@link ClientsOrder},
+     *             като след това се създава инстанция на {@link ProcessOrder} за обработка на поръчката.</li>
+     *             <li>За "PRODUCTION" идентификатора се използва за извличане на обекти от
+     *             класовете {@link Batch}, {@link Sweetness} и {@link BottleType}, с които се инициира
+     *             създаването на нова инстанция на {@link ProcessOrder} за обработка на производството.</li>
+     *         </ul>
+     *     </li>
+     *     <li>Проверява се дали създадената инстанция е валидна и изпълнява тестови дисплей методи.</li>
+     * </ul>
      *
-     * The method handles two main contexts:
-     * 1. "ORDERS": Fetches a `ClientsOrder` object using the provided order ID, initializes
-     *    a `ProcessOrder` instance with it, and performs additional operations if the
-     *    instance creation is successful.
-     * 2. "PRODUCTION": Fetches a `Batch`, `Sweetness`, and `BottleType` object using the
-     *    order ID, initializes a `ProcessOrder` instance with these entities (along with
-     *    specific hardcoded values), and performs operations if the instance creation succeeds.
-     *
-     * Error handling is in place for scenarios like invalid number format in the order ID input
-     * (defaults to a predefined value) and issues during the reflection-based instantiation
-     * of the `ProcessOrder` class.
-     *
-     * If an exception occurs during object instantiation, it is re-thrown as a `RuntimeException`.
-     *
-     * Exceptions:
-     * - NumberFormatException: If the `orderNameTextField` contains a non-integer value.
-     * - InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException:
-     *   Thrown during the instantiation of the `ProcessOrder` class or its constructor call.
+     * <p>Методът обработва изключения като {@link InstantiationException},
+     * {@link IllegalAccessException}, {@link InvocationTargetException},
+     * {@link NoSuchMethodException} и {@link NumberFormatException}, като в тези случаи
+     * изключението или се изхвърля отново, или се задава стойност по подразбиране.</p>
      */
     @FXML
     private void handleSelectOrderButtonAction() {

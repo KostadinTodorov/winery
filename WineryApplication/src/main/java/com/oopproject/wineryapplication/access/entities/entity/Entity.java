@@ -12,29 +12,29 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
- * Abstract base class representing an entity in the system.
- * This class is designed to be extended by specific entity classes
- * and provides common functionality for all entities.
+ * Абстрактен базов клас, представляващ entity в системата.
+ * Този клас е предназначен да бъде разширен от специфични класове entity
+ * и предоставя обща функционалност за всички entity-та.
  *
- * This class implements the following interfaces:
- * - {@code Entitiable}: Indicates the entity is manageable in the context of the system.
- * - {@code EntityPrintable}: Provides support for generating a string representation.
- * - {@code EntityFieldNodeble}: Facilitates mapping of entity fields to nodes for data structure representation.
+ * Този клас имплементира следните интерфейси:
+ * - {@code Entitiable}: Показва, че entity-то може да се управлява в контекста на системата.
+ * - {@code EntityPrintable}: Осигурява поддръжка за генериране на string представяне.
+ * - {@code EntityFieldNodeble}: Улеснява съпоставянето на полета на entity-то към възли за представяне на структурата на данните.
  *
- * Subclasses of this class typically represent specific entities in the application.
- * Examples include entities like "ClientsOrder", "Act", and "Employee".
+ * Подкласовете на този клас обикновено представляват специфични entity-та в приложението.
+ * Примери включват entity-та като "ClientsOrder", "Act" и "Employee".
  *
- * The intended purpose of this class and its associated subclasses is to encapsulate
- * data and behavior related to real-world entities, making them manageable and operable within
- * the application context.
+ * Предназначението на този клас и свързаните с него подкласове е да капсулират
+ * данни и поведение, свързани с реални entity-та, което ги прави управляеми и операционни в
+ * контекста на приложението.
  */
 public abstract class Entity  implements Entitiable, EntityPrintable, EntityFieldNodeble{
     /**
-     * Returns a string representation of the entity.
-     * This representation includes the simple name of the class
-     * and the unique identifier of the entity enclosed in square brackets.
+     * Връща string представяне на entity-то.
+     * Това представяне включва простото име на класа
+     * и уникалния идентификатор на entity-то, затворени в квадратни скоби.
      *
-     * @return the string representation of the entity in the format: ClassName[ID]
+     * @return string представянето на entity-то във формат: ClassName[ID]
      */
     @Override
     public String toString() {
@@ -42,11 +42,11 @@ public abstract class Entity  implements Entitiable, EntityPrintable, EntityFiel
     }
 
     /**
-     * Converts the given {@code EntityFieldMapper} into a map that associates entity fields
-     * with their corresponding nodes in the data structure.
+     * Преобразува дадения {@code EntityFieldMapper} в карта, която свързва полетата на entity-то
+     * със съответните им възли в структурата на данните.
      *
-     * @param entityFieldMapper the mapper that provides the mapping between entity fields and nodes
-     * @return a map where the keys are fields of the entity and the values are nodes in the associated data structure
+     * @param entityFieldMapper mapper-ът, който предоставя съпоставянето между полетата на entity-то и възлите
+     * @return карта, където ключовете са полета на entity-то, а стойностите са възли в свързаната структура на данни
      */
     @Override
     public Map<Field, Node> toFieldNodesMap(EntityFieldMapper entityFieldMapper) {

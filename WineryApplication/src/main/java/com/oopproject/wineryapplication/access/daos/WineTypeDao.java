@@ -10,21 +10,21 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * A DAO class for performing CRUD operations on the {@link WineType} entity using Hibernate.
+ * DAO клас за извършване на CRUD операции върху обекта {@link WineType} с помощта на Hibernate.
  *
- * This class extends {@link EntityDao} and provides implementations for:
- * - Retrieving single or multiple {@link WineType} entities.
- * - Adding a new {@link WineType} entity.
- * - Updating an existing {@link WineType} entity.
- * - Deleting an {@link WineType} entity by its ID.
+ * Този клас разширява {@link EntityDao} и предоставя имплементации за:
+ * - Извличане на единични или множество обекти {@link WineType}.
+ * - Добавяне на нов обект {@link WineType}.
+ * - Актуализиране на съществуващ обект {@link WineType}.
+ * - Изтриване на обект {@link WineType} по неговия ID.
  *
- * Each method utilizes Hibernate sessions for database interactions and includes
- * appropriate transaction handling to ensure data integrity.
+ * Всеки метод използва Hibernate сесии за взаимодействия с базата данни и включва
+ * подходяща обработка на транзакциите, за да се гарантира целостта на данните.
  */
 public class WineTypeDao extends EntityDao<WineType> {
 
     /**
-     * Constructs an {@code WineTypeDao} for performing CRUD operations on the {@link WineType} entity.
+     * Конструира {@code WineTypeDao} за извършване на CRUD операции върху обекта {@link WineType}.
      * {@inheritDoc}
      */
     public WineTypeDao() {

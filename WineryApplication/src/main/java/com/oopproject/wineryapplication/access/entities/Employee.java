@@ -9,43 +9,44 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 
+
 /**
- * Represents an Employee entity in the system, corresponding to the "employee" table in the database.
- * This class extends the base entity class to inherit common functionalities and adds
- * specific attributes and relationships for the "Employee" concept.
+ * Represents the "Employee" entity in the system, corresponding to the "employee" table in the database.
+ * This class extends the base entity class to inherit common functionalities and adds specific
+ * attributes and relationships for the concept of an "Employee."
  * <p>
- * Each instance of Employee is identified by a unique ID,
- * is associated with a person, has a password, and has an occupation.
- * Employees can also be related to a collection of behaviors.
- * <p>
- * The Employee class implements methods for retrieving and setting its properties,
- * interacting with a DAO, and overriding the default string representation.
+ * Each instance of Employee is identified by a unique ID, is linked to a person, has a defined occupation,
+ * and a password for authentication.
  * <p>
  * Fields:
- * - id: A unique identifier for the Employee entity.
- * - person: An associated Person entity representing the individual linked to this Employee (many-to-one relationship).
- * - password: A string representing the password of the Employee (maximum length 30).
- * - occupation: An associated Occupation entity indicating the job role of the Employee (many-to-one relationship).
- * - behaviors: A set of behaviors associated with this Employee, forming a one-to-many relationship.
+ * <ul>
+ *     <li>{@code id}: Unique identifier for the Employee entity.</li>
+ *     <li>{@code person}: Represents the person associated with the employee, forming a many-to-one relationship.</li>
+ *     <li>{@code password}: A string representing the password of the employee, with a maximum length of 30 characters.</li>
+ *     <li>{@code occupation}: Denotes the job or role the employee holds, forming a many-to-one relationship.</li>
+ *     <li>{@code behaviors}: A collection of behaviors linked to this employee, forming a one-to-many relationship.</li>
+ * </ul>
  * <p>
  * Methods:
- * - getId(): Retrieves the ID of the Employee.
- * - setId(Integer id): Sets the ID of the Employee.
- * - getPerson(): Retrieves the associated Person entity.
- * - setPerson(Person person): Sets the associated Person entity.
- * - getPassword(): Retrieves the password of the Employee.
- * - setPassword(String password): Sets the password of the Employee.
- * - getOccupation(): Retrieves the associated Occupation entity.
- * - setOccupation(Occupation occupation): Sets the associated Occupation entity.
- * - getBehaviors(): Retrieves the set of behaviors associated with the Employee.
- * - setBehaviors(Set<Behavior> behaviors): Sets the behaviors associated with the Employee.
- * - toString(): Returns a string representation of the Employee entity including its base representation and person's name.
- * - getDao(): Provides a DAO implementation specific to Employee for interacting with the database.
+ * <ul>
+ *     <li>{@code getId()}: Retrieves the ID of the Employee.</li>
+ *     <li>{@code setId(Integer id)}: Sets the ID of the Employee.</li>
+ *     <li>{@code getDao()}: Provides a DAO implementation specific to Employee for database interaction.</li>
+ *     <li>{@code getPerson()}: Retrieves the person linked to this employee.</li>
+ *     <li>{@code setPerson(Person person)}: Defines the person linked to this employee.</li>
+ *     <li>{@code getPassword()}: Retrieves the employee's password.</li>
+ *     <li>{@code setPassword(String password)}: Sets the employee's password.</li>
+ *     <li>{@code getOccupation()}: Retrieves the occupation associated with an employee.</li>
+ *     <li>{@code setOccupation(Occupation occupation)}: Sets the occupation of the employee.</li>
+ *     <li>{@code getBehaviors()}: Retrieves the behaviors associated with the employee.</li>
+ *     <li>{@code setBehaviors(Set<Behavior> behaviors)}: Assigns behaviors to the employee.</li>
+ *     <li>{@code toString()}: Returns a string representation of the employee, including the linked person's name.</li>
+ * </ul>
  * <p>
  * Relationships:
- * - Many-to-one relationship with the Person entity, linked by the "person_id" column.
- * - Many-to-one relationship with the Occupation entity, linked by the "occupation_id" column.
- * - One-to-many relationship with the Behavior entity, mapped by the "employee" field in Behavior.
+ * - Many-to-one relationship with {@code Person entity}, representing the associated person.
+ * - Many-to-one relationship with {@code Occupation entity}, representing the employee's role.
+ * - One-to-many relationship with {@code Behavior entity}, representing the behaviors tied to the employee.
  */
 @Entity
 @Table(name = "employee", schema = "public")
