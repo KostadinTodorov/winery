@@ -8,6 +8,45 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+
+/**
+ * Represents an Employee entity in the system, corresponding to the "employee" table in the database.
+ * This class extends the base entity class to inherit common functionalities and adds
+ * specific attributes and relationships for the "Employee" concept.
+ * <p>
+ * Each instance of Employee is identified by a unique ID,
+ * is associated with a person, has a password, and has an occupation.
+ * Employees can also be related to a collection of behaviors.
+ * <p>
+ * The Employee class implements methods for retrieving and setting its properties,
+ * interacting with a DAO, and overriding the default string representation.
+ * <p>
+ * Fields:
+ * - id: A unique identifier for the Employee entity.
+ * - person: An associated Person entity representing the individual linked to this Employee (many-to-one relationship).
+ * - password: A string representing the password of the Employee (maximum length 30).
+ * - occupation: An associated Occupation entity indicating the job role of the Employee (many-to-one relationship).
+ * - behaviors: A set of behaviors associated with this Employee, forming a one-to-many relationship.
+ * <p>
+ * Methods:
+ * - getId(): Retrieves the ID of the Employee.
+ * - setId(Integer id): Sets the ID of the Employee.
+ * - getPerson(): Retrieves the associated Person entity.
+ * - setPerson(Person person): Sets the associated Person entity.
+ * - getPassword(): Retrieves the password of the Employee.
+ * - setPassword(String password): Sets the password of the Employee.
+ * - getOccupation(): Retrieves the associated Occupation entity.
+ * - setOccupation(Occupation occupation): Sets the associated Occupation entity.
+ * - getBehaviors(): Retrieves the set of behaviors associated with the Employee.
+ * - setBehaviors(Set<Behavior> behaviors): Sets the behaviors associated with the Employee.
+ * - toString(): Returns a string representation of the Employee entity including its base representation and person's name.
+ * - getDao(): Provides a DAO implementation specific to Employee for interacting with the database.
+ * <p>
+ * Relationships:
+ * - Many-to-one relationship with the Person entity, linked by the "person_id" column.
+ * - Many-to-one relationship with the Occupation entity, linked by the "occupation_id" column.
+ * - One-to-many relationship with the Behavior entity, mapped by the "employee" field in Behavior.
+ */
 @Entity
 @Table(name = "employee", schema = "public")
 public class Employee extends com.oopproject.wineryapplication.access.entities.entity.Entity {
@@ -31,10 +70,16 @@ public class Employee extends com.oopproject.wineryapplication.access.entities.e
     @OneToMany(mappedBy = "employee")
     private Set<Behavior> behaviors = new LinkedHashSet<>();
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -71,11 +116,17 @@ public class Employee extends com.oopproject.wineryapplication.access.entities.e
         this.behaviors = behaviors;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return super.toString()+"["+person.getPersonName()+"]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<Employee> getDao() {
         return new EmployeeDao();

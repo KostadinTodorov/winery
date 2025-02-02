@@ -26,10 +26,16 @@ public class WineType extends com.oopproject.wineryapplication.access.entities.e
     @OneToMany(mappedBy = "wineType")
     private Set<ClientsOrder> clientsOrders = new LinkedHashSet<>();
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -58,11 +64,17 @@ public class WineType extends com.oopproject.wineryapplication.access.entities.e
         this.clientsOrders = clientsOrders;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return super.toString()+"["+name+"]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<WineType> getDao() {
         return new WineTypeDao();

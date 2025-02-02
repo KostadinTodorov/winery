@@ -23,10 +23,16 @@ public class FaultCode extends com.oopproject.wineryapplication.access.entities.
     @OneToMany(mappedBy = "faultCode")
     private Set<com.oopproject.wineryapplication.access.entities.Machine> machines = new LinkedHashSet<>();
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -47,6 +53,9 @@ public class FaultCode extends com.oopproject.wineryapplication.access.entities.
         this.machines = machines;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<FaultCode> getDao() {
         return new FaultCodeDao();

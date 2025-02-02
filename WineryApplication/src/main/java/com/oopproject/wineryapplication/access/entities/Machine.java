@@ -41,10 +41,16 @@ public class Machine extends com.oopproject.wineryapplication.access.entities.en
     @JoinColumn(name = "answer_id")
     private Answer answer;
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -105,6 +111,9 @@ public class Machine extends com.oopproject.wineryapplication.access.entities.en
         this.answer = answer;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<Machine> getDao() {
         return new MachineDao();

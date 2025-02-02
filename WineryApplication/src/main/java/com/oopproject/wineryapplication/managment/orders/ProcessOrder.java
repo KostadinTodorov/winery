@@ -8,6 +8,13 @@ import org.hibernate.query.Order;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * The ProcessOrder class is responsible for handling operations related to a client's order,
+ * including updating the order progress, marking the order as complete, and retrieving order requirements.
+ *
+ * This class acts as a bridge between the ClientsOrder entity and its business logic,
+ * performing validations and ensuring proper modifications are made to the order data.
+ */
 public class ProcessOrder {
     ClientsOrder order;
     OrderRequirements orderRequirements;
