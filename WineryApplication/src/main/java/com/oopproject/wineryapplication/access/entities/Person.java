@@ -38,10 +38,16 @@ public class Person extends com.oopproject.wineryapplication.access.entities.ent
     @OneToMany(mappedBy = "person")
     private Set<Employee> employees = new LinkedHashSet<>();
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -102,11 +108,17 @@ public class Person extends com.oopproject.wineryapplication.access.entities.ent
         this.employees = employees;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return super.toString()+"["+personName+"]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<Person> getDao() {
         return new PersonDao();

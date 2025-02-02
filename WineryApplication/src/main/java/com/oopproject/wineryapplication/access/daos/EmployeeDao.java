@@ -1,5 +1,6 @@
 package com.oopproject.wineryapplication.access.daos;
 
+import com.oopproject.wineryapplication.access.entities.Client;
 import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 import jakarta.persistence.RollbackException;
@@ -8,13 +9,33 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * A DAO class for performing CRUD operations on the {@link Employee} entity using Hibernate.
+ * <p>
+ * This class extends {@link EntityDao} and provides implementations for:
+ * <ul>
+ *   <li>Retrieving single or multiple {@link Employee} entities.</li>
+ *   <li>Adding a new {@link Employee} entity.</li>
+ *   <li>Updating an existing {@link Employee} entity.</li>
+ *   <li>Deleting an {@link Employee} entity by its ID.</li>
+ * </ul>
+ * <p>
+ * Each method utilizes Hibernate sessions for database interactions and includes
+ * appropriate transaction handling to ensure data integrity.
+ */
 public class EmployeeDao extends EntityDao<Employee> {
 
+    /**
+     * Constructs an {@code EmployeeDao} for performing CRUD operations on the {@link Employee} entity.
+     * {@inheritDoc}
+     */
     public EmployeeDao() {
         super();
     }
 
-    /**{@inheriteDoc}*/
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Employee get(int id) {
         try (Session session = createSession()) {
@@ -22,6 +43,9 @@ public class EmployeeDao extends EntityDao<Employee> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Employee> getAll() {
         try (Session session = createSession()) {
@@ -29,6 +53,9 @@ public class EmployeeDao extends EntityDao<Employee> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean add(Employee employee) {
         if (employee.getId() == null) {
@@ -39,6 +66,9 @@ public class EmployeeDao extends EntityDao<Employee> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Employee insert(Employee employee) {
         Employee newEmployee = null;
@@ -58,6 +88,9 @@ public class EmployeeDao extends EntityDao<Employee> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(int id, Employee employee) {
         if (get(id) != null) {
@@ -67,6 +100,9 @@ public class EmployeeDao extends EntityDao<Employee> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(int id) {
         try (Session session = createSession()) {

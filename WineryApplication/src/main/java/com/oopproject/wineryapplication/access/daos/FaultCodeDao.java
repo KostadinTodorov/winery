@@ -1,5 +1,6 @@
 package com.oopproject.wineryapplication.access.daos;
 
+import com.oopproject.wineryapplication.access.entities.Client;
 import com.oopproject.wineryapplication.access.entities.FaultCode;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
 import jakarta.persistence.RollbackException;
@@ -8,12 +9,33 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * A DAO class for performing CRUD operations on the {@link FaultCode} entity using Hibernate.
+ * <p>
+ * This class extends {@link EntityDao} and provides implementations for:
+ * <ul>
+ *   <li>Retrieving single or multiple {@link FaultCode} entities.</li>
+ *   <li>Adding a new {@link FaultCode} entity.</li>
+ *   <li>Updating an existing {@link FaultCode} entity.</li>
+ *   <li>Deleting an {@link FaultCode} entity by its ID.</li>
+ * </ul>
+ * <p>
+ * Each method utilizes Hibernate sessions for database interactions and includes
+ * appropriate transaction handling to ensure data integrity.
+ */
 public class FaultCodeDao extends EntityDao<FaultCode> {
 
+    /**
+     * Constructs an {@code FaultCodeDao} for performing CRUD operations on the {@link FaultCode} entity.
+     * {@inheritDoc}
+     */
     public FaultCodeDao() {
         super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FaultCode get(int id) {
         try (Session session = createSession()) {
@@ -21,6 +43,9 @@ public class FaultCodeDao extends EntityDao<FaultCode> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<FaultCode> getAll() {
         try (Session session = createSession()) {
@@ -28,6 +53,9 @@ public class FaultCodeDao extends EntityDao<FaultCode> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean add(FaultCode faultCode) {
         if (faultCode.getId() == null) {
@@ -38,6 +66,9 @@ public class FaultCodeDao extends EntityDao<FaultCode> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FaultCode insert(FaultCode faultCode) {
         FaultCode newFaultCode = null;
@@ -57,6 +88,9 @@ public class FaultCodeDao extends EntityDao<FaultCode> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(int id, FaultCode faultCode) {
         if (get(id) != null) {
@@ -66,6 +100,9 @@ public class FaultCodeDao extends EntityDao<FaultCode> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(int id) {
         try (Session session = createSession()) {

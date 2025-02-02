@@ -2,6 +2,7 @@ package com.oopproject.wineryapplication.access.daos;
 
 import com.oopproject.wineryapplication.access.daos.dao.Dao;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
+import com.oopproject.wineryapplication.access.entities.Act;
 import com.oopproject.wineryapplication.access.entities.Answer;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
@@ -9,11 +10,31 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * A DAO class for performing CRUD operations on the {@link Answer} entity using Hibernate.
+ *
+ * This class extends {@link EntityDao} and provides implementations for:
+ * - Retrieving single or multiple {@link Answer} entities.
+ * - Adding a new {@link Answer} entity.
+ * - Updating an existing {@link Answer} entity.
+ * - Deleting an {@link Answer} entity by its ID.
+ *
+ * Each method utilizes Hibernate sessions for database interactions and includes
+ * appropriate transaction handling to ensure data integrity.
+ */
 public class AnswerDao extends EntityDao<Answer> {
+
+    /**
+     * Constructs an {@code AnswerDao} for performing CRUD operations on the {@link Answer} entity.
+     * {@inheritDoc}
+     */
     public AnswerDao() {
         super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Answer get(int id) {
         try (Session session = createSession()) {
@@ -21,6 +42,9 @@ public class AnswerDao extends EntityDao<Answer> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Answer> getAll() {
         try (Session session = createSession()) {
@@ -28,6 +52,9 @@ public class AnswerDao extends EntityDao<Answer> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean add(Answer answer) {
         if (answer.getId() == null) {
@@ -39,6 +66,9 @@ public class AnswerDao extends EntityDao<Answer> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Answer insert(Answer answer) {
         Answer newAnswer = null;
@@ -58,6 +88,9 @@ public class AnswerDao extends EntityDao<Answer> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(int id, Answer answer) {
         if (get(id) != null) {
@@ -67,6 +100,9 @@ public class AnswerDao extends EntityDao<Answer> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(int id) {
         try (Session session = createSession()) {

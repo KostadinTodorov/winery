@@ -8,15 +8,33 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * A concrete implementation of the {@link EntityDao} class for managing entities of a specific type.
+ *
+ * This class provides CRUD operations for entities of type {@code T}, where {@code T} is a subclass
+ * of {@link Entity}. It utilizes Hibernate for database interactions. The specific type of entity
+ * managed by this DAO is determined by the type parameter {@code T} and the associated class {@code type}.
+ *
+ * @param <T> the type of entity managed by this DAO, extending {@link Entity}
+ */
 public class TemplateDao<T extends Entity> extends EntityDao<T> {
 
     private final Class<T> type;
 
+    /**
+     * Constructs a new instance of {@code TemplateDao} for managing entities of the specified type.
+     *
+     * @param type the {@code Class} object representing the specific type of entity {@code T}
+     *             managed by this instance of the {@code TemplateDao}. {@code T} must extend {@code Entity}.
+     */
     public TemplateDao(Class<T> type) {
         super();
         this.type = type;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T get(int id) {
         try (Session session = createSession()) {
@@ -24,6 +42,9 @@ public class TemplateDao<T extends Entity> extends EntityDao<T> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<T> getAll() {
         try (Session session = createSession()) {
@@ -45,6 +66,9 @@ public class TemplateDao<T extends Entity> extends EntityDao<T> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public T insert(T entity) {
         T newEntity = null;
@@ -64,6 +88,9 @@ public class TemplateDao<T extends Entity> extends EntityDao<T> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(int id, T entity) {
         if (get(id) != null) {
@@ -73,6 +100,9 @@ public class TemplateDao<T extends Entity> extends EntityDao<T> {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(int id) {
         try (Session session = createSession()) {

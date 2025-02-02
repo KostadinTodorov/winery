@@ -8,6 +8,34 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Represents an Answer entity in the system, corresponding to the "answers" table in the database.
+ * This class extends the base entity class to inherit common functionalities and adds
+ * specific attributes and relationships for the "Answer" concept.
+ *
+ * Each instance of Answer is identified by a unique ID,
+ * includes a string representing the answer, and is associated with a collection of machines.
+ *
+ * The Answer class also implements methods for retrieving and setting its properties,
+ * interacting with a DAO, and overriding the default string representation.
+ *
+ * Fields:
+ * - id: A unique identifier for the Answer entity.
+ * - answers: A string representing the answer (maximum length 20).
+ * - machines: A set of machines associated with this Answer, forming a one-to-many relationship.
+ *
+ * Methods:
+ * - getId(): Retrieves the ID of the Answer.
+ * - setId(Integer id): Sets the ID of the Answer.
+ * - getDao(): Provides a DAO implementation specific to Answer for interacting with the database.
+ * - getAnswers(): Retrieves the string representing the answer.
+ * - setAnswers(String answers): Sets the string representing the answer.
+ * - getMachines(): Retrieves the set of machines associated with the Answer.
+ * - setMachines(Set<Machine> machines): Sets the machines associated with the Answer.
+ *
+ * Relationships:
+ * - One-to-many relationship with the Machine entity, mapped by the "answer" field in Machine.
+ */
 @Entity
 @Table(name = "answers", schema = "public")
 public class Answer extends com.oopproject.wineryapplication.access.entities.entity.Entity {

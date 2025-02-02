@@ -26,10 +26,16 @@ public class Sweetness extends com.oopproject.wineryapplication.access.entities.
     @OneToMany(mappedBy = "sweetness")
     private Set<Bottle> bottles = new LinkedHashSet<>();
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -58,11 +64,17 @@ public class Sweetness extends com.oopproject.wineryapplication.access.entities.
         this.bottles = bottles;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return super.toString()+"["+leCategory+"("+category+")"+"]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<Sweetness> getDao() {
         return new SweetnessDao();
