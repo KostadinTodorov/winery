@@ -12,8 +12,11 @@ public class ProcessOrder {
     ClientsOrder order;
     OrderRequirements orderRequirements;
     public ProcessOrder(ClientsOrder order) {
-        this.order = order;
-        this.orderRequirements = new OrderRequirements(order);
+        if (order.getId() != null) {
+            this.order = order;
+            this.orderRequirements = new OrderRequirements(order);
+        }
+        throw new IllegalArgumentException("Order ID cannot be null");
     }
 
     boolean updateOrder(Progress progress){
@@ -25,9 +28,13 @@ public class ProcessOrder {
         }
     }
 
-    void completeOrder(LocalDate date){
+    boolean completeOrder(LocalDate date){
         order.setCompletionDate(date);
-        new ClientsOrderDao().insert(order);
+        try {
+            return new ClientsOrderDao().insert(order) != null;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public OrderRequirements getOrderRequirements() {

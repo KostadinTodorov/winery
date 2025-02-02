@@ -1,9 +1,7 @@
-package com.oopproject.wineryapplication.access.entities.helper;
+package com.oopproject.wineryapplication.access.entities.mappers;
 
 import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
-import com.oopproject.wineryapplication.access.entities.Employee;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
-import com.oopproject.wineryapplication.access.entities.entity.contracts.EntityFieldNodeble;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -17,9 +15,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-public class EntityTypeNodeMapper{
+public class EntityTypeNodeMapper implements EntityFieldMapper{
     private final Class<? extends Entity> entityClass;
 
     public EntityTypeNodeMapper(Class<? extends Entity> entityClass) {

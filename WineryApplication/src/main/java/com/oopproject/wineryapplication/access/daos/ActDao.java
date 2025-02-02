@@ -1,14 +1,31 @@
 package com.oopproject.wineryapplication.access.daos;
 import com.oopproject.wineryapplication.access.entities.Act;
 import com.oopproject.wineryapplication.access.daos.dao.EntityDao;
+import com.oopproject.wineryapplication.access.entities.Answer;
 import jakarta.persistence.RollbackException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * A DAO class for performing CRUD operations on the {@link Act} entity using Hibernate.
+ *
+ * This class extends {@link EntityDao} and provides implementations for:
+ * - Retrieving single or multiple {@link Act} entities.
+ * - Adding a new {@link Act} entity.
+ * - Updating an existing {@link Act} entity.
+ * - Deleting an {@link Act} entity by its ID.
+ *
+ * Each method utilizes Hibernate sessions for database interactions and includes
+ * appropriate transaction handling to ensure data integrity.
+ */
 public class ActDao extends EntityDao<Act> {
 
+    /**
+     * Constructs an {@code AnswerDao} for performing CRUD operations on the {@link Answer} entity.
+     * {@inheritDoc}
+     */
     public ActDao() {
         super();
     }

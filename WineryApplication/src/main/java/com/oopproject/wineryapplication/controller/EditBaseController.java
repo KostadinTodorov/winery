@@ -2,10 +2,9 @@ package com.oopproject.wineryapplication.controller;
 
 import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
 import com.oopproject.wineryapplication.access.entities.creator.EntityFactory;
+import com.oopproject.wineryapplication.access.entities.creator.GenericEntityFactory;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
-import com.oopproject.wineryapplication.access.entities.helper.EntityTypeNodeMapper;
-import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
-import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
+import com.oopproject.wineryapplication.access.entities.mappers.EntityTypeNodeMapper;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -37,12 +36,10 @@ public class EditBaseController {
 
     @FXML
     public void initialize() {
-        LoggerHelper.logData(EditBaseController.class, LoggerLevels.INFO, "Initialize Edit Base Controller");
-
         Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> saveButton());
         entityProps.getChildren().add(saveButton);
-        fieldNodeMap = entity.toNode(new EntityTypeNodeMapper(entity.getClass()));
+        fieldNodeMap = entity.toFieldNodesMap(new EntityTypeNodeMapper(entity.getClass()));
         generateNodes(fieldNodeMap);
     }
 
@@ -53,8 +50,6 @@ public class EditBaseController {
                 entityProps.getChildren().addAll(fieldLabel, entry.getValue());
             }
         }
-
-        LoggerHelper.logData(EditBaseController.class, LoggerLevels.INFO, "Generate buttons and fields for Edit Base Controller");
     }
 
     private boolean isFilled() {
@@ -90,9 +85,9 @@ public class EditBaseController {
     }
 
     private boolean setEntity() {
-        EntityFactory entityFactory = new EntityFactory();
+        EntityFactory genericEntityFactory = new GenericEntityFactory(entity,fieldNodeMap);
         try {
-            entityFactory.createEntity(entity,fieldNodeMap);
+            genericEntityFactory.createEntity();
             return true;
         } catch (Exception e) {
             return false;
@@ -100,11 +95,9 @@ public class EditBaseController {
     }
     public boolean saveEntity() {
         try{
-//            if (entity.getDao().update(entity.getId(),entity)) {
-//                return true;
-//            }
-            TemplateDao<Entity> dao = new TemplateDao<>((Class<Entity>) entity.getClass());
-            return dao.update(entity.getId(), entity);
+            return entity.getDao().update(entity.getId(),entity);
+//            TemplateDao<Entity> dao = new TemplateDao<>((Class<Entity>) entity.getClass());
+//            return dao.update(entity.getId(), entity);
         } catch (Exception e){
             return false;
         }

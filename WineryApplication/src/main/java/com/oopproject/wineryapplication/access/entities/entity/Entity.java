@@ -3,7 +3,9 @@ package com.oopproject.wineryapplication.access.entities.entity;
 import com.oopproject.wineryapplication.access.entities.entity.contracts.Entitiable;
 import com.oopproject.wineryapplication.access.entities.entity.contracts.EntityFieldNodeble;
 import com.oopproject.wineryapplication.access.entities.entity.contracts.EntityPrintable;
-import com.oopproject.wineryapplication.access.entities.helper.EntityTypeNodeMapper;
+//import com.oopproject.wineryapplication.access.entities.helper.EntityFieldMap;
+import com.oopproject.wineryapplication.access.entities.mappers.EntityFieldMapper;
+import com.oopproject.wineryapplication.access.entities.mappers.EntityTypeNodeMapper;
 import javafx.scene.Node;
 
 import java.lang.reflect.Field;
@@ -16,7 +18,7 @@ public abstract class Entity  implements Entitiable, EntityPrintable, EntityFiel
     }
 
     @Override
-    public Map<Field, Node> toNode(EntityTypeNodeMapper entityTypeNodeMapper) {
-        return entityTypeNodeMapper.getFieldNodeMap();
+    public Map<Field, Node> toFieldNodesMap(EntityFieldMapper entityFieldMapper) {
+        return entityFieldMapper.getFieldNodeMap();
     }
 }

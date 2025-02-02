@@ -32,4 +32,6 @@ module com.oopproject.wineryapplication {
     opens com.oopproject.wineryapplication.helpers.scenes to javafx.fxml;
     exports com.oopproject.wineryapplication.helpers.logger;
     opens com.oopproject.wineryapplication.helpers.logger to javafx.fxml;
+    exports com.oopproject.wineryapplication.access.entities.mappers;
+    opens com.oopproject.wineryapplication.access.entities.mappers to javafx.fxml, org.hibernate.orm.core;
 }
