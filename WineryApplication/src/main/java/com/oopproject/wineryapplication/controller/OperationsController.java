@@ -59,7 +59,7 @@ public class OperationsController {
                     this.operationClass = ProcessOrder.class;
                     this.operationInstance = this.operationClass.getDeclaredConstructor(ClientsOrder.class).newInstance(clientsOrder);
                     if (operationInstance instanceof ProcessOrder processOrder) {
-                        processOrder.testdisplay();
+                      //  processOrder.testdisplay();
                     } else {
                         LoggerHelper.logData(OperationsController.class, LoggerLevels.ERROR, "Issue with process ORDER");
                     }
