@@ -11,6 +11,11 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
+/**
+ * The WelcomeController class acts as the controller for the Welcome scene in a JavaFX application.
+ * It handles interactions with the UI elements present in the Welcome screen, including button presses
+ * for different user roles.
+ */
 public class WelcomeController {
 
     @FXML
@@ -22,11 +27,29 @@ public class WelcomeController {
     @FXML
     Button btnDevisionLead;
 
+    /**
+     * Initializes the WelcomeController by performing any required setup tasks
+     * before the controller is used. This method is automatically called after
+     * the FXML file has been loaded and ensures that the controller's state is initialized.
+     *
+     * Functionality:
+     * - Logs an informational message indicating the initialization of the
+     *   WelcomeController using the LoggerHelper utility.
+     */
     @FXML
     public void initialize() {
         LoggerHelper.logData(WelcomeController.class, LoggerLevels.INFO, "Initialize Welcome Controller");
     }
 
+    /**
+     * Handles the action of switching to the login screen based on the button pressed.
+     * Updates the user's occupation in the system depending on the selected role and
+     * transitions to the login scene.
+     *
+     * @param event The ActionEvent triggered by pressing one of the role selection buttons
+     *              (e.g., CEO, Storage Organiser, Accountant, or Division Lead).
+     * @throws IOException if an I/O error occurs during the scene transition.
+     */
     @FXML
     protected void switchToLogin(ActionEvent event) throws IOException {
 

@@ -27,10 +27,16 @@ public class Harvest extends com.oopproject.wineryapplication.access.entities.en
     @OneToMany(mappedBy = "harvest")
     private Set<com.oopproject.wineryapplication.access.entities.Mix> mixes = new LinkedHashSet<>();
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -59,11 +65,17 @@ public class Harvest extends com.oopproject.wineryapplication.access.entities.en
         this.mixes = mixes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return super.toString()+"["+sort.getName()+"]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<Harvest> getDao() {
         return new HarvestDao();

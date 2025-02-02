@@ -23,10 +23,16 @@ public class Sort extends com.oopproject.wineryapplication.access.entities.entit
     @OneToMany(mappedBy = "sort")
     private Set<Harvest> harvests = new LinkedHashSet<>();
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -47,11 +53,17 @@ public class Sort extends com.oopproject.wineryapplication.access.entities.entit
         this.harvests = harvests;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return super.toString()+"["+name+"]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<Sort> getDao() {
         return new SortDao();

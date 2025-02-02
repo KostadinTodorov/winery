@@ -23,10 +23,16 @@ public class MachineType extends com.oopproject.wineryapplication.access.entitie
     @OneToMany(mappedBy = "machineType")
     private Set<com.oopproject.wineryapplication.access.entities.Machine> machines = new LinkedHashSet<>();
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -47,11 +53,17 @@ public class MachineType extends com.oopproject.wineryapplication.access.entitie
         this.machines = machines;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return super.toString()+"["+machineType+"]";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<MachineType> getDao() {
         return new MachineTypeDao();

@@ -7,13 +7,13 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
- class EntityFieldMap{
+ class _EntityFieldMap {
 
     private Field[] fields;
     private Map<String, Type> map;
     Class<? extends Entity> clazz;
 
-    public EntityFieldMap(Class<? extends Entity> clazz) {
+    public _EntityFieldMap(Class<? extends Entity> clazz) {
         this.clazz = clazz;
         fields = this.clazz.getDeclaredFields();
     }

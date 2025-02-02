@@ -40,6 +40,16 @@ public class GenericEntityFactory <T extends Entity> implements EntityFactory{
         return createEntity(entity, fieldNodeMap);
     }
 
+    /**
+     * Creates and initializes an {@link Entity} object by mapping its fields to corresponding GUI nodes.
+     * This method iterates through the fields of the given entity, maps each field based on its type
+     * to the provided field-node mapping, and sets the corresponding values to the entity's fields.
+     *
+     * @param entity The base entity object to be initialized. Its fields will be populated based on the provided mapping.
+     * @param fieldNodeMap A map associating entity fields with their corresponding GUI node representations.
+     *                     The keys are the fields of the entity, and the values are GUI nodes like TextField, ComboBox, etc.
+     * @return The updated {@link Entity} object with its fields populated based on the given field-node mapping.
+     */
     private Entity createEntity(T entity, Map<Field, Node> fieldNodeMap) {
         Set<Field> entityFields = entity.toFieldNodesMap(new EntityTypeNodeMapper(entity.getClass())).keySet();
 
@@ -65,6 +75,18 @@ public class GenericEntityFactory <T extends Entity> implements EntityFactory{
         return entity;
     }
 
+    /**
+     * Sets the value of a specified field in an entity object based on the value taken
+     * from a corresponding GUI node, such as a TextField, CheckBox, or DatePicker.
+     * The value assignment depends on the field's type.
+     *
+     * @param field The field of the entity object whose value is to be set.
+     * @param entity The entity object to which the field belongs.
+     * @param node The GUI node corresponding to the field, used to retrieve the input value.
+     * @param fieldType The data type of the field to ensure appropriate type handling and conversion.
+     * @throws IllegalAccessException If the field cannot be accessed or modified.
+     * @throws IllegalArgumentException If the field type is unsupported or the node is invalid.
+     */
     private void setFieldValue(Field field, Entity entity, Node node, Class<?> fieldType) throws IllegalAccessException {
         switch (node) {
             case TextField textField -> {

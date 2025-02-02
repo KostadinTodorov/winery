@@ -20,10 +20,16 @@ public class Mix extends com.oopproject.wineryapplication.access.entities.entity
     @JoinColumn(name = "batch_id", nullable = false)
     private Batch batch;
 
+    /**
+     * {@inheritDoc}
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -44,6 +50,9 @@ public class Mix extends com.oopproject.wineryapplication.access.entities.entity
         this.batch = batch;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dao<Mix> getDao() {
         return new MixDao();

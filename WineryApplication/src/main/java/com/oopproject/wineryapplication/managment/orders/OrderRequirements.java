@@ -9,6 +9,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The OrderRequirements class represents the requirements needed to fulfill a client's order.
+ * It calculates the total necessary volume, identifies stored batches available
+ * for the order, determines additional batch requirements, and computes harvest needs.
+ * This class ensures that all operations align with the client's specified wine type and
+ * quantity for the order.
+ */
 public class OrderRequirements {
     private final ClientsOrder order;
     private List<BatchStoridge> storedBatchesForOrder;
@@ -30,10 +37,24 @@ public class OrderRequirements {
         return new ClientsOrderDao().get(order.getId());
     }
 
+    /**
+     * Calculates the remaining volume required for the order by subtracting the total volume
+     * already stored in batches from the total needed volume.
+     *
+     * @return the remaining volume required for the order as a Double.
+     */
     public Double volumeForOrder(){
         return totalNeededVolume - storedBatchesForOrder().stream().mapToInt(BatchStoridge::getVolumeStored).sum();
     }
 
+    /**
+     * Retrieves a list of batches that match the wine type for the associated order
+     * and have a positive total volume stored across their storages.
+     * The result is filtered and calculated based on the current order's wine type
+     * and the sum of all stored volumes in the batch storages.
+     *
+     * @return a list of Batch objects that satisfy the required conditions.
+     */
     public List<Batch> batchesForOrder(){
         if (batchesForOrder == null) {
             batchesForOrder = new BatchDao().getAll().stream().filter(
@@ -45,6 +66,13 @@ public class OrderRequirements {
         return batchesForOrder;
     }
 
+    /**
+     * Retrieves a list of BatchStoridge objects associated with the order.
+     * These objects represent storage batches that are usable for fulfilling the order.
+     * The method calculates the list only once and caches the result.
+     *
+     * @return a list of BatchStoridge objects representing the usable storage batches for the order.
+     */
     public List<BatchStoridge> storedBatchesForOrder(){
         if (storedBatchesForOrder == null) {
             List<BatchStoridge> usableBatchesContainers = batchesForOrder().stream().flatMap(
@@ -66,7 +94,17 @@ public class OrderRequirements {
 //        for (int i = 0; i < batchStoridges.size(); i++) {
 //            if (closestDifference != 0) {
 //                BatchStoridge ibatchStoridge = batchStoridges.get(i);
-////            currentSum = batchStoridge.getVolumeStored();
+/**
+ * Determines the harvests required to fulfill an order based on the given sort ratios and loss percentage.
+ * This method calculates the required weight of each sort in proportion to its ratio in the order,
+ * adjusted for any percentage loss, and returns a list of `Harvest` objects reflecting these requirements.
+ *
+ * @param sortRatioMap a map where each key is a `Sort` object representing the type of grape,
+ *                     and the value is a Float representing the proportion of that sort in the order.
+ * @param lossPercentage an integer representing the percentage of losses to be considered during calculation.
+ * @return a list of `Harvest` objects, where each object specifies the sort and its corresponding weight,
+ *         required to fulfill the order.
+ */
 //                int currentDiff = wantedVolume - ibatchStoridge.getVolumeStored();
 //                if (currentDiff != 0) {
 //                    List<BatchStoridge> combination = new ArrayList<>();
