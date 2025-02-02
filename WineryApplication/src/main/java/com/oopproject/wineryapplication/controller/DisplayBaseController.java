@@ -2,8 +2,8 @@ package com.oopproject.wineryapplication.controller;
 
 import com.oopproject.wineryapplication.access.daos.dao.TemplateDao;
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
-import com.oopproject.wineryapplication.helpers.Nodes;
-import com.oopproject.wineryapplication.helpers.SceneHelper;
+import com.oopproject.wineryapplication.helpers.scenes.Nodes;
+import com.oopproject.wineryapplication.helpers.scenes.SceneHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

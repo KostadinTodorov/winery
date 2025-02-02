@@ -14,21 +14,23 @@ public class OrderRequirements {
     private List<BatchStoridge> storedBatchesForOrder;
     private List<Batch> batchesForOrder;
     private double totalNeededVolume;
+
+
     public OrderRequirements(ClientsOrder order) {
-        if (order.getId() != null) {
-            this.order = order;
-            this.totalNeededVolume = order.getQuantity() * 0.75;
+        if (order == null || order.getId() == null) {
+            throw new IllegalArgumentException("Order or Order ID cannot be null");
         }
-        throw new IllegalArgumentException("Order ID cannot be null");
+        this.order = order;
+        this.totalNeededVolume = order.getQuantity() * 0.75;
     }
 
     public double getTotalNeededVolume() {
         return totalNeededVolume;
     }
 
-    public ClientsOrder getOrder() {
-        return new ClientsOrderDao().get(order.getId());
-    }
+    //public ClientsOrder getOrder() {
+    //    return new ClientsOrderDao().get(order.getId());
+    //}
 
     public Double volumeForOrder(){
         return totalNeededVolume - storedBatchesForOrder().stream().mapToInt(BatchStoridge::getVolumeStored).sum();
@@ -66,7 +68,7 @@ public class OrderRequirements {
 //        for (int i = 0; i < batchStoridges.size(); i++) {
 //            if (closestDifference != 0) {
 //                BatchStoridge ibatchStoridge = batchStoridges.get(i);
-////            currentSum = batchStoridge.getVolumeStored();
+//            currentSum = batchStoridge.getVolumeStored();
 //                int currentDiff = wantedVolume - ibatchStoridge.getVolumeStored();
 //                if (currentDiff != 0) {
 //                    List<BatchStoridge> combination = new ArrayList<>();

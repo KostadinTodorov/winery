@@ -11,15 +11,17 @@ import java.util.Date;
 public class ProcessOrder {
     ClientsOrder order;
     OrderRequirements orderRequirements;
+
+
     public ProcessOrder(ClientsOrder order) {
-        if (order.getId() != null) {
-            this.order = order;
-            this.orderRequirements = new OrderRequirements(order);
+        if (order == null || order.getId() == null) {
+            throw new IllegalArgumentException("Order or Order ID cannot be null");
         }
-        throw new IllegalArgumentException("Order ID cannot be null");
+        this.order = order;
+        this.orderRequirements = new OrderRequirements(order);
     }
 
-    boolean updateOrder(Progress progress){
+    public boolean updateOrder(Progress progress){
         order.setProgress(progress);
         try {
             return new ClientsOrderDao().insert(order) != null;
@@ -28,7 +30,7 @@ public class ProcessOrder {
         }
     }
 
-    boolean completeOrder(LocalDate date){
+    public boolean completeOrder(LocalDate date){
         order.setCompletionDate(date);
         try {
             return new ClientsOrderDao().insert(order) != null;
@@ -42,6 +44,7 @@ public class ProcessOrder {
     }
 
     public void testdisplay() {
+        System.out.println("===========wcddwcdwcdcd===================wdcwdcccd=================wcdwc========");
     }
 
 //    public void setOrderRequirements(OrderRequirements orderRequirements) {
