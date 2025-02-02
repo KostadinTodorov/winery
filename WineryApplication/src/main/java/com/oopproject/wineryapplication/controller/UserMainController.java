@@ -3,7 +3,7 @@ package com.oopproject.wineryapplication.controller;
 import com.oopproject.wineryapplication.data.User;
 import com.oopproject.wineryapplication.helpers.buttons.ButtonsHelper;
 import com.oopproject.wineryapplication.helpers.buttons.ButtonsMapHolderForEachCategory;
-import com.oopproject.wineryapplication.helpers.buttons.ButtonsMapHolderForEachNotification;
+import com.oopproject.wineryapplication.helpers.buttons.ButtonsMapHolderForEachOperation;
 import com.oopproject.wineryapplication.helpers.buttons.ButtonsMappingRegisters;
 import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
 import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
@@ -31,7 +31,7 @@ public class UserMainController {
         LoggerHelper.logData(UserMainController.class, LoggerLevels.INFO, "Initializing User Controller");
 
         ButtonsMapHolderForEachCategory categoriesMap = new ButtonsMapHolderForEachCategory();
-        ButtonsMapHolderForEachNotification notificationsMap = new ButtonsMapHolderForEachNotification();
+        ButtonsMapHolderForEachOperation notificationsMap = new ButtonsMapHolderForEachOperation();
         lblUserPrompt.setText ("Please choose a category and then select one of its attributes!");
         btnLogOut.setOnAction(e -> {User.userLogout();});
 
@@ -42,7 +42,7 @@ public class UserMainController {
 
                 lblUserGreeting.setText(String.format("# %s : Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
                 ButtonsHelper.addButtons(ButtonsMappingRegisters.CATCEO, placeHolderVBoxCat, categoriesMap.getActionMap(), true);
-                ButtonsHelper.addButtons(ButtonsMappingRegisters.NTFCEO, placeHolderVBoxNtf, notificationsMap.getActionMap(), true);
+                ButtonsHelper.addButtons(ButtonsMappingRegisters.OPCEO, placeHolderVBoxNtf, notificationsMap.getActionMap(), true);
             }
             case "storage organiser" -> {
 
@@ -50,7 +50,7 @@ public class UserMainController {
 
                 lblUserGreeting.setText(String.format("# %s Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
                 ButtonsHelper.addButtons(ButtonsMappingRegisters.CATSTORAGEORGANISER, placeHolderVBoxCat, categoriesMap.getActionMap(), true);
-                ButtonsHelper.addButtons(ButtonsMappingRegisters.NTFSTORAGEORGANISER, placeHolderVBoxNtf, notificationsMap.getActionMap(), true);
+                ButtonsHelper.addButtons(ButtonsMappingRegisters.OPSTORAGEORGANISER, placeHolderVBoxNtf, notificationsMap.getActionMap(), true);
             }
             case "accountant" -> {
 
@@ -58,7 +58,7 @@ public class UserMainController {
 
                 lblUserGreeting.setText(String.format("# %s Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
                 ButtonsHelper.addButtons(ButtonsMappingRegisters.CATACCOUNTANT, placeHolderVBoxCat, categoriesMap.getActionMap(), true);
-                ButtonsHelper.addButtons(ButtonsMappingRegisters.NTFACCOUNTANT, placeHolderVBoxNtf, notificationsMap.getActionMap(), true);
+                ButtonsHelper.addButtons(ButtonsMappingRegisters.OPACCOUNTANT, placeHolderVBoxNtf, notificationsMap.getActionMap(), true);
             }
             case "devision lead" -> {
 
@@ -66,7 +66,7 @@ public class UserMainController {
 
                 lblUserGreeting.setText(String.format("# %s Welcome, %s", User.getEmployeeOccupationBasedOnWellcome().toUpperCase(), User.getEmployee().getPerson().getPersonName()));
                 ButtonsHelper.addButtons(ButtonsMappingRegisters.CATDEVISIONLEAD, placeHolderVBoxCat, categoriesMap.getActionMap(), true);
-                ButtonsHelper.addButtons(ButtonsMappingRegisters.NTFDEVISIONLEAD, placeHolderVBoxNtf, notificationsMap.getActionMap(), true);
+                ButtonsHelper.addButtons(ButtonsMappingRegisters.OPDEVISIONLEAD, placeHolderVBoxNtf, notificationsMap.getActionMap(), true);
             }
         }
     }

@@ -2,6 +2,7 @@ package com.oopproject.wineryapplication.helpers.buttons;
 
 import com.oopproject.wineryapplication.access.entities.entity.Entity;
 import com.oopproject.wineryapplication.controller.DisplayBaseController;
+import com.oopproject.wineryapplication.controller.OperationsController;
 import com.oopproject.wineryapplication.helpers.logger.LoggerHelper;
 import com.oopproject.wineryapplication.helpers.logger.LoggerLevels;
 import com.oopproject.wineryapplication.helpers.scenes.Nodes;
@@ -67,6 +68,7 @@ public class ButtonsHelper {
 
                 LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.INFO, String.format("Loading entities buttons for category [ %s ]", getLabel() ));
                 placeHolderHBox.getChildren().clear();
+                // Gets the button name for example (Manage orders) and aligns it with the name of the bitmap enum register
                 ButtonsHelper.addButtons(ButtonsMappingRegisters.valueOf(getLabel().toUpperCase().replaceAll("\\s", "")), placeHolderHBox, entitiesMap.getActionMap(), true);
             } catch (IllegalArgumentException e) {
                 throw new RuntimeException(e);
@@ -77,15 +79,22 @@ public class ButtonsHelper {
     }
 
     // Specific action for loading different notification FXMLs  ---------------------------------------------
-    public static class NotificationButtonAction extends ButtonAction {
+    public static class OperationButtonAction extends ButtonAction {
 
-        public NotificationButtonAction(String label) {
+        public OperationButtonAction(String label) {
             super(label);
         }
 
         @Override
         public void execute(Scene scene) throws IOException {
-            // TODO - add functionality
+            try {
+                LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.INFO, String.format("Opening a Notifications Controller for <[ %s ]>", getLabel() ));
+                // Gets the button name for example (Orders) and aligns it with the name of the enum, that will refer to the FXML
+                SceneHelper.<OperationsController>switchToPopUp(ButtonsNotificationsRegisters.valueOf(getLabel().toUpperCase().replaceAll("\\s", "")), getLabel(), new OperationsController(getLabel()));
+            } catch (NullPointerException e) {
+                LoggerHelper.logData(ButtonsHelper.class, LoggerLevels.ERROR, e.getMessage());
+                throw new NullPointerException();
+            }
         }
     }
 

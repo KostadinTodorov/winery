@@ -1,10 +1,12 @@
 package com.oopproject.wineryapplication.helpers.scenes;
 
+import com.oopproject.wineryapplication.helpers.buttons.ButtonsNotificationsRegisters;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -18,8 +20,7 @@ public class SceneHelper
         SceneHelper.scene = scene;
     }
 
-    public static void switchTo(Scenes selectedScene)
-    {
+    public static void switchTo(Scenes selectedScene) {
         if (SceneHelper.scene == null)
         {
         System.out.println("No scene is being declared!");
@@ -54,30 +55,7 @@ public class SceneHelper
     }
 
 
-
-    public static void addNode(Pane paneNode, Nodes node)
-    {
-        if (SceneHelper.scene == null)
-        {
-            System.out.println("No scene is being declared!");
-        }
-
-        try {
-
-            AnchorPane newNode = FXMLLoader.load(SceneHelper.class.getResource(node.getFileName()));
-            AnchorPane.setLeftAnchor(newNode, 0.0);
-            AnchorPane.setBottomAnchor(newNode, 0.0);
-            AnchorPane.setRightAnchor(newNode, 0.0);
-            AnchorPane.setTopAnchor(newNode, 0.0);
-            paneNode.getChildren().setAll(newNode);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static <T> void addNode(Pane paneNode, Nodes node, T controller)
-    {
+    public static <T> void addNode(Pane paneNode, Nodes node, T controller) {
         if (SceneHelper.scene == null)
         {
             System.out.println("No scene is being declared!");
@@ -98,4 +76,18 @@ public class SceneHelper
         }
     }
 
+    public static <T> void switchToPopUp(ButtonsNotificationsRegisters notificationFXML, String title, T controller) {
+        try {
+            Stage popUpStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(SceneHelper.class.getResource(notificationFXML.getFileName()));
+            loader.setController(controller);
+            Parent root = loader.load(); // Load FXML file
+            Scene newScene = new Scene(root, 700, 400);
+            popUpStage.setScene(newScene);
+            popUpStage.setTitle(title);
+            popUpStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

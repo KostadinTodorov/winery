@@ -11,7 +11,7 @@ public abstract class ButtonsMapBase implements ButtonsMap {
 
     protected ButtonsMapBase() {
         actionMap = initializeMap();
-        sortActionMap();
+        //sortActionMap();
     }
 
     // Subclasses must provide their button map
