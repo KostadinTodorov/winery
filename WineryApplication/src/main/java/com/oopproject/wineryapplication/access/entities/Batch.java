@@ -133,4 +133,9 @@ public class Batch extends com.oopproject.wineryapplication.access.entities.enti
     public Dao<Batch> getDao() {
         return new BatchDao();
     }
+
+    @Override
+    public String toString() {
+        return String.format("Id number #%d, amount = %d, wine name \"%s\"", id, volume, wineType.getName());
+    }
 }

@@ -59,8 +59,10 @@ public class OrderRequirements {
         if (batchesForOrder == null) {
             batchesForOrder = new BatchDao().getAll().stream().filter(
                     b ->
-                            b.getWineType().equals(order.getWineType()) &&
-                                    b.getBatchStoridges().stream().mapToInt(BatchStoridge::getVolumeStored).sum() > 0
+                            b.getId()== b.getId()
+//                            b.getWineType().equals(order.getWineType())
+//                                    &&
+//                                    b.getBatchStoridges().stream().mapToInt(BatchStoridge::getVolumeStored).sum() > 0
             ).toList();
         }
         return batchesForOrder;
