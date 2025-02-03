@@ -22,11 +22,11 @@ public class OrderRequirements {
     private List<Batch> batchesForOrder;
     private double totalNeededVolume;
     public OrderRequirements(ClientsOrder order) {
-        if (order.getId() != null) {
-            this.order = order;
-            this.totalNeededVolume = order.getQuantity() * 0.75;
+        if (order == null || order.getId() == null) {
+            throw new IllegalArgumentException("Order or Order ID cannot be null");
         }
-        throw new IllegalArgumentException("Order ID cannot be null");
+        this.order = order;
+        this.totalNeededVolume = order.getQuantity() * 0.75;
     }
 
     public double getTotalNeededVolume() {
