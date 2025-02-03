@@ -103,14 +103,14 @@ public class OperationsController {
                     {
                         orderRequirements.batchesForOrder().stream().forEach(batch -> {
                             operationsVbox.getChildren().add(new Label(batch.toString()));
-                            if (new BottleBatch(
+                            int res = new BottleBatch(
                                     batch,
                                     new SweetnessDao().getAll().getFirst(),
                                     (short) 0,
                                     orderRequirements.getOrder().getQuantity(),
                                     new BottleTypeDao().getAll().getFirst())
-                                    .bottle()
-                            ) {
+                                    .bottle();
+                            if (res == 0) {
 
                                 operationsVbox.getChildren().add(new Label("We have achieved the bottling"));
 
@@ -118,7 +118,7 @@ public class OperationsController {
                             }
                             else{
 
-                                operationsVbox.getChildren().add(new Label("We have NOT achieved the bottling"));
+                                operationsVbox.getChildren().add(new Label(String.format("We have NOT achieved the bottling: %d bottles left to fill!", res)));
                             }
                         });
                     }

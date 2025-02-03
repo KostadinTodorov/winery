@@ -1,5 +1,6 @@
 package com.oopproject.wineryapplication.managment.production.bottling;
 
+import com.oopproject.wineryapplication.access.daos.BottleDao;
 import com.oopproject.wineryapplication.access.entities.*;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class BottleBatch {
      *
      * @return true if the bottling process completes successfully
      */
-    public boolean bottle(){
+    public int bottle(){
         var ref = new Object() {
             Integer totalVolume = 0;
         };
@@ -71,6 +72,8 @@ public class BottleBatch {
                     bs.getDao().insert(bs);
                 }
         );
-        return true;
+        bottledBatch.setFilled(ref.totalVolume);
+        new BottleDao().insert(bottledBatch);
+        return (int) (bottlesToFill - (int)ref.totalVolume * 0.75);
     }
 }
